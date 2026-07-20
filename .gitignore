@@ -58,9 +58,11 @@ server.log
 # DO NOT ignore public/uploads/ or existing image references will break on deploy
 
 # Local-only files (not needed on the deployed app — now on Supabase)
-/db/                # old SQLite DB + one-time export.json backup
-/download/          # local dev artifacts
-/upload/            # local dev artifacts
+# old SQLite DB + one-time export.json backup
+/db/
+# local dev artifacts
+/download/
+/upload/
 /tool-results/
 /agent-ctx/
 /mini-services/
