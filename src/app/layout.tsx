@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   verification: {
-    google: "PinzlrJb7G_xNlItF640a5xdPF3xo_IwVhzM99MmBW8",
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "PinzlrJb7G_xNlItF640a5xdPF3xo_IwVhzM99MmBW8",
   },
 };
 

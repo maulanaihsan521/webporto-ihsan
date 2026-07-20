@@ -2,7 +2,7 @@
  * Site configuration — reads from environment variable.
  * All URLs across the project should use SITE_URL instead of hardcoding.
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portofolioihsan.space-z.ai";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portofoliomaulanaihsan.vercel.app";
 
 export const SITE_CONFIG = {
   url: SITE_URL,

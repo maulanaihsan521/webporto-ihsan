@@ -70,3 +70,5 @@ worklog.md
 dev.out.log
 Caddyfile
 bun.lock
+# test artifacts
+tok.txt
