@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site-config";
