@@ -1,0 +1,388 @@
+// Portfolio CMS Enterprise - Prisma Schema
+// Owner: Maulana Ihsan Rohim
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  password     String
+  image        String?
+  role         String   @default("ADMIN") // ADMIN | EDITOR | VIEWER
+  bio          String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]   @relation("AuthorPosts")
+  comments     Comment[]
+  activityLogs ActivityLog[]
+  messages     Message[] @relation("MessageReplier")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  type      String   @default("BLOG") // BLOG | PORTFOLIO | CERTIFICATE | GALLERY
+  description String?
+  color     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+  portfolios Portfolio[]
+  certificates Certificate[]
+  galleries Gallery[]
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  posts     Post[]
+}
+
+model Post {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  excerpt        String?
+  content        String
+  coverImage     String?
+  published      Boolean  @default(false)
+  featured       Boolean  @default(false)
+  viewCount      Int      @default(0)
+  metaTitle      String?
+  metaDescription String?
+  metaKeywords   String?
+  canonical      String?
+  ogImage        String?
+  readingTime    Int      @default(0)
+  authorId       String
+  author         User     @relation("AuthorPosts", fields: [authorId], references: [id], onDelete: Cascade)
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id])
+  tags           Tag[]
+  comments       Comment[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  publishedAt    DateTime?
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  content   String
+  parentId  String?
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  approved  Boolean  @default(false)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Portfolio {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  excerpt        String?
+  description    String
+  thumbnail      String?
+  banner         String?
+  videoUrl       String?
+  role           String?
+  client         String?
+  status         String   @default("PUBLISHED") // DRAFT | PUBLISHED
+  startDate      DateTime?
+  endDate        DateTime?
+  projectDate    DateTime?
+  technologies   String?
+  githubUrl      String?
+  demoUrl        String?
+  figmaUrl       String?
+  youtubeUrl     String?
+  downloadUrl    String?
+  featured       Boolean  @default(false)
+  viewCount      Int      @default(0)
+  metaTitle      String?
+  metaDescription String?
+  ogImage        String?
+  images         PortfolioImage[]
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PortfolioImage {
+  id          String   @id @default(cuid())
+  url         String
+  caption     String?
+  order       Int      @default(0)
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+model Gallery {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  url         String
+  type        String   @default("IMAGE") // IMAGE | VIDEO
+  thumbnail   String?
+  album       String?
+  featured    Boolean  @default(false)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  issuer      String
+  issueDate   DateTime
+  expiryDate  DateTime?
+  credentialId String?
+  credentialUrl String?
+  fileUrl     String?
+  imageUrl    String?
+  featured    Boolean  @default(false)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  company     String
+  logo        String?
+  position    String
+  location    String?
+  type        String   @default("FULL_TIME") // FULL_TIME | PART_TIME | CONTRACT | INTERNSHIP | FREELANCE
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String?
+  technologies String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  logo        String?
+  degree      String
+  field       String?
+  grade       String? // IPK / GPA
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String?
+  achievements String?
+  organization String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  category    String
+  percentage  Int      @default(0)
+  level       String   @default("INTERMEDIATE") // BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
+  icon        String?
+  description String?
+  color       String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  icon        String?
+  color       String?
+  features    String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  position  String?
+  company   String?
+  avatar    String?
+  rating    Int      @default(5)
+  content   String
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question String
+  answer    String
+  category  String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  starred   Boolean  @default(false)
+  replied   Boolean  @default(false)
+  reply     String?
+  replierId String?
+  replier   User?    @relation("MessageReplier", fields: [replierId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MarketArticle {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String
+  type        String   @default("ANALYSIS") // ANALYSIS | TECHNICAL | FUNDAMENTAL | EDUCATION | RISK | JOURNAL
+  instrument  String?
+  coverImage  String?
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  viewCount   Int      @default(0)
+  metaTitle   String?
+  metaDescription String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+}
+
+model Watchlist {
+  id        String   @id @default(cuid())
+  symbol    String
+  name      String
+  type      String   @default("STOCK") // STOCK | CRYPTO | FOREX | INDEX | COMMODITY
+  notes     String?
+  targetPrice String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PortfolioHolding {
+  id          String   @id @default(cuid())
+  symbol      String
+  name        String
+  type        String   @default("STOCK") // STOCK | CRYPTO
+  quantity    Float    @default(0)
+  buyPrice    Float    @default(0)
+  currentPrice Float   @default(0)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  type      String   // IMAGE | VIDEO | AUDIO | DOCUMENT | ARCHIVE
+  mimeType  String?
+  size      Int      @default(0)
+  folder    String   @default("/")
+  width     Int?
+  height    Int?
+  alt       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("TEXT") // TEXT | JSON | IMAGE | COLOR
+  group     String   @default("GENERAL")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String?
+  detail    String?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  country   String?
+  city      String?
+  device    String?
+  browser   String?
+  sessionId String?
+  createdAt DateTime @default(now())
+}
+
+model VisitorCount {
+  id        String   @id @default(cuid())
+  date      DateTime @default(now())
+  count     Int      @default(0)
+  unique    Int      @default(0)
+  path      String   @default("/")
+}
