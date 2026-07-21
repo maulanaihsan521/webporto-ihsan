@@ -474,12 +474,28 @@ export default async function HomePage() {
                 </Button>
               </div>
               <div className="grid grid-cols-3 gap-2">
-                {latestGalleries.map((g, i) => (
-                  <Link key={g.id} href="/gallery" className="group relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-primary/15 to-chart-2/15">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={g.url} alt={g.title} className="size-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-                  </Link>
-                ))}
+                {latestGalleries.map((g, i) => {
+                  const imgSrc = g.type === "VIDEO" ? g.thumbnail : (g.thumbnail || g.url);
+                  return (
+                    <Link key={g.id} href="/gallery" className="group relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-primary/15 to-chart-2/15">
+                      {imgSrc ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={imgSrc} alt={g.title} className="size-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                      ) : (
+                        <div className="size-full flex items-center justify-center">
+                          <Youtube className="size-8 text-primary/40" />
+                        </div>
+                      )}
+                      {g.type === "VIDEO" && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                          <span className="flex size-9 items-center justify-center rounded-full bg-black/60 backdrop-blur-sm">
+                            <svg viewBox="0 0 24 24" fill="white" className="size-4 translate-x-0.5"><path d="M8 5v14l11-7z" /></svg>
+                          </span>
+                        </div>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             </SectionReveal>
           )}
