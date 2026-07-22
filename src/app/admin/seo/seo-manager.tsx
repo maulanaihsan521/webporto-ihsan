@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { AdminPageHeader } from "@/components/admin/page-header";
 import { MediaPicker } from "@/components/admin/media-picker";
 import { cn } from "@/lib/utils";
+import { SITE_URL } from "@/lib/site-config";
 import { toast } from "sonner";
 
 type Settings = Record<string, string>;
@@ -78,7 +79,7 @@ export function SeoManager({ settings }: { settings: Settings }) {
 
   const serpTitle = form.seo_meta_title || "Maulana Ihsan Rohim · Portfolio & CMS";
   const serpDesc = form.seo_meta_description || "Portfolio, blog, dan layanan digital marketing dari Maulana Ihsan Rohim.";
-  const serpUrl = "portofolioihsan.space-z.ai";
+  const serpUrl = SITE_URL.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
   return (
     <div>
