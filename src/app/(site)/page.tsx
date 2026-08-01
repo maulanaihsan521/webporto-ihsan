@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Download, Sparkles, Mail, Github, Linkedin, Instagram, Facebook, Youtube, Star, Calendar, Award, TrendingUp, Briefcase, Users, FileText, Clock, Quote, MessageCircle } from "lucide-react";
+import { ArrowRight, Download, Mail, Github, Linkedin, Instagram, Facebook, Youtube, Star, Calendar, Award, TrendingUp, Briefcase, Users, FileText, Clock, Quote, MessageCircle } from "lucide-react";
 import { getHomeData } from "@/lib/queries";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -179,28 +179,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== MARQUEE BAND ===== */}
-      <section className="py-4 border-y bg-primary/5 overflow-hidden">
-        <div className="marquee">
-          <div className="marquee-track">
-            {["Digital Marketing", "Social Media", "Photography", "Videography", "Video Editing", "SEO", "Meta Ads", "Google Ads", "Content Creation", "Brand Strategy", "UI/UX Design", "Web Development", "Financial Analysis", "Trading", "Motion Graphics"].map((t) => (
-              <span key={t} className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
-                <Sparkles className="size-3.5 text-primary" />
-                {t}
-              </span>
-            ))}
-          </div>
-          <div className="marquee-track" aria-hidden>
-            {["Digital Marketing", "Social Media", "Photography", "Videography", "Video Editing", "SEO", "Meta Ads", "Google Ads", "Content Creation", "Brand Strategy", "UI/UX Design", "Web Development", "Financial Analysis", "Trading", "Motion Graphics"].map((t) => (
-              <span key={t} className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
-                <Sparkles className="size-3.5 text-primary" />
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ===== STATS ===== */}
       <section className="section-pad py-16">
         <div className="mx-auto max-w-7xl">
@@ -233,7 +211,7 @@ export default async function HomePage() {
             <div className="flex items-end justify-between mb-10">
               <div>
                 <Badge variant="secondary" className="mb-3 rounded-full">
-                  <Sparkles className="size-3 mr-1" /> Featured Work
+                  Featured Work
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Proyek <span className="text-gradient">Pilihan</span></h2>
                 <p className="text-muted-foreground mt-2">Hasil kerja terbaik yang telah saya selesaikan</p>
@@ -311,10 +289,7 @@ export default async function HomePage() {
               <SectionReveal key={s.id} delay={i * 0.08}>
                 <Card className="lift group rounded-2xl p-6 h-full glass relative overflow-hidden">
                   <div className="absolute -top-8 -right-8 size-24 rounded-full bg-primary/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
-                    <Sparkles className="size-6" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">{s.title}</h3>
+                  <h3 className="font-bold text-lg mb-4 mt-1">{s.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{s.description}</p>
                   <Link href="/services" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all">
                     Selengkapnya <ArrowRight className="size-3.5" />
@@ -609,9 +584,6 @@ export default async function HomePage() {
               <Card className="relative glass-strong rounded-[2rem] p-8 sm:p-12 text-center overflow-hidden">
                 <div className="absolute inset-0 animated-gradient opacity-20" />
                 <div className="relative z-10">
-                  <div className="inline-flex size-14 rounded-2xl bg-primary/15 items-center justify-center text-primary mb-5">
-                    <Sparkles className="size-7" />
-                  </div>
                   <h2 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
                     Punya proyek? <span className="text-gradient">Mari berkolaborasi</span>
                   </h2>
