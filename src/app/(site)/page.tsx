@@ -465,7 +465,7 @@ export default async function HomePage() {
                       <p className="text-sm leading-relaxed mb-5 relative z-10">"{t.content}"</p>
                       <div className="flex items-center gap-3 pt-4 border-t border-border/50">
                         <Avatar className="size-11 ring-2 ring-primary/20">
-                          <AvatarFallback className="bg-primary text-primary text-xs font-semibold">{getInitials(t.name)}</AvatarFallback>
+                          <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">{getInitials(t.name)}</AvatarFallback>
                         </Avatar>
                         <div>
                           <p className="text-sm font-semibold">{t.name}</p>
