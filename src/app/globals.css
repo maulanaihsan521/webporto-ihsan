@@ -80,21 +80,21 @@
 }
 
 .dark {
-  /* Dark Mode — Warm Dark Luxury */
-  --background: #1A1815;          /* Dark Warm Brown */
-  --foreground: #F8F6F2;          /* Warm Ivory */
-  --card: #252220;                /* Dark Warm Card */
-  --card-foreground: #F8F6F2;     /* Warm Ivory */
-  --popover: #252220;             /* Dark Warm Card */
-  --popover-foreground: #F8F6F2;  /* Warm Ivory */
+  /* Dark Mode — Pure Black */
+  --background: #000000;          /* Pure Black */
+  --foreground: #FFFFFF;          /* White */
+  --card: #0A0A0A;                /* Near Black */
+  --card-foreground: #FFFFFF;     /* White */
+  --popover: #0A0A0A;             /* Near Black */
+  --popover-foreground: #FFFFFF;  /* White */
   --primary: #D4A64A;             /* Champagne Gold */
-  --primary-foreground: #1A1815;  /* Dark Warm (text on gold) */
-  --secondary: #2A2725;           /* Dark Warm Secondary */
-  --secondary-foreground: #F8F6F2;/* Warm Ivory */
-  --muted: #2A2725;               /* Dark Warm Muted */
-  --muted-foreground: #8A857D;    /* Warm Gray */
+  --primary-foreground: #000000;  /* Black (text on gold) */
+  --secondary: #141414;           /* Dark Gray */
+  --secondary-foreground: #FFFFFF;/* White */
+  --muted: #141414;               /* Dark Gray */
+  --muted-foreground: #A0A0A0;    /* Light Gray */
   --accent: #B68A3D;              /* Soft Bronze */
-  --accent-foreground: #F8F6F2;   /* Warm Ivory */
+  --accent-foreground: #FFFFFF;   /* White */
   --destructive: #DC2626;
   --border: rgba(255, 255, 255, 0.1);
   --input: rgba(255, 255, 255, 0.12);
@@ -104,12 +104,12 @@
   --chart-3: #C6922E;             /* Rich Gold */
   --chart-4: #8A857D;             /* Warm Gray */
   --chart-5: #666666;             /* Slate Gray */
-  --sidebar: #1A1815;             /* Dark Warm Brown */
-  --sidebar-foreground: #F8F6F2;  /* Warm Ivory */
+  --sidebar: #000000;             /* Pure Black */
+  --sidebar-foreground: #FFFFFF;  /* White */
   --sidebar-primary: #D4A64A;     /* Champagne Gold */
-  --sidebar-primary-foreground: #1A1815;
-  --sidebar-accent: #2A2725;      /* Dark Warm Secondary */
-  --sidebar-accent-foreground: #F8F6F2;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #141414;      /* Dark Gray */
+  --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: #D4A64A;        /* Champagne Gold */
 }
