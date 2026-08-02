@@ -3,28 +3,22 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
+import { Search,
   X,
   Briefcase,
   Calendar,
   Eye,
   Star,
-  Sparkles,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  LayoutGrid,
-} from "lucide-react";
-import {
-  Select,
+  LayoutGrid } from "lucide-react";
+import { Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/motion-primitives";
 import { cn, formatDateShort, truncate, stripHtml } from "@/lib/utils";
@@ -81,7 +75,7 @@ const categoryGradients: Record<string, string> = {
   Photography: "from-violet-500 to-purple-500",
   Branding: "from-fuchsia-500 to-pink-500",
   Design: "from-rose-500 to-pink-500",
-  Default: "from-primary to-chart-2",
+  Default: "bg-primary",
 };
 
 function gradientFor(category: string | null): string {
@@ -185,8 +179,8 @@ export function PortfolioExplorer({
   return (
     <div>
       {/* ===== Stats ===== */}
-      <div className="mb-10 grid grid-cols-3 gap-3 sm:gap-5">
-        <Card className="glass p-4 text-center sm:p-6">
+      <div className="mb-6 grid grid-cols-3 gap-3 sm:gap-5">
+        <Card className="glass p-3 text-center sm:p-4">
           <Briefcase className="mx-auto mb-2 size-5 text-primary" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.total} />
@@ -195,7 +189,7 @@ export function PortfolioExplorer({
             Total Proyek
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <Star className="mx-auto mb-2 size-5 text-amber-500" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.featured} />
@@ -204,7 +198,7 @@ export function PortfolioExplorer({
             Unggulan
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <LayoutGrid className="mx-auto mb-2 size-5 text-chart-2" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.categories} />
@@ -375,7 +369,7 @@ export function PortfolioExplorer({
                   className={cn(
                     "flex size-9 items-center justify-center rounded-full text-sm font-medium transition-colors",
                     item === currentPage
-                      ? "bg-gradient-to-r from-primary to-chart-2 text-primary-foreground shadow-md"
+                      ? "bg-primary text-primary-foreground shadow-md"
                       : "border border-border bg-background/60 hover:bg-accent",
                   )}
                 >
@@ -425,7 +419,7 @@ function CategoryPill({
       {active && (
         <motion.span
           layoutId="activePortfolioCat"
-          className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-chart-2 shadow-md"
+          className="absolute inset-0 -z-10 rounded-full bg-primary shadow-md"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
@@ -471,7 +465,7 @@ function PortfolioCard({
             ) : (
               <div
                 className={cn(
-                  "flex size-full items-center justify-center bg-gradient-to-br",
+                  "flex size-full items-center justify-center bg-primary/10",
                   gradient,
                 )}
               >
@@ -481,7 +475,7 @@ function PortfolioCard({
 
             {/* Overlay gradient for legibility */}
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70"
+              className="pointer-events-none absolute inset-0 bg-black/60 opacity-70"
               aria-hidden
             />
 
@@ -496,13 +490,7 @@ function PortfolioCard({
             {/* Category badge */}
             {p.category && (
               <div className="absolute right-3 top-3">
-                <Badge
-                  variant="secondary"
-                  className="border-0 bg-black/40 text-white backdrop-blur-md"
-                >
-                  {p.category.name}
-                </Badge>
-              </div>
+                </div>
             )}
 
             {/* View count chip */}
@@ -573,7 +561,6 @@ function EmptyState({ onReset }: { onReset: () => void }) {
   return (
     <Card className="glass p-12 text-center sm:p-16">
       <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-muted">
-        <Sparkles className="size-7 text-muted-foreground/60" />
       </div>
       <p className="text-lg font-semibold">Tidak ada proyek ditemukan</p>
       <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">

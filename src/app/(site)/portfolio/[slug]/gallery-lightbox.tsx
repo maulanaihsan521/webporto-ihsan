@@ -81,7 +81,7 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
               loading="lazy"
               className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
             />
-            <div className="pointer-events-none absolute inset-0 flex items-end justify-between gap-2 bg-gradient-to-t from-black/70 via-transparent to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="pointer-events-none absolute inset-0 flex items-end justify-between gap-2 bg-black/60 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {img.caption ? (
                 <span className="line-clamp-2 text-[11px] font-medium text-white">
                   {img.caption}

@@ -110,11 +110,11 @@ export function RelatedProjectsCarousel({ projects }: { projects: RelatedProject
                         className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                       />
                     ) : (
-                      <div className="flex size-full items-center justify-center bg-gradient-to-br from-primary/30 to-chart-2/30">
+                      <div className="flex size-full items-center justify-center bg-primary">
                         <Briefcase className="size-10 text-white/80" />
                       </div>
                     )}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70" aria-hidden />
+                    <div className="pointer-events-none absolute inset-0 bg-black/60 opacity-70" aria-hidden />
                     {p.featured && (
                       <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-amber-500/95 px-2 py-0.5 text-[10px] font-semibold text-white shadow-md backdrop-blur">
                         <Star className="size-2.5 fill-current" />
@@ -150,7 +150,7 @@ export function RelatedProjectsCarousel({ projects }: { projects: RelatedProject
 
       {/* Progress indicator */}
       <div className="mt-3 h-1 rounded-full bg-muted overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-primary to-chart-2 rounded-full transition-all" style={{ width: `${Math.min(100, (projects.length > 3 ? 60 : 100))}%` }} />
+        <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${Math.min(100, (projects.length > 3 ? 60 : 100))}%` }} />
       </div>
     </div>
   );

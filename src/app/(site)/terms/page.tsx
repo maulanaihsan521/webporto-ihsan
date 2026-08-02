@@ -1,6 +1,5 @@
 import Link from "next/link";
-import {
-  FileText,
+import { FileText,
   Briefcase,
   Scale,
   Lightbulb,
@@ -11,10 +10,8 @@ import {
   Mail,
   ArrowRight,
   ChevronRight,
-  type LucideIcon,
-} from "lucide-react";
+  type LucideIcon } from "lucide-react";
 import { getSettings } from "@/lib/settings";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
 import { formatDate } from "@/lib/utils";
@@ -51,47 +48,9 @@ export default async function TermsPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-24">
-          <div className="mx-auto max-w-4xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <Scale className="mr-1.5 size-3.5" />
-                Legal
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Syarat &amp; <span className="text-gradient">Ketentuan</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Ketentuan penggunaan layanan dan situs web {ownerName}. Mohon
-                baca dengan saksama sebelum mengakses atau menggunakan layanan
-                kami.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs text-muted-foreground">
-                <RefreshCw className="size-3.5 text-primary" />
-                Terakhir diperbarui:{" "}
-                <time dateTime={lastUpdated.toISOString()} className="font-medium text-foreground">
-                  {formatDate(lastUpdated)}
-                </time>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Content + TOC ===== */}
-      <section className="section-pad py-12 sm:py-16 lg:py-20">
+      <section className="section-pad py-8 sm:py-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
             {/* Sticky TOC sidebar */}

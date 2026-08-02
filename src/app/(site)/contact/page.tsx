@@ -1,11 +1,9 @@
 import Link from "next/link";
-import {
-  Mail,
+import { Mail,
   Phone,
   MapPin,
   Clock,
   ArrowRight,
-  Sparkles,
   MessageSquare,
   Github,
   Linkedin,
@@ -15,13 +13,11 @@ import {
   HelpCircle,
   Send,
   ExternalLink,
-  Calculator,
-} from "lucide-react";
+  Calculator } from "lucide-react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { ContactForm } from "./contact-form";
 import { BudgetEstimator } from "./budget-estimator";
@@ -78,46 +74,9 @@ export default async function ContactPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <Send className="mr-1.5 size-3.5" />
-                Hubungi Saya
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Mari <span className="text-gradient">Berkolaborasi</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Punya proyek, pertanyaan, atau ide yang ingin didiskusikan? Saya selalu
-                terbuka untuk peluang baru. Konsultasi awal selalu gratis.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-                </span>
-                Tersedia untuk proyek baru
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Contact Section ===== */}
-      <section id="contact-form" className="section-pad py-12 sm:py-16 lg:py-20 scroll-mt-20">
+      <section id="contact-form" className="section-pad py-8 sm:py-10 lg:py-20 scroll-mt-20">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-5">
             {/* Left: Contact form (3 cols) */}
@@ -258,10 +217,6 @@ export default async function ContactPage() {
         <div className="mx-auto max-w-4xl">
           <SectionReveal>
             <div className="text-center mb-8">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <Calculator className="mr-1.5 size-3.5 text-primary" />
-                Estimasi Harga
-              </Badge>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 Hitung Budget Proyek Anda
               </h2>
@@ -281,10 +236,6 @@ export default async function ContactPage() {
           <div className="mx-auto max-w-7xl">
             <SectionReveal>
               <div className="mb-5 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <MapPin className="mr-1.5 size-3.5 text-primary" />
-                  Lokasi
-                </Badge>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Temukan Saya di Peta
                 </h2>
@@ -308,14 +259,10 @@ export default async function ContactPage() {
 
       {/* ===== FAQ Teaser ===== */}
       {faqs.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-5xl">
             <SectionReveal>
               <div className="mb-8 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <HelpCircle className="mr-1.5 size-3.5 text-primary" />
-                  Pertanyaan Cepat
-                </Badge>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Sering Ditanyakan
                 </h2>
@@ -328,7 +275,7 @@ export default async function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-3">
               {faqs.map((f, i) => (
                 <SectionReveal key={f.id} delay={(i % 3) * 0.05}>
-                  <Card className="glass group relative h-full overflow-hidden p-5 lift">
+                  <Card className="glass group relative h-full overflow-hidden p-3 sm:p-4 lift">
                     <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <HelpCircle className="size-4" />
                     </div>
@@ -362,10 +309,9 @@ export default async function ContactPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <Sparkles className="mx-auto mb-4 size-8 text-primary" />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Tidak yakin mulai dari <span className="text-gradient">mana</span>?
                 </h2>
@@ -382,7 +328,6 @@ export default async function ContactPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/services">
-                      <Sparkles className="size-4" />
                       Jelajahi Layanan
                     </Link>
                   </Button>

@@ -4,7 +4,6 @@ import { db } from "@/lib/db";
 import { ArrowLeft, Calendar, Eye, TrendingUp, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ShareButtons } from "@/components/share-buttons";
 import { PdfLinkExtractor } from "@/components/pdf-link-extractor";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -51,10 +50,7 @@ export default async function MarketArticlePage({ params }: { params: Promise<{ 
 
           <SectionReveal>
             <div className="flex items-center gap-2 flex-wrap mb-4">
-              <Badge className="rounded-full bg-green-500/15 text-green-600 dark:text-green-400 border-0">
-                <TrendingUp className="size-3 mr-1" /> {TYPE_LABELS[article.type] || article.type}
-              </Badge>
-              {article.instrument && <Badge variant="secondary" className="rounded-full">{article.instrument}</Badge>}
+              {article.instrument && <span className="text-sm font-medium text-muted-foreground">{article.instrument}</span>}
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-4">{article.title}</h1>
             <p className="text-lg text-muted-foreground mb-6">{article.excerpt}</p>
@@ -96,7 +92,6 @@ export default async function MarketArticlePage({ params }: { params: Promise<{ 
               {related.map((r) => (
                 <Link key={r.id} href={`/financial-market/${r.slug}`}>
                   <Card className="lift group rounded-2xl p-5 glass h-full">
-                    <Badge variant="secondary" className="rounded-full mb-2">{TYPE_LABELS[r.type] || r.type}</Badge>
                     <h3 className="font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">{r.title}</h3>
                     <p className="text-sm text-muted-foreground line-clamp-2">{r.excerpt}</p>
                     <span className="inline-flex items-center gap-1 text-sm text-primary mt-3 group-hover:gap-2 transition-all">Baca <ArrowRight className="size-3.5" /></span>

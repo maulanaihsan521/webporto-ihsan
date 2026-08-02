@@ -104,7 +104,7 @@ export function ChartWithSymbolPicker() {
                 <motion.span
                   layoutId="activeSymbol"
                   className={cn(
-                    "absolute inset-0 -z-10 rounded-full bg-gradient-to-r",
+                    "absolute inset-0 -z-10 rounded-full bg-primary",
                     s.accent,
                   )}
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}

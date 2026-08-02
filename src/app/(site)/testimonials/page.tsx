@@ -1,24 +1,18 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Sparkles,
+import { ArrowRight,
   Star,
   Quote,
   Heart,
   Users,
   TrendingUp,
-  MessageSquare,
-} from "lucide-react";
+  MessageSquare } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal, Counter } from "@/components/motion-primitives";
 import { getInitials, cn } from "@/lib/utils";
-import {
-  TestimonialCarousel,
-  type TestimonialItem,
-} from "./testimonial-carousel";
+import { TestimonialCarousel,
+  type TestimonialItem } from "./testimonial-carousel";
 
 export const metadata = {
   title: "Testimoni — Maulana Ihsan Rohim",
@@ -93,47 +87,19 @@ export default async function TestimonialsPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <Heart className="mr-1.5 size-3.5" />
-                Testimoni Klien
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Apa Kata <span className="text-gradient">Klien</span> Saya
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Kepercayaan klien adalah prioritas utama. Berikut pengalaman mereka
-                bekerja sama dengan saya dalam berbagai proyek dan industri.
-              </p>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Stats ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {[
                 {
                   icon: MessageSquare,
                   label: "Total Testimoni",
                   value: total,
                   suffix: "+",
-                  accent: "from-amber-500 to-orange-500",
+                  accent: "bg-primary",
                 },
                 {
                   icon: Star,
@@ -141,44 +107,37 @@ export default async function TestimonialsPage() {
                   value: Number(avgRating.toFixed(1)),
                   suffix: "/5",
                   isDecimal: true,
-                  accent: "from-teal-500 to-emerald-500",
+                  accent: "bg-primary",
                 },
                 {
                   icon: Users,
                   label: "Klien Puas",
                   value: satisfiedPct,
                   suffix: "%",
-                  accent: "from-violet-500 to-fuchsia-500",
+                  accent: "bg-primary",
                 },
               ].map((s) => (
                 <div
                   key={s.label}
-                  className="glass relative overflow-hidden rounded-2xl p-6 text-center lift"
+                  className="glass relative overflow-hidden rounded-xl p-4 text-center lift"
                 >
-                  <div
-                    className={cn(
-                      "pointer-events-none absolute -right-6 -top-6 size-24 rounded-full bg-gradient-to-br opacity-10 blur-2xl",
-                      s.accent,
-                    )}
-                    aria-hidden
-                  />
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex flex-col items-center gap-1.5">
                     <div
                       className={cn(
-                        "mx-auto mb-3 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-lg",
+                        "flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground",
                         s.accent,
                       )}
                     >
-                      <s.icon className="size-6" />
+                      <s.icon className="size-4" />
                     </div>
-                    <div className="text-3xl font-bold sm:text-4xl">
+                    <div className="text-xl font-bold sm:text-2xl">
                       {s.isDecimal ? (
                         avgRating.toFixed(1)
                       ) : (
                         <Counter to={s.value} suffix={s.suffix} />
                       )}
                     </div>
-                    <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
                       {s.label}
                     </p>
                   </div>
@@ -191,14 +150,10 @@ export default async function TestimonialsPage() {
 
       {/* ===== Featured Testimonials Carousel ===== */}
       {featuredItems.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-7xl">
             <SectionReveal>
               <div className="mb-10 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <Sparkles className="mr-1.5 size-3.5 text-primary" />
-                  Testimoni Unggulan
-                </Badge>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                   Kisah Sukses Klien
                 </h2>
@@ -216,14 +171,10 @@ export default async function TestimonialsPage() {
       )}
 
       {/* ===== All Testimonials Grid ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-7xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <MessageSquare className="mr-1.5 size-3.5 text-primary" />
-                Semua Testimoni
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Suara dari Klien
               </h2>
@@ -268,7 +219,7 @@ export default async function TestimonialsPage() {
                           ) : (
                             <div
                               className={cn(
-                                "flex size-10 items-center justify-center rounded-full bg-gradient-to-br text-xs font-bold text-white",
+                                "flex size-10 items-center justify-center rounded-full bg-primary font-bold text-white",
                                 grad,
                               )}
                               aria-hidden
@@ -284,16 +235,7 @@ export default async function TestimonialsPage() {
                               </p>
                             )}
                           </div>
-                          {t.featured && (
-                            <Badge
-                              variant="outline"
-                              className="ml-auto shrink-0 gap-1 text-[10px] uppercase tracking-wider text-amber-600 dark:text-amber-400"
-                            >
-                              <Star className="size-3 fill-amber-400 text-amber-400" />
-                              Unggulan
-                            </Badge>
-                          )}
-                        </div>
+</div>
                       </div>
                     </Card>
                   </SectionReveal>
@@ -308,7 +250,7 @@ export default async function TestimonialsPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <TrendingUp className="mx-auto mb-4 size-8 text-primary" />
@@ -328,7 +270,6 @@ export default async function TestimonialsPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/portfolio">
-                      <Sparkles className="size-4" />
                       Lihat Portofolio
                     </Link>
                   </Button>

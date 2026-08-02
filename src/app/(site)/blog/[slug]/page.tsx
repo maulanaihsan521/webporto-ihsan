@@ -2,15 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
+import { ArrowRight,
   ArrowLeft,
   Newspaper,
   Calendar,
   Eye,
   Star,
   Clock,
-  Sparkles,
   Hash,
   ChevronRight,
   Home,
@@ -19,31 +17,25 @@ import {
   Layers,
   TrendingUp,
   User,
-  Mail,
-} from "lucide-react";
+  Mail } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { ReadingProgress } from "@/components/reading-progress";
 import { TableOfContents } from "@/components/table-of-contents";
 import { ShareButtons } from "@/components/share-buttons";
 import { PdfViewer } from "@/components/pdf-viewer";
 import { PdfLinkExtractor } from "@/components/pdf-link-extractor";
-import {
-  formatDate,
+import { formatDate,
   formatDateShort,
   stripHtml,
   truncate,
   getInitials,
-  cn,
-} from "@/lib/utils";
-import {
-  CommentsSection,
+  cn } from "@/lib/utils";
+import { CommentsSection,
   type CommentItem,
-  type CommentReplyItem,
-} from "./comments-section";
+  type CommentReplyItem } from "./comments-section";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -267,19 +259,12 @@ export default async function BlogDetailPage({ params }: Params) {
       <header className="relative overflow-hidden border-b border-border">
         <div className="animated-gradient absolute inset-0 -z-10 opacity-30" aria-hidden />
         <div className="mesh-bg absolute inset-0 -z-10 opacity-50" aria-hidden />
-        <div className="section-pad relative z-10 py-12 sm:py-16 lg:py-20">
+        <div className="section-pad relative z-10 py-8 sm:py-10 lg:py-20">
           <div className="mx-auto max-w-3xl text-center">
             {post.category && (
               <SectionReveal>
                 <Link href={`/blog?cat=${post.category.id}`}>
-                  <Badge
-                    variant="outline"
-                    className="mb-5 glass px-3 py-1 text-xs uppercase tracking-wider"
-                  >
-                    <Layers className="mr-1.5 size-3 text-primary" />
-                    {post.category.name}
-                  </Badge>
-                </Link>
+                  </Link>
               </SectionReveal>
             )}
             <SectionReveal delay={0.05}>
@@ -345,7 +330,7 @@ export default async function BlogDetailPage({ params }: Params) {
       )}
 
       {/* ===== Article body + sticky sidebar ===== */}
-      <div className="section-pad py-12 sm:py-16">
+      <div className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
             {/* Main column */}
@@ -419,7 +404,6 @@ export default async function BlogDetailPage({ params }: Params) {
                         <div className="mt-4 flex flex-wrap gap-2">
                           <Button asChild size="sm" variant="outline" className="rounded-full">
                             <Link href="/about">
-                              <Sparkles className="size-3.5" />
                               Tentang Saya
                             </Link>
                           </Button>
@@ -510,7 +494,7 @@ export default async function BlogDetailPage({ params }: Params) {
                   </ul>
                 </Card>
 
-                <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-5">
+                <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-primary/10 p-5">
                   <TrendingUp className="mb-2 size-6 text-primary" />
                   <p className="text-sm font-semibold">Suka dengan artikel ini?</p>
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -605,17 +589,10 @@ export default async function BlogDetailPage({ params }: Params) {
 
       {/* ===== Related posts ===== */}
       {relatedList.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-7xl">
             <SectionReveal>
               <div className="mb-8 text-center">
-                <Badge
-                  variant="outline"
-                  className="mb-3 text-xs uppercase tracking-wider"
-                >
-                  <Sparkles className="mr-1.5 size-3.5 text-primary" />
-                  Baca Juga
-                </Badge>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Artikel <span className="text-gradient">Terkait</span>
                 </h2>
@@ -641,7 +618,7 @@ export default async function BlogDetailPage({ params }: Params) {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Newspaper className="mx-auto mb-4 size-8 text-primary" />
@@ -662,7 +639,6 @@ export default async function BlogDetailPage({ params }: Params) {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/blog">
-                      <Sparkles className="size-4" />
                       Semua Artikel
                     </Link>
                   </Button>
@@ -701,7 +677,7 @@ function AuthorAvatar({
   }
   return (
     <span
-      className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-chart-2 font-semibold text-primary-foreground ring-2 ring-background"
+      className="inline-flex items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground ring-2 ring-background"
       style={{ width: size, height: size, fontSize: size * 0.4 }}
     >
       {getInitials(name) || "?"}
@@ -744,7 +720,7 @@ function RelatedCard({
     author: { name: string | null; image: string | null } | null;
   };
 }) {
-  const gradient = "from-primary to-chart-2";
+  const gradient = "bg-primary";
   const cover = post.coverImage || null;
   const authorName = post.author?.name ?? "Anonim";
   const authorImage = post.author?.image ?? null;
@@ -763,7 +739,7 @@ function RelatedCard({
           ) : (
             <div
               className={cn(
-                "flex size-full items-center justify-center bg-gradient-to-br",
+                "flex size-full items-center justify-center bg-primary/10",
                 gradient,
               )}
             >
@@ -771,18 +747,12 @@ function RelatedCard({
             </div>
           )}
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70"
+            className="pointer-events-none absolute inset-0 bg-black/60 opacity-70"
             aria-hidden
           />
           {post.category && (
             <div className="absolute right-3 top-3">
-              <Badge
-                variant="secondary"
-                className="border-0 bg-black/40 text-white backdrop-blur-md"
-              >
-                {post.category.name}
-              </Badge>
-            </div>
+              </div>
           )}
         </div>
         <div className="flex flex-1 flex-col gap-2 p-4">

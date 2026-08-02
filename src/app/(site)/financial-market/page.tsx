@@ -1,7 +1,5 @@
 import Link from "next/link";
-import {
-  Sparkles,
-  TrendingUp,
+import { TrendingUp,
   LineChart,
   Eye,
   Newspaper,
@@ -16,21 +14,17 @@ import {
   Activity,
   BarChart3,
   AlertTriangle,
-  ArrowUpRight,
-} from "lucide-react";
+  ArrowUpRight } from "lucide-react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import {
-  Table,
+import { Table,
   TableHeader,
   TableBody,
   TableRow,
   TableHead,
-  TableCell,
-} from "@/components/ui/table";
+  TableCell } from "@/components/ui/table";
 import { SectionReveal } from "@/components/motion-primitives";
 import { TradingViewWidget } from "@/components/tradingview-widget";
 import { ChartWithSymbolPicker } from "./chart-picker";
@@ -209,47 +203,7 @@ export default async function FinancialMarketPage() {
   return (
     <div className="relative">
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-24">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge variant="outline" className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider">
-                <Activity className="mr-1.5 size-3.5" />
-                Pasar Keuangan
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className="text-gradient">Financial Market</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-3xl text-base text-muted-foreground sm:text-lg">
-                Pusat analisis pasar keuangan real-time — pantau chart, watchlist,
-                berita pasar, kalender ekonomi, dan portofolio investasi dalam
-                satu dashboard interaktif.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="#dashboard">
-                    <LineChart className="size-4" />
-                    Buka Dashboard
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="#analysis">
-                    <Newspaper className="size-4" />
-                    Baca Analisis
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
+      
 
       {/* ===== TICKER TAPE (full width) ===== */}
       <div className="border-b border-border bg-background/80">
@@ -266,7 +220,7 @@ export default async function FinancialMarketPage() {
       {/* ===== MAIN TABS ===== */}
       <section
         id="dashboard"
-        className="section-pad relative scroll-mt-24 py-12 sm:py-16"
+        className="section-pad relative scroll-mt-24 py-8 sm:py-10"
       >
         <div className="mx-auto max-w-7xl">
           <Tabs defaultValue="overview" className="gap-6">
@@ -591,17 +545,7 @@ export default async function FinancialMarketPage() {
                     sebelum mengambil keputusan investasi.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge variant="outline" className="gap-1 border-amber-500/30 text-amber-600 dark:text-amber-400">
-                      <AlertTriangle className="size-3" />
-                      Risiko Kerugian
-                    </Badge>
-                    <Badge variant="outline" className="gap-1 border-rose-500/30 text-rose-600 dark:text-rose-400">
-                      Bukan Saran Investasi
-                    </Badge>
-                    <Badge variant="outline" className="gap-1 border-teal-500/30 text-teal-600 dark:text-teal-400">
-                      DYOR
-                    </Badge>
-                  </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -613,8 +557,7 @@ export default async function FinancialMarketPage() {
       <section className="section-pad pb-20">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="animated-gradient relative overflow-hidden rounded-3xl border border-border p-8 text-center sm:p-12">
-              <div className="mesh-bg" aria-hidden />
+            <div className="bg-card relative overflow-hidden rounded-3xl border-0 p-8 text-center sm:p-12 shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Siap Mengambil Kendali Portofolio Anda?
@@ -724,7 +667,7 @@ function ArticleCard({ article }: ArticleCardProps) {
             loading="lazy"
           />
         ) : (
-          <div className="flex size-full items-center justify-center bg-gradient-to-br from-amber-500/20 via-teal-500/10 to-violet-500/20">
+          <div className="flex size-full items-center justify-center bg-amber-500/20">
             <TrendingUp className="size-10 text-primary/60" />
           </div>
         )}
@@ -739,7 +682,6 @@ function ArticleCard({ article }: ArticleCardProps) {
           </span>
           {article.featured && (
             <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-600 backdrop-blur dark:text-amber-400">
-              <Sparkles className="size-3" />
               Unggulan
             </span>
           )}

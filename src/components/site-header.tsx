@@ -78,13 +78,13 @@ export function SiteHeader() {
             )}
           >
             <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <div className="relative size-9 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+              <div className="relative size-9 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
                 MI
                 <span className="absolute -inset-0.5 rounded-xl bg-primary/30 blur-md -z-10" />
               </div>
-              <div className="hidden sm:flex flex-col leading-none">
+              <div className="flex flex-col leading-none">
                 <span className="font-bold text-sm tracking-tight">Maulana Ihsan</span>
-                <span className="text-[10px] text-muted-foreground font-medium">Digital Marketing · Finance</span>
+                <span className="text-[10px] text-muted-foreground font-medium hidden xs:inline">Digital Marketing · Finance</span>
               </div>
             </Link>
 
@@ -231,13 +231,6 @@ export function SiteHeader() {
                       className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-accent"
                     >
                       FAQ
-                    </Link>
-                    <Link
-                      href="/admin"
-                      onClick={() => setOpen(false)}
-                      className="px-4 py-3 rounded-xl text-sm font-medium hover:bg-accent"
-                    >
-                      Admin Dashboard
                     </Link>
                     <Button asChild className="mt-3 rounded-xl">
                       <Link href="/contact" onClick={() => setOpen(false)}>Hire Me</Link>

@@ -65,7 +65,7 @@ export async function SiteFooter() {
           <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2 w-fit">
-                <div className="size-10 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold shadow-lg shadow-primary/30">
+                <div className="size-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-lg shadow-primary/30">
                   MI
                 </div>
                 <div className="flex flex-col leading-none">
@@ -113,9 +113,6 @@ export async function SiteFooter() {
 
           <div className="mt-12 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
             <p>© {year} {s.owner_name || "Maulana Ihsan Rohim"}. All rights reserved.</p>
-            <p className="flex items-center gap-1.5">
-              Dibuat dengan <span className="text-primary">♥</span> menggunakan Next.js &amp; Tailwind CSS
-            </p>
           </div>
         </div>
       </div>

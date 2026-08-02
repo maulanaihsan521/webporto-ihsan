@@ -2,9 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, Sparkles } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Counter } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
 
@@ -63,12 +62,12 @@ const categoryGradients: Record<string, string> = {
   Development: "from-emerald-500 to-teal-500",
   Database: "from-green-500 to-emerald-500",
   Tools: "from-sky-500 to-cyan-500",
-  "Financial Market": "from-primary to-chart-2",
-  "Data Analysis": "from-chart-3 to-chart-5",
+  "Financial Market": "bg-primary",
+  "Data Analysis": "bg-chart-3",
 };
 
 function gradientFor(category: string): string {
-  return categoryGradients[category] ?? "from-primary to-chart-2";
+  return categoryGradients[category] ?? "bg-primary";
 }
 
 export function SkillFilter({ skills }: { skills: SkillItem[] }) {
@@ -117,9 +116,8 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
   return (
     <div>
       {/* Stats */}
-      <div className="mb-10 grid grid-cols-3 gap-3 sm:gap-5">
-        <Card className="glass p-4 text-center sm:p-6">
-          <Sparkles className="mx-auto mb-2 size-5 text-primary" />
+      <div className="mb-6 grid grid-cols-3 gap-3 sm:gap-5">
+        <Card className="glass p-3 text-center sm:p-4">
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.total} />
           </div>
@@ -127,7 +125,7 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
             Total Skill
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <div className="mx-auto mb-2 size-5 rounded-full bg-emerald-500/20 ring-2 ring-emerald-500/40" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.expert} />
@@ -136,7 +134,7 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
             Expert Level
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <div className="mx-auto mb-2 flex size-5 items-center justify-center rounded-full bg-violet-500/20 text-[10px] font-bold text-violet-500 ring-2 ring-violet-500/40">
             +
           </div>
@@ -192,7 +190,7 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
                 {active && (
                   <motion.span
                     layoutId="activeCatPill"
-                    className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-chart-2 shadow-md"
+                    className="absolute inset-0 -z-10 rounded-full bg-primary shadow-md"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -247,15 +245,12 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
                 <div className="mb-5 flex items-center gap-3">
                   <div
                     className={cn(
-                      "h-1 w-10 rounded-full bg-gradient-to-r",
+                      "h-1 w-10 rounded-full bg-primary",
                       gradientFor(category),
                     )}
                   />
                   <h3 className="text-xl font-bold tracking-tight sm:text-2xl">{category}</h3>
-                  <Badge variant="secondary" className="text-[10px]">
-                    {items.length} skill
-                  </Badge>
-                </div>
+                  </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map((skill, idx) => {
@@ -268,10 +263,10 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3, delay: idx * 0.04 }}
                       >
-                        <Card className="glass group relative h-full overflow-hidden p-5 lift">
+                        <Card className="glass group relative h-full overflow-hidden p-3 sm:p-4 lift">
                           <div
                             className={cn(
-                              "pointer-events-none absolute -right-6 -top-6 size-20 rounded-full bg-gradient-to-br opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-30",
+                              "pointer-events-none absolute -right-6 -top-6 size-20 rounded-full bg-primary/10 opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-30",
                               gradientFor(skill.category),
                             )}
                             aria-hidden
@@ -316,7 +311,7 @@ export function SkillFilter({ skills }: { skills: SkillItem[] }) {
                               <div className="relative h-2 w-full overflow-hidden rounded-full bg-muted">
                                 <motion.div
                                   className={cn(
-                                    "absolute inset-y-0 left-0 rounded-full bg-gradient-to-r",
+                                    "absolute inset-y-0 left-0 rounded-full bg-primary",
                                     gradientFor(skill.category),
                                   )}
                                   initial={{ width: 0 }}

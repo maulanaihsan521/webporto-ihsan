@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import {
-  Search as SearchIcon,
-  Sparkles,
+import { Search as SearchIcon,
   ArrowRight,
   FileText,
   Briefcase,
@@ -11,11 +9,9 @@ import {
   TrendingUp,
   FolderSearch,
   Compass,
-  type LucideIcon,
-} from "lucide-react";
+  type LucideIcon } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
 import { formatDate, truncate, stripHtml, cn } from "@/lib/utils";
@@ -195,48 +191,9 @@ export default async function SearchPage({
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-24">
-          <div className="mx-auto max-w-4xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <SearchIcon className="mr-1.5 size-3.5" />
-                Pencarian
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Temukan <span className="text-gradient">Apapun</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Cari artikel blog, portofolio proyek, sertifikat, karya galeri, dan
-                analisis pasar finansial — semua dalam satu tempat.
-              </p>
-            </SectionReveal>
-
-            {/* Search box (client) */}
-            <SectionReveal delay={0.15} className="mt-8">
-              <Suspense
-                fallback={
-                  <div className="mx-auto h-16 w-full max-w-3xl animate-pulse rounded-full bg-muted/60" />
-                }
-              >
-                <SearchBox popularSearches={POPULAR_SEARCHES} />
-              </Suspense>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Results / Suggestions ===== */}
-      <section className="section-pad py-12 sm:py-16 lg:py-20">
+      <section className="section-pad py-8 sm:py-10 lg:py-20">
         <div className="mx-auto max-w-5xl">
           {query ? (
             <>
@@ -256,7 +213,6 @@ export default async function SearchPage({
                   </div>
                   <Button asChild variant="outline" size="sm" className="glass">
                     <Link href="/search">
-                      <Sparkles className="size-4" />
                       Pencarian Baru
                     </Link>
                   </Button>
@@ -267,7 +223,7 @@ export default async function SearchPage({
                 // Empty result state
                 <SectionReveal delay={0.1}>
                   <Card className="glass p-10 text-center sm:p-16">
-                    <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-amber-500/10 to-orange-500/10 text-primary">
+                    <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full bg-amber-500/10 text-primary">
                       <FolderSearch className="size-8" />
                     </div>
                     <h3 className="text-xl font-bold sm:text-2xl">
@@ -313,7 +269,7 @@ export default async function SearchPage({
                         <div className="mb-4 flex items-center gap-3">
                           <div
                             className={cn(
-                              "flex size-10 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-md",
+                              "flex size-10 items-center justify-center rounded-xl bg-primary text-white shadow-md",
                               group.accent,
                             )}
                             aria-hidden
@@ -341,7 +297,7 @@ export default async function SearchPage({
                               <div className="flex items-start gap-3">
                                 <div
                                   className={cn(
-                                    "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-white shadow",
+                                    "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-white shadow",
                                     group.accent,
                                   )}
                                   aria-hidden
@@ -379,10 +335,6 @@ export default async function SearchPage({
             <>
               <SectionReveal>
                 <div className="mb-10 text-center">
-                  <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                    <Compass className="mr-1.5 size-3.5 text-primary" />
-                    Eksplorasi
-                  </Badge>
                   <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                     Mulai Menjelajah
                   </h2>

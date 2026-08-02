@@ -21,6 +21,8 @@ export function BlurImage({ src, alt, className, containerClassName, priority }:
       setInView(true);
       return;
     }
+    // Fallback: render immediately, then use IntersectionObserver for optimization
+    setInView(true);
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(

@@ -148,7 +148,7 @@ export function TestimonialCarousel({
                       ) : (
                         <div
                           className={cn(
-                            "flex size-14 items-center justify-center rounded-full bg-gradient-to-br text-base font-bold text-white shadow-lg ring-2 ring-background",
+                            "flex size-14 items-center justify-center rounded-full bg-primary font-bold text-white shadow-lg ring-2 ring-background",
                             grad,
                           )}
                           aria-hidden

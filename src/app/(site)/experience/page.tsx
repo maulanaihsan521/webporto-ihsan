@@ -1,8 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  Sparkles,
+import { ArrowRight,
   Briefcase,
   Building2,
   MapPin,
@@ -10,13 +8,11 @@ import {
   CheckCircle2,
   Wrench,
   Clock,
-  TrendingUp,
-} from "lucide-react";
+  TrendingUp } from "lucide-react";
 import { db } from "@/lib/db";
 import type { Experience } from "@prisma/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal, Counter } from "@/components/motion-primitives";
 import { cn, formatDateShort, getInitials } from "@/lib/utils";
 
@@ -68,78 +64,33 @@ export default async function ExperiencePage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <Briefcase className="mr-1.5 size-3.5" />
-                Perjalanan Profesional
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Pengalaman <span className="text-gradient">Kerja</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Setiap peran mengajarkan hal baru. Berikut kronologi perjalanan
-                karier saya — dari intern hingga specialist dengan beragam
-                pengalaman lintas industri.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    Bekerja Sama
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="/certificates">
-                    <Sparkles className="size-4" />
-                    Lihat Sertifikat
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Stats ===== */}
       <section className="section-pad py-10 sm:py-12">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <Card className="glass p-6 text-center">
+              <Card className="glass p-3 text-center sm:p-4">
                 <Clock className="mx-auto mb-2 size-5 text-primary" />
-                <div className="text-3xl font-bold sm:text-4xl">
+                <div className="text-xl font-bold sm:text-2xl">
                   <Counter to={totalYears} suffix="+" />
                 </div>
                 <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                   Tahun Pengalaman
                 </p>
               </Card>
-              <Card className="glass p-6 text-center">
+              <Card className="glass p-3 text-center sm:p-4">
                 <Building2 className="mx-auto mb-2 size-5 text-chart-2" />
-                <div className="text-3xl font-bold sm:text-4xl">
+                <div className="text-xl font-bold sm:text-2xl">
                   <Counter to={companiesCount} />
                 </div>
                 <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                   Perusahaan
                 </p>
               </Card>
-              <Card className="glass p-6 text-center">
+              <Card className="glass p-3 text-center sm:p-4">
                 <TrendingUp className="mx-auto mb-2 size-5 text-emerald-500" />
-                <div className="text-3xl font-bold sm:text-4xl">
+                <div className="text-xl font-bold sm:text-2xl">
                   <Counter to={currentCount} />
                 </div>
                 <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
@@ -156,10 +107,6 @@ export default async function ExperiencePage() {
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <Calendar className="mr-1.5 size-3.5 text-primary" />
-                Kronologi Karier
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Jejak <span className="text-gradient">Profesional</span>
               </h2>
@@ -181,7 +128,7 @@ export default async function ExperiencePage() {
             <div className="relative">
               {/* vertical line - centered on desktop, left on mobile */}
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent sm:left-1/2 sm:-translate-x-1/2"
+                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30 sm:left-1/2 sm:-translate-x-1/2"
                 aria-hidden
               />
 
@@ -204,7 +151,7 @@ export default async function ExperiencePage() {
                         {/* dot with initials */}
                         <span
                           className={cn(
-                            "absolute top-1 flex size-10 items-center justify-center rounded-full border-4 border-background bg-gradient-to-br from-primary to-chart-2 text-xs font-bold text-primary-foreground shadow-lg sm:top-2",
+                            "absolute top-1 flex size-10 items-center justify-center rounded-full border-4 border-background bg-primary text-xs font-bold text-primary-foreground shadow-lg sm:top-2",
                             isLeft
                               ? "left-0 sm:-left-5"
                               : "left-0 sm:left-auto sm:-right-5",
@@ -221,35 +168,8 @@ export default async function ExperiencePage() {
                               !isLeft && "sm:justify-end",
                             )}
                           >
-                            <Badge
-                              variant="secondary"
-                              className="text-[10px] uppercase tracking-wider"
-                            >
-                              <Calendar className="mr-1 size-3" />
-                              {formatDateShort(exp.startDate)} —{" "}
-                              {exp.current
-                                ? "Sekarang"
-                                : exp.endDate
-                                  ? formatDateShort(exp.endDate)
-                                  : "—"}
-                            </Badge>
-                            {exp.type && typeLabels[exp.type] && (
-                              <Badge
-                                className={cn(
-                                  "text-[10px] uppercase tracking-wider",
-                                  typeStyles[exp.type] ?? "bg-muted text-muted-foreground",
-                                )}
-                              >
-                                {typeLabels[exp.type]}
-                              </Badge>
-                            )}
-                            {exp.current && (
-                              <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                                <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
-                                Aktif
-                              </Badge>
-                            )}
-                          </div>
+
+</div>
 
                           {/* Position */}
                           <h3 className="mt-3 text-lg font-bold leading-tight">
@@ -300,13 +220,7 @@ export default async function ExperiencePage() {
                                 Teknologi
                               </span>
                               {techs.map((t) => (
-                                <Badge
-                                  key={t}
-                                  variant="outline"
-                                  className="text-[10px] font-medium"
-                                >
-                                  {t}
-                                </Badge>
+                                <span key={t} className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium">{t}</span>
                               ))}
                             </div>
                           )}
@@ -325,7 +239,7 @@ export default async function ExperiencePage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Briefcase className="mx-auto mb-4 size-8 text-primary" />

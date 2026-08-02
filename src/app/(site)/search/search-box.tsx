@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Search, X, Sparkles } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -102,7 +102,6 @@ export function SearchBox({ popularSearches }: SearchBoxProps) {
       {popularSearches.length > 0 && (
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Sparkles className="size-3.5 text-primary" />
             Pencarian populer:
           </span>
           {popularSearches.map((term) => (

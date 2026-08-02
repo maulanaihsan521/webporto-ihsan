@@ -2,15 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { Search, HelpCircle, X, MessageCircle, Tag } from "lucide-react";
-import {
-  Accordion,
+import { Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -154,7 +151,7 @@ export function FaqExplorer({ items }: FaqExplorerProps) {
                 <div className="mb-4 flex items-center gap-3">
                   <div
                     className={cn(
-                      "flex size-9 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-md",
+                      "flex size-9 items-center justify-center rounded-xl bg-primary text-white shadow-md",
                       accent,
                     )}
                     aria-hidden
@@ -216,10 +213,6 @@ export function FaqExplorer({ items }: FaqExplorerProps) {
         <Card className="glass-strong relative overflow-hidden p-6 text-center sm:p-8">
           <div className="mesh-bg opacity-50" aria-hidden />
           <div className="relative z-10">
-            <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-              <MessageCircle className="mr-1.5 size-3.5 text-primary" />
-              Butuh bantuan lebih?
-            </Badge>
             <h3 className="text-xl font-bold sm:text-2xl">Masih ada pertanyaan?</h3>
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
               Tidak menemukan jawaban yang Anda cari? Saya siap membantu. Hubungi saya

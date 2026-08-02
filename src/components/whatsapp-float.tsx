@@ -42,7 +42,7 @@ export function WhatsAppFloat({ whatsappUrl = "" }: WhatsAppFloatProps) {
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          className="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-2"
+          className="fixed bottom-24 left-4 lg:bottom-6 lg:left-6 z-40 flex flex-col items-start gap-2"
         >
           <AnimatePresence>
             {bubble && (

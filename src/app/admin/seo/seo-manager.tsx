@@ -205,7 +205,7 @@ export function SeoManager({ settings }: { settings: Settings }) {
               className="p-4 rounded-xl bg-white border"
             >
               <div className="flex items-center gap-2 mb-1">
-                <div className="size-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-[10px] font-bold">
+                <div className="size-7 rounded-full bg-amber-400 flex items-center justify-center text-white text-[10px] font-bold">
                   MI
                 </div>
                 <div className="min-w-0">
@@ -240,7 +240,7 @@ export function SeoManager({ settings }: { settings: Settings }) {
                   <img src={form.seo_og_image} alt="OG preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="aspect-[1.91/1] bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-amber-500">
+                <div className="aspect-[1.91/1] bg-amber-100 flex items-center justify-center text-amber-500">
                   <ImageIcon className="size-10 opacity-50" />
                 </div>
               )}

@@ -165,7 +165,7 @@ export function AdminDashboardClient({
             >
               <Link href={s.href}>
                 <Card className="lift group rounded-2xl p-4 glass relative overflow-hidden h-full">
-                  <div className={`size-10 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-3`}>
+                  <div className={`size-10 rounded-xl bg-primary/10 ${s.color} flex items-center justify-center mb-3`}>
                     <s.icon className="size-5" />
                   </div>
                   <div className="text-2xl font-bold">{formatNumber(s.value)}</div>

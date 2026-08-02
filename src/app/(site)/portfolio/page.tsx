@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Briefcase, LayoutGrid } from "lucide-react";
+import { ArrowRight, Briefcase, LayoutGrid } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
-import {
-  PortfolioExplorer,
+import { PortfolioExplorer,
   type PortfolioItem,
-  type PortfolioCategoryItem,
-} from "./portfolio-explorer";
+  type PortfolioCategoryItem } from "./portfolio-explorer";
 
 export const metadata = {
   title: "Portfolio — Maulana Ihsan Rohim",
@@ -71,58 +68,11 @@ export default async function PortfolioPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge variant="outline" className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider">
-                <Briefcase className="mr-1.5 size-3.5" />
-                Portfolio &amp; Case Study
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Karya &amp; <span className="text-gradient">Proyek</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Eksplorasi koleksi proyek profesional yang saya kerjakan — dari
-                pengembangan web, kampanye digital marketing, produksi video,
-                fotografi, hingga identitas brand.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    Mulai Proyek
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="/services">
-                    <Sparkles className="size-4" />
-                    Lihat Layanan
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
-
       {/* ===== Explorer ===== */}
-      <section className="section-pad py-16 sm:py-20">
+      <section className="section-pad py-8 sm:py-12">
         <div className="mx-auto max-w-7xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <LayoutGrid className="mr-1.5 size-3.5 text-primary" />
-                Eksplorasi Portfolio
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Jelajahi <span className="text-gradient">Semua Karya</span>
               </h2>
@@ -156,7 +106,7 @@ export default async function PortfolioPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Briefcase className="mx-auto mb-4 size-8 text-primary" />
@@ -176,7 +126,6 @@ export default async function PortfolioPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/about">
-                      <Sparkles className="size-4" />
                       Tentang Saya
                     </Link>
                   </Button>

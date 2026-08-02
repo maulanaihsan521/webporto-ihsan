@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
       >
         <Card className="glass-strong rounded-3xl p-8 shadow-2xl">
           <div className="text-center mb-7">
-            <div className="inline-flex size-16 rounded-2xl bg-gradient-to-br from-primary to-primary/70 items-center justify-center text-primary-foreground font-bold text-xl shadow-lg shadow-primary/30 mb-4">
+            <div className="inline-flex size-16 rounded-2xl bg-primary items-center justify-center text-primary-foreground font-bold text-xl shadow-lg shadow-primary/30 mb-4">
               <ShieldCheck className="size-8" />
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Admin Login</h1>

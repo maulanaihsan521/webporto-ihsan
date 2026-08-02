@@ -2,8 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
+import { ArrowRight,
   ArrowLeft,
   Award,
   BadgeCheck,
@@ -13,17 +12,14 @@ import {
   ExternalLink,
   Share2,
   ShieldCheck,
-  Sparkles,
   Star,
   Clock,
   CheckCircle2,
   FileText,
-  Layers,
-} from "lucide-react";
+  Layers } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { ShareButtons } from "@/components/share-buttons";
 import { formatDate, stripHtml, cn } from "@/lib/utils";
@@ -169,25 +165,9 @@ export default async function CertificateDetailPage({ params }: Params) {
                 {/* Text content */}
                 <div>
                   <div className="mb-4 flex flex-wrap items-center gap-2">
-                    {certificate.category && (
-                      <Badge variant="outline" className="glass gap-1.5">
-                        <Layers className="size-3" />
-                        {certificate.category.name}
-                      </Badge>
-                    )}
-                    {certificate.featured && (
-                      <Badge className="bg-amber-500/95 text-white">
-                        <Star className="size-3 fill-current" />
-                        Unggulan
-                      </Badge>
-                    )}
-                    {certificate.credentialUrl && (
-                      <Badge className="bg-emerald-500/95 text-white">
-                        <BadgeCheck className="size-3" />
-                        Terverifikasi
-                      </Badge>
-                    )}
-                  </div>
+
+
+</div>
 
                   <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
                     {certificate.title}
@@ -265,9 +245,9 @@ export default async function CertificateDetailPage({ params }: Params) {
                           href={certificate.fileUrl as string}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex size-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-6 text-center transition-colors hover:from-primary/15 hover:via-chart-2/15 hover:to-chart-3/15"
+                          className="group flex size-full flex-col items-center justify-center gap-3 bg-primary/10 p-6 text-center transition-colors"
                         >
-                          <div className="flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-chart-2 text-white shadow-lg">
+                          <div className="flex size-16 items-center justify-center rounded-2xl bg-primary text-white shadow-lg">
                             <FileText className="size-8" />
                           </div>
                           <div>
@@ -286,7 +266,7 @@ export default async function CertificateDetailPage({ params }: Params) {
                         />
                       )
                     ) : (
-                      <div className="flex size-full items-center justify-center bg-gradient-to-br from-primary/20 via-chart-2/20 to-chart-3/20">
+                      <div className="flex size-full items-center justify-center bg-primary/10">
                         <Award className="size-16 text-foreground/40" />
                       </div>
                     )}
@@ -304,7 +284,7 @@ export default async function CertificateDetailPage({ params }: Params) {
       </section>
 
       {/* ===== Body ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_320px]">
           {/* Main content */}
           <div className="min-w-0 space-y-10">
@@ -313,7 +293,7 @@ export default async function CertificateDetailPage({ params }: Params) {
               <SectionReveal>
                 <div>
                   <h2 className="mb-4 flex items-center gap-2 text-xl font-bold sm:text-2xl">
-                    <span className="h-5 w-1 rounded-full bg-gradient-to-b from-primary to-chart-2" />
+                    <span className="h-5 w-1 rounded-full bg-primary" />
                     Tentang Sertifikat
                   </h2>
                   <div
@@ -417,11 +397,7 @@ export default async function CertificateDetailPage({ params }: Params) {
                       Kategori
                     </dt>
                     <dd className="mt-0.5">
-                      <Badge variant="secondary" className="gap-1">
-                        <Layers className="size-3" />
-                        {certificate.category.name}
-                      </Badge>
-                    </dd>
+                      </dd>
                   </div>
                 )}
                 {certificate.credentialId && (
@@ -440,15 +416,9 @@ export default async function CertificateDetailPage({ params }: Params) {
                   </dt>
                   <dd className="mt-0.5">
                     {isExpired ? (
-                      <Badge className="bg-rose-500/15 text-rose-600 dark:text-rose-400">
-                        <Clock className="size-3" />
-                        Berakhir
-                      </Badge>
+                      <span className="text-rose-500">Expired</span>
                     ) : (
-                      <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                        <BadgeCheck className="size-3" />
-                        Aktif
-                      </Badge>
+                      <span className="text-emerald-500">Active</span>
                     )}
                   </dd>
                 </div>
@@ -490,7 +460,6 @@ export default async function CertificateDetailPage({ params }: Params) {
 
             <Card className="glass p-5 sm:p-6">
               <h3 className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-wider">
-                <Sparkles className="size-4 text-chart-3" />
                 Tindakan Cepat
               </h3>
               <div className="space-y-2 text-sm">
@@ -531,15 +500,11 @@ export default async function CertificateDetailPage({ params }: Params) {
 
       {/* ===== Related Certificates ===== */}
       {relatedList.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-6xl">
             <SectionReveal>
               <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
                 <div>
-                  <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                    <Sparkles className="mr-1.5 size-3.5 text-primary" />
-                    Sertifikat Terkait
-                  </Badge>
                   <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                     Jelajahi <span className="text-gradient">Kredensial Lainnya</span>
                   </h2>
@@ -567,19 +532,13 @@ export default async function CertificateDetailPage({ params }: Params) {
                             className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                           />
                         ) : (
-                          <div className="flex size-full items-center justify-center bg-gradient-to-br from-primary/30 via-chart-2/30 to-chart-3/30">
+                          <div className="flex size-full items-center justify-center bg-primary/10">
                             <Award className="size-12 text-foreground/40" />
                           </div>
                         )}
                         {r.category && (
                           <div className="absolute bottom-3 left-3">
-                            <Badge
-                              variant="secondary"
-                              className="border-0 bg-black/40 text-white backdrop-blur-md"
-                            >
-                              {r.category.name}
-                            </Badge>
-                          </div>
+                            </div>
                         )}
                       </div>
                       <div className="space-y-2 p-4">
@@ -607,7 +566,7 @@ export default async function CertificateDetailPage({ params }: Params) {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Award className="mx-auto mb-4 size-8 text-primary" />
@@ -628,7 +587,6 @@ export default async function CertificateDetailPage({ params }: Params) {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/experience">
-                      <Sparkles className="size-4" />
                       Lihat Pengalaman
                     </Link>
                   </Button>

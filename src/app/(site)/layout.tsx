@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { CookieConsent } from "@/components/cookie-consent";
 import { VisitorTracker } from "@/components/visitor-tracker";
 
@@ -12,8 +13,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="relative min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="flex-1 pt-20">{children}</main>
+      <main className="flex-1 pt-20 pb-20 lg:pb-0">{children}</main>
       <SiteFooter />
+      <MobileBottomNav />
       <CookieConsent />
       <VisitorTracker />
     </div>

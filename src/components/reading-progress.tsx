@@ -30,7 +30,7 @@ export function ReadingProgress({ targetSelector = "article" }: { targetSelector
       style={{ originX: 0 }}
     >
       <motion.div
-        className="h-full bg-gradient-to-r from-primary via-primary to-chart-2"
+        className="h-full bg-primary"
         style={{ width: `${progress}%` }}
         transition={{ type: "spring", stiffness: 200, damping: 30 }}
       />

@@ -171,7 +171,7 @@ export function BudgetEstimator({ prices = {} }: BudgetEstimatorProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="rounded-2xl bg-gradient-to-br from-primary/15 via-primary/10 to-chart-2/10 border border-primary/20 p-5"
+          className="rounded-2xl bg-primary border border-primary/20 p-5"
         >
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div>

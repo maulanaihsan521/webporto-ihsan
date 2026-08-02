@@ -419,7 +419,7 @@ function SummaryCard({
 }) {
   return (
     <div className="glass relative overflow-hidden rounded-xl p-4">
-      <div className={cn("mb-2 inline-flex size-8 items-center justify-center rounded-lg bg-gradient-to-br", accent)}>
+      <div className={cn("mb-2 inline-flex size-8 items-center justify-center rounded-lg bg-primary/10", accent)}>
         {icon}
       </div>
       <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">

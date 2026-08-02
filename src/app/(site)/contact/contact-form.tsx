@@ -96,7 +96,7 @@ export function ContactForm() {
   // Success state — full form swap
   if (submitted) {
     return (
-      <Card className="glass-strong relative overflow-hidden p-8 text-center sm:p-10">
+      <Card className="glass-strong relative overflow-hidden p-4 text-center sm:p-10">
         <div className="mesh-bg opacity-40" aria-hidden />
         <div className="relative z-10 flex flex-col items-center">
           <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 ring-4 ring-emerald-500/10">

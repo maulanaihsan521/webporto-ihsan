@@ -2,24 +2,19 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Dialog,
+import { Dialog,
   DialogContent,
   DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import {
-  Image as ImageIcon,
+  DialogDescription } from "@/components/ui/dialog";
+import { Image as ImageIcon,
   Video as VideoIcon,
-  Sparkles,
   X,
   ChevronLeft,
   ChevronRight,
   LayoutGrid,
   Film,
   Layers,
-  ExternalLink,
-} from "lucide-react";
+  ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Counter } from "@/components/motion-primitives";
 import { BlurImage } from "@/components/blur-image";
@@ -147,40 +142,40 @@ export function GalleryView({
   return (
     <div>
       {/* ===== Stats ===== */}
-      <div className="mb-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        <Card className="glass p-4 text-center sm:p-5">
-          <Layers className="mx-auto mb-2 size-5 text-primary" />
-          <div className="text-2xl font-bold sm:text-3xl">
+      <div className="mb-6 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
+        <Card className="glass p-3 text-center sm:p-4">
+          <Layers className="mx-auto mb-1 size-4 text-primary" />
+          <div className="text-lg font-bold sm:text-xl">
             <Counter to={stats.total} />
           </div>
-          <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-xs">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground sm:text-[10px]">
             Total Media
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-5">
-          <ImageIcon className="mx-auto mb-2 size-5 text-chart-2" />
-          <div className="text-2xl font-bold sm:text-3xl">
+        <Card className="glass p-3 text-center sm:p-4">
+          <ImageIcon className="mx-auto mb-1 size-4 text-chart-2" />
+          <div className="text-lg font-bold sm:text-xl">
             <Counter to={stats.images} />
           </div>
-          <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-xs">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground sm:text-[10px]">
             Foto
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-5">
-          <VideoIcon className="mx-auto mb-2 size-5 text-chart-3" />
-          <div className="text-2xl font-bold sm:text-3xl">
+        <Card className="glass p-3 text-center sm:p-4">
+          <VideoIcon className="mx-auto mb-1 size-4 text-chart-3" />
+          <div className="text-lg font-bold sm:text-xl">
             <Counter to={stats.videos} />
           </div>
-          <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-xs">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground sm:text-[10px]">
             Video
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-5">
-          <Film className="mx-auto mb-2 size-5 text-chart-4" />
-          <div className="text-2xl font-bold sm:text-3xl">
+        <Card className="glass p-3 text-center sm:p-4">
+          <Film className="mx-auto mb-1 size-4 text-chart-4" />
+          <div className="text-lg font-bold sm:text-xl">
             <Counter to={stats.albums} />
           </div>
-          <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-xs">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground sm:text-[10px]">
             Album
           </p>
         </Card>
@@ -207,7 +202,7 @@ export function GalleryView({
                   {typeFilter === opt.value && (
                     <motion.span
                       layoutId="activeGalleryType"
-                      className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-chart-2 shadow-md"
+                      className="absolute inset-0 -z-10 rounded-full bg-primary shadow-md"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -297,7 +292,6 @@ export function GalleryView({
           {filtered.length === 0 ? (
             <Card className="glass p-12 text-center sm:p-16">
               <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-muted">
-                <Sparkles className="size-7 text-muted-foreground/60" />
               </div>
               <p className="text-lg font-semibold">Tidak ada media ditemukan</p>
               <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
@@ -316,7 +310,7 @@ export function GalleryView({
               )}
             </Card>
           ) : (
-            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4 [&>*]:mb-4 [&>*]:break-inside-avoid">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 sm:columns-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-4">
               {filtered.map((g, idx) => (
                 <GalleryCard
                   key={g.id}
@@ -481,19 +475,21 @@ function GalleryCard({
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative block w-full overflow-hidden rounded-2xl border border-border bg-muted text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      className="group relative block w-full overflow-hidden rounded-2xl border-0 bg-muted text-left shadow-[0_2px_12px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 aspect-[3/4] sm:aspect-[4/5]"
       aria-label={`Buka media: ${g.title}`}
     >
-      <BlurImage
-        src={thumb}
-        alt={g.title}
-        containerClassName="w-full"
-        className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-      />
+      <div className="absolute inset-0">
+        <BlurImage
+          src={thumb}
+          alt={g.title}
+          containerClassName="w-full h-full"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+      </div>
 
       {/* Overlay */}
       <div
-        className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-black/60 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         aria-hidden
       >
         <div className="flex items-end justify-between gap-2">
@@ -517,7 +513,6 @@ function GalleryCard({
       {/* Featured badge */}
       {g.featured && (
         <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-amber-500/95 px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-md backdrop-blur">
-          <Sparkles className="size-2.5 fill-current" />
           Unggulan
         </div>
       )}

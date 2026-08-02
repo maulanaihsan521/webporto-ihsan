@@ -74,7 +74,7 @@ export default function NotFound() {
       {/* Top bar with brand + back-to-home */}
       <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-sm font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-amber-500 text-white shadow-md">
             <Compass className="size-5" />
           </span>
           <span className="hidden sm:inline">Maulana Ihsan Rohim</span>
@@ -190,7 +190,7 @@ export default function NotFound() {
                 className="group glass lift flex flex-col items-center gap-2 rounded-2xl p-4 transition-colors hover:bg-accent/40"
               >
                 <div
-                  className={`flex size-10 items-center justify-center rounded-xl bg-gradient-to-br ${link.accent} text-white shadow-md`}
+                  className={`flex size-10 items-center justify-center rounded-xl bg-primary/10 ${link.accent} text-white shadow-md`}
                   aria-hidden
                 >
                   <link.icon className="size-5" />

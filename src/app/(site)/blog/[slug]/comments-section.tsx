@@ -2,17 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  MessageSquare,
+import { MessageSquare,
   Reply,
   RefreshCw,
   Inbox,
   Loader2,
-  ShieldCheck,
-} from "lucide-react";
+  ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn, getInitials, timeAgo } from "@/lib/utils";
 import { CommentForm } from "./comment-form";
 
@@ -63,7 +60,7 @@ function CommentAvatar({ name, size = 40 }: { name: string; size?: number }) {
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-semibold text-white ring-2 ring-background",
+        "inline-flex shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-white ring-2 ring-background",
         gradientFor(name),
       )}
       style={{ width: size, height: size, fontSize: size * 0.4 }}
@@ -117,10 +114,7 @@ export function CommentsSection({ postId, initialComments }: CommentsSectionProp
           <h2 id="comments-heading" className="flex items-center gap-2 text-2xl font-bold tracking-tight sm:text-3xl">
             <MessageSquare className="size-6 text-primary" />
             Komentar
-            <Badge variant="secondary" className="ml-1 tabular-nums">
-              {totalCount}
-            </Badge>
-          </h2>
+            </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Bagikan pendapat, pertanyaan, atau pengalaman Anda terkait artikel ini.
           </p>
@@ -266,10 +260,6 @@ function CommentCard({
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-sm font-semibold text-foreground">{r.name}</span>
-                      <Badge variant="outline" className="border-0 bg-primary/10 px-1.5 py-0 text-[10px] font-medium text-primary">
-                        <Reply className="mr-0.5 size-2.5" />
-                        Balasan
-                      </Badge>
                       <span
                         className="text-xs text-muted-foreground"
                         title={new Date(r.createdAt).toLocaleString("id-ID")}

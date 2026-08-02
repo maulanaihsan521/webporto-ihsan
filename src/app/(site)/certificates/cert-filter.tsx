@@ -3,20 +3,16 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
+import { Search,
   X,
   Award,
   BadgeCheck,
   Calendar,
   Building2,
   Star,
-  Sparkles,
   Eye,
-  ShieldCheck,
-} from "lucide-react";
+  ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Counter } from "@/components/motion-primitives";
 import { cn, formatDate, truncate } from "@/lib/utils";
 
@@ -102,8 +98,8 @@ export function CertFilter({
   return (
     <div>
       {/* ===== Stats ===== */}
-      <div className="mb-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-        <Card className="glass p-4 text-center sm:p-6">
+      <div className="mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+        <Card className="glass p-3 text-center sm:p-4">
           <Award className="mx-auto mb-2 size-5 text-primary" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={certificates.length} />
@@ -112,7 +108,7 @@ export function CertFilter({
             Total Sertifikat
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <Building2 className="mx-auto mb-2 size-5 text-chart-2" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={issuersCount} />
@@ -207,7 +203,6 @@ export function CertFilter({
           {filtered.length === 0 ? (
             <Card className="glass p-12 text-center sm:p-16">
               <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-muted">
-                <Sparkles className="size-7 text-muted-foreground/60" />
               </div>
               <p className="text-lg font-semibold">Sertifikat tidak ditemukan</p>
               <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
@@ -258,7 +253,7 @@ function CategoryPill({
       {active && (
         <motion.span
           layoutId="activeCertCat"
-          className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-chart-2 shadow-md"
+          className="absolute inset-0 -z-10 rounded-full bg-primary shadow-md"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
@@ -300,7 +295,7 @@ function CertificateCard({
             ) : (
               <div
                 className={cn(
-                  "flex size-full items-center justify-center bg-gradient-to-br",
+                  "flex size-full items-center justify-center bg-primary/10",
                   gradient,
                 )}
               >
@@ -319,21 +314,7 @@ function CertificateCard({
             {/* Verified badge */}
             {c.credentialUrl && (
               <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-emerald-500/95 px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-md backdrop-blur">
-                <BadgeCheck className="size-3" />
-                Terverifikasi
-              </div>
-            )}
-
-            {/* Category badge */}
-            {c.category && (
-              <div className="absolute bottom-3 left-3">
-                <Badge
-                  variant="secondary"
-                  className="border-0 bg-black/40 text-white backdrop-blur-md"
-                >
-                  {c.category.name}
-                </Badge>
-              </div>
+                </div>
             )}
 
             {/* Hover View button */}
@@ -352,7 +333,7 @@ function CertificateCard({
             <div className="flex items-center gap-2 text-xs">
               <div
                 className={cn(
-                  "flex size-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-[9px] font-bold text-white",
+                  "flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[9px] font-bold text-white",
                   gradient,
                 )}
               >
@@ -380,12 +361,10 @@ function CertificateCard({
                 </span>
               ) : c.expiryDate ? (
                 <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                  <BadgeCheck className="size-3" />
                   Aktif
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                  <BadgeCheck className="size-3" />
                   Tanpa Kadaluarsa
                 </span>
               )}

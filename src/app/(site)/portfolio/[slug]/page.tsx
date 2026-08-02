@@ -2,8 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
+import { ArrowRight,
   ArrowLeft,
   Briefcase,
   Calendar,
@@ -19,16 +18,13 @@ import {
   Download,
   Share2,
   Layers,
-  Sparkles,
   Building2,
   Wrench,
-  PlayCircle,
-} from "lucide-react";
+  PlayCircle } from "lucide-react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { ShareButtons } from "@/components/share-buttons";
 import { PdfViewer } from "@/components/pdf-viewer";
@@ -148,7 +144,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
   const ownerName = settings.owner_name || "Maulana Ihsan Rohim";
 
   const projectLinks = [
-    { key: "demo", label: "Live Demo", icon: ExternalLink, url: portfolio.demoUrl, accent: "from-primary to-chart-2" },
+    { key: "demo", label: "Live Demo", icon: ExternalLink, url: portfolio.demoUrl, accent: "bg-primary" },
     { key: "github", label: "Source Code", icon: Github, url: portfolio.githubUrl, accent: "from-foreground to-foreground/70" },
     { key: "figma", label: "Figma", icon: Figma, url: portfolio.figmaUrl, accent: "from-fuchsia-500 to-pink-500" },
     { key: "youtube", label: "YouTube", icon: Youtube, url: portfolio.youtubeUrl, accent: "from-rose-500 to-red-500" },
@@ -193,13 +189,13 @@ export default async function PortfolioDetailPage({ params }: Params) {
                     className="size-full object-cover"
                   />
                 ) : (
-                  <div className="flex size-full items-center justify-center bg-gradient-to-br from-primary/30 via-chart-2/30 to-chart-3/30">
+                  <div className="flex size-full items-center justify-center bg-primary/10">
                     <Briefcase className="size-16 text-foreground/40" />
                   </div>
                 )}
                 {/* gradient overlay for legibility */}
                 <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20"
+                  className="pointer-events-none absolute inset-0 bg-black/60"
                   aria-hidden
                 />
                 {/* Mesh accents */}
@@ -209,19 +205,8 @@ export default async function PortfolioDetailPage({ params }: Params) {
                 <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10">
                   <div className="max-w-3xl">
                     <div className="mb-4 flex flex-wrap items-center gap-2">
-                      {portfolio.category && (
-                        <Badge className="bg-primary/90 text-primary-foreground backdrop-blur">
-                          <Layers className="size-3" />
-                          {portfolio.category.name}
-                        </Badge>
-                      )}
-                      {portfolio.featured && (
-                        <Badge className="bg-amber-500/95 text-white backdrop-blur">
-                          <Star className="size-3 fill-current" />
-                          Unggulan
-                        </Badge>
-                      )}
-                    </div>
+
+</div>
                     <h1 className="text-2xl font-bold tracking-tight text-white drop-shadow-md sm:text-4xl lg:text-5xl">
                       {portfolio.title}
                     </h1>
@@ -263,7 +248,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
       </section>
 
       {/* ===== Body ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_320px]">
           {/* ===== Main Content ===== */}
           <div className="min-w-0 space-y-10">
@@ -281,7 +266,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
                           title={`${portfolio.title} - ${l.label}`}
                           trigger={
                             <button className={cn(
-                              "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90 transition-opacity bg-gradient-to-r",
+                              "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90 transition-opacity bg-primary",
                               l.accent
                             )}>
                               <l.icon className="size-4" />
@@ -297,7 +282,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
                         asChild
                         size="sm"
                         className={cn(
-                          "rounded-full bg-gradient-to-r text-white shadow-sm hover:opacity-90",
+                          "rounded-full bg-primary text-white shadow-sm hover:opacity-90",
                           l.accent,
                         )}
                       >
@@ -316,7 +301,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
             <SectionReveal>
               <div>
                 <h2 className="mb-4 flex items-center gap-2 text-xl font-bold sm:text-2xl">
-                  <span className="h-5 w-1 rounded-full bg-gradient-to-b from-primary to-chart-2" />
+                  <span className="h-5 w-1 rounded-full bg-primary" />
                   Deskripsi Proyek
                 </h2>
                 <div
@@ -331,19 +316,12 @@ export default async function PortfolioDetailPage({ params }: Params) {
               <SectionReveal>
                 <div>
                   <h2 className="mb-4 flex items-center gap-2 text-xl font-bold sm:text-2xl">
-                    <span className="h-5 w-1 rounded-full bg-gradient-to-b from-primary to-chart-2" />
+                    <span className="h-5 w-1 rounded-full bg-primary" />
                     Teknologi &amp; Tools
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {technologies.map((t) => (
-                      <Badge
-                        key={t}
-                        variant="outline"
-                        className="gap-1.5 rounded-full bg-card/60 px-3 py-1 text-sm backdrop-blur"
-                      >
-                        <Sparkles className="size-3.5 text-primary" />
-                        {t}
-                      </Badge>
+                      <span key={t} className="rounded-md bg-secondary px-2 py-1 text-xs font-medium">{t}</span>
                     ))}
                   </div>
                 </div>
@@ -355,12 +333,9 @@ export default async function PortfolioDetailPage({ params }: Params) {
               <SectionReveal>
                 <div>
                   <h2 className="mb-4 flex items-center gap-2 text-xl font-bold sm:text-2xl">
-                    <span className="h-5 w-1 rounded-full bg-gradient-to-b from-primary to-chart-2" />
+                    <span className="h-5 w-1 rounded-full bg-primary" />
                     Galeri Proyek
-                    <Badge variant="secondary" className="ml-1 text-xs">
-                      {portfolio.images.length} gambar
-                    </Badge>
-                  </h2>
+                    </h2>
                   <GalleryLightbox
                     images={portfolio.images.map((img) => ({
                       id: img.id,
@@ -378,7 +353,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
               <SectionReveal>
                 <div>
                   <h2 className="mb-4 flex items-center gap-2 text-xl font-bold sm:text-2xl">
-                    <span className="h-5 w-1 rounded-full bg-gradient-to-b from-primary to-chart-2" />
+                    <span className="h-5 w-1 rounded-full bg-primary" />
                     Video Proyek
                   </h2>
                   <div className="overflow-hidden rounded-2xl border border-border bg-black">
@@ -438,11 +413,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
                   <SidebarRow
                     icon={CheckCircle2}
                     label="Status"
-                    value={
-                      <Badge variant="secondary" className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                        Published
-                      </Badge>
-                    }
+                    value={portfolio.status === "PUBLISHED" ? "Published" : "Draft"}
                   />
                   {portfolio.projectDate && (
                     <SidebarRow icon={Calendar} label="Tanggal Proyek" value={formatDate(portfolio.projectDate)} />
@@ -497,7 +468,6 @@ export default async function PortfolioDetailPage({ params }: Params) {
                   </p>
                   <Button asChild className="w-full rounded-full">
                     <Link href="/contact">
-                      <Sparkles className="size-4" />
                       Hubungi Saya
                     </Link>
                   </Button>
@@ -581,14 +551,10 @@ export default async function PortfolioDetailPage({ params }: Params) {
 
       {/* ===== Related Projects Carousel ===== */}
       {related.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-7xl">
             <SectionReveal>
               <div className="mb-8 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <Sparkles className="mr-1.5 size-3.5 text-primary" />
-                  Proyek Terkait
-                </Badge>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Karya <span className="text-gradient">Serupa</span>
                 </h2>
@@ -618,7 +584,7 @@ export default async function PortfolioDetailPage({ params }: Params) {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Briefcase className="mx-auto mb-4 size-8 text-primary" />

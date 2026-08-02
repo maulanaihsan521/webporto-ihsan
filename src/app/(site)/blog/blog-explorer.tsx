@@ -3,14 +3,12 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
+import { Search,
   X,
   Newspaper,
   Calendar,
   Eye,
   Star,
-  Sparkles,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
@@ -20,25 +18,19 @@ import {
   TrendingUp,
   User,
   BookOpen,
-  Tag as TagIcon,
-} from "lucide-react";
-import {
-  Select,
+  Tag as TagIcon } from "lucide-react";
+import { Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  DropdownMenu,
+  SelectValue } from "@/components/ui/select";
+import { DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuCheckboxItem,
-} from "@/components/ui/dropdown-menu";
+  DropdownMenuCheckboxItem } from "@/components/ui/dropdown-menu";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/motion-primitives";
 import { cn, formatDateShort, truncate, stripHtml, getInitials } from "@/lib/utils";
@@ -92,7 +84,7 @@ const categoryGradients: Record<string, string> = {
   Branding: "from-fuchsia-500 to-pink-500",
   Design: "from-rose-500 to-pink-500",
   Finance: "from-teal-500 to-emerald-500",
-  Default: "from-primary to-chart-2",
+  Default: "bg-primary",
 };
 
 function gradientFor(category: string | null): string {
@@ -248,8 +240,8 @@ export function BlogExplorer({
   return (
     <div>
       {/* ===== Stats ===== */}
-      <div className="mb-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-        <Card className="glass p-4 text-center sm:p-6">
+      <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+        <Card className="glass p-3 text-center sm:p-4">
           <Newspaper className="mx-auto mb-2 size-5 text-primary" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.total} />
@@ -258,7 +250,7 @@ export function BlogExplorer({
             Total Artikel
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <Star className="mx-auto mb-2 size-5 text-amber-500" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.featured} />
@@ -267,7 +259,7 @@ export function BlogExplorer({
             Unggulan
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <LayoutGrid className="mx-auto mb-2 size-5 text-chart-2" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.categories} />
@@ -276,7 +268,7 @@ export function BlogExplorer({
             Kategori
           </p>
         </Card>
-        <Card className="glass p-4 text-center sm:p-6">
+        <Card className="glass p-3 text-center sm:p-4">
           <Eye className="mx-auto mb-2 size-5 text-chart-3" />
           <div className="text-2xl font-bold sm:text-4xl">
             <Counter to={stats.views} />
@@ -490,7 +482,7 @@ export function BlogExplorer({
                       className={cn(
                         "flex size-9 items-center justify-center rounded-full text-sm font-medium transition-colors",
                         item === currentPage
-                          ? "bg-gradient-to-r from-primary to-chart-2 text-primary-foreground shadow-md"
+                          ? "bg-primary text-primary-foreground shadow-md"
                           : "border border-border bg-background/60 hover:bg-accent",
                       )}
                     >
@@ -616,7 +608,7 @@ export function BlogExplorer({
                     >
                       <div
                         className={cn(
-                          "flex size-10 shrink-0 items-center justify-center rounded-md bg-gradient-to-br text-white",
+                          "flex size-10 shrink-0 items-center justify-center rounded-md bg-primary text-white",
                           gradientFor(p.category?.name ?? null),
                         )}
                       >
@@ -647,7 +639,7 @@ export function BlogExplorer({
                       href={`/blog/${p.slug}`}
                       className="group flex gap-3 rounded-lg p-1 transition-colors hover:bg-accent"
                     >
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-primary to-chart-2 text-xs font-bold text-primary-foreground">
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
                         {i + 1}
                       </span>
                       <div className="min-w-0 flex-1">
@@ -667,7 +659,7 @@ export function BlogExplorer({
           )}
 
           {/* CTA card */}
-          <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-5">
+          <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-primary/10 p-5">
             <BookOpen className="mb-2 size-6 text-primary" />
             <p className="text-sm font-semibold">Butuh konten yang lebih dalam?</p>
             <p className="mt-1 text-xs text-muted-foreground">
@@ -711,7 +703,7 @@ function CategoryPill({
       {active && (
         <motion.span
           layoutId="activeBlogCat"
-          className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-chart-2 shadow-md"
+          className="absolute inset-0 -z-10 rounded-full bg-primary shadow-md"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
@@ -827,14 +819,14 @@ function FeaturedHero({ post }: { post: BlogPostItem }) {
               ) : (
                 <div
                   className={cn(
-                    "flex size-full items-center justify-center bg-gradient-to-br",
+                    "flex size-full items-center justify-center bg-primary/10",
                     gradient,
                   )}
                 >
                   <Newspaper className="size-14 text-white/80" />
                 </div>
               )}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent md:bg-gradient-to-r" aria-hidden />
+              <div className="pointer-events-none absolute inset-0 bg-black/60 md:bg-primary" aria-hidden />
               {/* Featured badge */}
               <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-amber-500/95 px-3 py-1.5 text-[11px] font-semibold text-white shadow-md backdrop-blur">
                 <Star className="size-3 fill-current" />
@@ -844,15 +836,7 @@ function FeaturedHero({ post }: { post: BlogPostItem }) {
 
             {/* Text */}
             <div className="flex flex-col justify-center gap-3 p-6 sm:p-8">
-              {post.category && (
-                <Badge
-                  variant="secondary"
-                  className="w-fit border-0 bg-primary/15 text-primary"
-                >
-                  {post.category.name}
-                </Badge>
-              )}
-              <h2 className="text-2xl font-bold leading-tight tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
+<h2 className="text-2xl font-bold leading-tight tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
                 {post.title}
               </h2>
               {post.excerpt && (
@@ -885,7 +869,7 @@ function FeaturedHero({ post }: { post: BlogPostItem }) {
                 </span>
               </div>
               <div className="mt-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-chart-2 px-4 py-2 text-xs font-semibold text-primary-foreground shadow-md transition-transform group-hover:scale-[1.02]">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-md transition-transform group-hover:scale-[1.02]">
                   Baca Selengkapnya
                   <ArrowRight className="size-3.5" />
                 </span>
@@ -935,7 +919,7 @@ function AuthorAvatar({
   }
   return (
     <span
-      className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-chart-2 font-semibold text-primary-foreground ring-1 ring-border"
+      className="inline-flex items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground ring-1 ring-border"
       style={{ width: size, height: size, fontSize: size * 0.4 }}
     >
       {getInitials(name) || "?"}
@@ -968,7 +952,7 @@ function PostCard({ post, delay }: { post: BlogPostItem; delay: number }) {
             ) : (
               <div
                 className={cn(
-                  "flex size-full items-center justify-center bg-gradient-to-br",
+                  "flex size-full items-center justify-center bg-primary/10",
                   gradient,
                 )}
               >
@@ -976,7 +960,7 @@ function PostCard({ post, delay }: { post: BlogPostItem; delay: number }) {
               </div>
             )}
             <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70"
+              className="pointer-events-none absolute inset-0 bg-black/60 opacity-70"
               aria-hidden
             />
             {post.featured && (
@@ -987,13 +971,7 @@ function PostCard({ post, delay }: { post: BlogPostItem; delay: number }) {
             )}
             {post.category && (
               <div className="absolute right-3 top-3">
-                <Badge
-                  variant="secondary"
-                  className="border-0 bg-black/40 text-white backdrop-blur-md"
-                >
-                  {post.category.name}
-                </Badge>
-              </div>
+                </div>
             )}
             <div className="absolute bottom-3 left-3 flex items-center gap-2">
               <div className="flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-md">
@@ -1078,7 +1056,6 @@ function EmptyState({ onReset }: { onReset: () => void }) {
   return (
     <Card className="glass p-12 text-center sm:p-16">
       <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-muted">
-        <Sparkles className="size-7 text-muted-foreground/60" />
       </div>
       <p className="text-lg font-semibold">Tidak ada artikel ditemukan</p>
       <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">

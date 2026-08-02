@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Newspaper, Rss } from "lucide-react";
+import { ArrowRight, Newspaper, Rss } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
-import {
-  BlogExplorer,
+import { BlogExplorer,
   type BlogPostItem,
   type BlogCategoryItem,
-  type BlogTagItem,
-} from "./blog-explorer";
+  type BlogTagItem } from "./blog-explorer";
 
 export const metadata = {
   title: "Blog — Maulana Ihsan Rohim",
@@ -80,64 +77,12 @@ export default async function BlogPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <Newspaper className="mr-1.5 size-3.5" />
-                Blog &amp; Artikel
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Insight &amp; <span className="text-gradient">Tulisan</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Eksplorasi pemikiran, tutorial, dan analisis mendalam seputar
-                digital marketing, pengembangan web, produksi konten, dan
-                pasar finansial.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="#blog-explorer">
-                    <Sparkles className="size-4" />
-                    Jelajahi Artikel
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="/financial-market">
-                    <Rss className="size-4" />
-                    Lihat Market Insights
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Explorer ===== */}
-      <section id="blog-explorer" className="section-pad scroll-mt-24 py-16 sm:py-20">
+      <section id="blog-explorer" className="section-pad scroll-mt-24 py-8 sm:py-12">
         <div className="mx-auto max-w-7xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge
-                variant="outline"
-                className="mb-3 text-xs uppercase tracking-wider"
-              >
-                <Newspaper className="mr-1.5 size-3.5 text-primary" />
-                Pustaka Artikel
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Jelajahi <span className="text-gradient">Semua Tulisan</span>
               </h2>
@@ -172,7 +117,7 @@ export default async function BlogPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Newspaper className="mx-auto mb-4 size-8 text-primary" />
@@ -193,7 +138,6 @@ export default async function BlogPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/about">
-                      <Sparkles className="size-4" />
                       Tentang Saya
                     </Link>
                   </Button>

@@ -72,7 +72,7 @@ export function MarketManager({ articles, watchlist, holdings }: { articles: Art
           <div className="grid gap-3">
             {articles.map((a) => (
               <Card key={a.id} className="rounded-2xl p-4 glass flex items-center gap-4">
-                <div className="size-12 rounded-xl bg-gradient-to-br from-green-400/20 to-emerald-400/20 flex items-center justify-center shrink-0">
+                <div className="size-12 rounded-xl bg-green-400/20 flex items-center justify-center shrink-0">
                   <TrendingUp className="size-5 text-green-500" />
                 </div>
                 <div className="flex-1 min-w-0">

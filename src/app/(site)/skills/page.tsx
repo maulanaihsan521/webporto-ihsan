@@ -1,7 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Sparkles,
+import { ArrowRight,
   Award,
   GraduationCap,
   Zap,
@@ -9,11 +7,10 @@ import {
   Brain,
   ShieldCheck,
   BarChart3,
-} from "lucide-react";
+  Megaphone } from "lucide-react";
 import { db } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { SkillFilter, type SkillItem } from "./skill-filter";
 
@@ -90,57 +87,12 @@ export default async function SkillsPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge variant="outline" className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider">
-                <Zap className="mr-1.5 size-3.5" />
-                Keahlian &amp; Kompetensi
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className="text-gradient">Skill</span> &amp; Expertise
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Kombinasi keahlian lintas-disiplin — dari kreativitas konten visual, teknologi
-                pengembangan web, hingga analisis pasar finansial.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    Kerja Sama
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="/services">
-                    <Sparkles className="size-4" />
-                    Lihat Layanan
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Skills content ===== */}
-      <section className="section-pad py-16 sm:py-20">
+      <section className="section-pad py-8 sm:py-12">
         <div className="mx-auto max-w-7xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <Award className="mr-1.5 size-3.5 text-primary" />
-                Eksplorasi Keahlian
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Semua <span className="text-gradient">Keahlian</span> Saya
               </h2>
@@ -158,14 +110,10 @@ export default async function SkillsPage() {
       </section>
 
       {/* ===== Category Progress Summary ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
             <div className="mb-8 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <BarChart3 className="mr-1.5 size-3.5 text-primary" />
-                Ringkasan Kategori
-              </Badge>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 Rata-rata per <span className="text-gradient">Kategori</span>
               </h2>
@@ -186,13 +134,12 @@ export default async function SkillsPage() {
                       <span className="text-sm font-semibold">{cat.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="rounded-full text-[10px]">{cat.count} skill</Badge>
                       <span className="text-lg font-bold text-primary">{cat.avg}%</span>
                     </div>
                   </div>
                   <div className="h-2 rounded-full bg-muted overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-primary to-chart-2 rounded-full transition-all duration-700"
+                      className="h-full bg-primary rounded-full transition-all duration-700"
                       style={{ width: `${cat.avg}%` }}
                     />
                   </div>
@@ -204,15 +151,11 @@ export default async function SkillsPage() {
       </section>
 
       {/* ===== Level Legend ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <Card className="glass-strong p-6 sm:p-10">
+            <Card className="glass-strong p-4 sm:p-6">
               <div className="mb-6 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <GraduationCap className="mr-1.5 size-3.5 text-primary" />
-                  Tingkat Penguasaan
-                </Badge>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Legenda Level</h2>
                 <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
                   Sistem level digunakan untuk menggambarkan tingkat penguasaan tiap skill.
@@ -247,14 +190,10 @@ export default async function SkillsPage() {
       </section>
 
       {/* ===== Skill Domains Highlights ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <Brain className="mr-1.5 size-3.5 text-primary" />
-                Bidang Keahlian
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Domain Utama</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
                 Empat pilar utama keahlian yang saya kuasai secara mendalam.
@@ -265,7 +204,7 @@ export default async function SkillsPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: Sparkles,
+                icon: Megaphone,
                 title: "Digital Marketing",
                 desc: "SEO, Meta & Google Ads, content marketing, dan social media management.",
                 accent: "from-amber-500 to-orange-500",
@@ -290,14 +229,14 @@ export default async function SkillsPage() {
               },
             ].map((domain, i) => (
               <SectionReveal key={domain.title} delay={i * 0.05}>
-                <Card className="glass group relative h-full overflow-hidden p-6 lift">
+                <Card className="glass group relative h-full overflow-hidden p-4 lift">
                   <div
-                    className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full bg-gradient-to-br ${domain.accent} opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-30`}
+                    className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full bg-primary/10 ${domain.accent} opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-30`}
                     aria-hidden
                   />
                   <div className="relative z-10">
                     <div
-                      className={`mb-4 flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br ${domain.accent} text-white shadow-lg`}
+                      className={`mb-4 flex size-12 items-center justify-center rounded-2xl bg-primary/10 ${domain.accent} text-white shadow-lg`}
                     >
                       <domain.icon className="size-6" />
                     </div>
@@ -315,7 +254,7 @@ export default async function SkillsPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <Award className="mx-auto mb-4 size-8 text-primary" />
@@ -335,7 +274,6 @@ export default async function SkillsPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/about">
-                      <Sparkles className="size-4" />
                       Tentang Saya
                     </Link>
                   </Button>

@@ -104,7 +104,7 @@ function SidebarContent({ pathname, unreadCount, pendingComments, onNavigate }: 
     <div className="flex flex-col h-full">
       <div className="p-5 border-b">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <div className="size-9 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg shadow-primary/30">
+          <div className="size-9 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg shadow-primary/30">
             MI
           </div>
           <div className="flex flex-col leading-none">

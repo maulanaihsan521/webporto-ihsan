@@ -1,13 +1,11 @@
 import Link from "next/link";
-import {
-  ArrowRight,
+import { ArrowRight,
   Mail,
   Phone,
   MapPin,
   Target,
   Compass,
   Heart,
-  Sparkles,
   Briefcase,
   GraduationCap,
   Languages as LanguagesIcon,
@@ -23,13 +21,11 @@ import {
   TrendingUp,
   BookOpen,
   Plane,
-  Gamepad2,
-} from "lucide-react";
+  Gamepad2 } from "lucide-react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SectionReveal } from "@/components/motion-primitives";
 import { formatDate, getInitials } from "@/lib/utils";
 
@@ -79,65 +75,18 @@ export default async function AboutPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-28">
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionReveal>
-              <Badge variant="outline" className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider">
-                <Sparkles className="mr-1.5 size-3.5" />
-                Tentang Saya
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className="text-gradient">{ownerName}</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-3xl text-base text-muted-foreground sm:text-lg">
-                {profession}
-              </p>
-            </SectionReveal>
-            {tagline && (
-              <SectionReveal delay={0.15}>
-                <p className="mx-auto mt-4 max-w-2xl text-sm italic text-foreground/70 sm:text-base">
-                  &ldquo;{tagline}&rdquo;
-                </p>
-              </SectionReveal>
-            )}
-            <SectionReveal delay={0.2}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Button asChild size="lg">
-                  <Link href="/contact">
-                    Hubungi Saya
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="glass">
-                  <Link href="/portfolio">
-                    <Briefcase className="size-4" />
-                    Lihat Portfolio
-                  </Link>
-                </Button>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Profile + Bio ===== */}
-      <section className="section-pad py-16 sm:py-20">
+      <section className="section-pad py-8 sm:py-12">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
             {/* Profile Card */}
             <SectionReveal>
-              <Card className="glass-strong relative overflow-hidden p-8 text-center lift">
+              <Card className="glass-strong relative overflow-hidden p-4 text-center lift">
                 <div className="mesh-bg" aria-hidden />
                 <div className="relative z-10 flex flex-col items-center">
                   <div className="relative">
-                    <div className="flex size-32 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary to-chart-2 text-3xl font-bold text-primary-foreground shadow-lg overflow-hidden sm:size-36 sm:text-4xl">
+                    <div className="flex size-32 items-center justify-center rounded-full bg-primary text-3xl font-bold text-primary-foreground shadow-lg overflow-hidden sm:size-36 sm:text-4xl">
                       {ownerPhoto ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={ownerPhoto} alt={ownerName} className="size-full object-cover" />
@@ -152,10 +101,7 @@ export default async function AboutPage() {
                   <h3 className="mt-5 text-xl font-semibold">{ownerName}</h3>
                   <p className="mt-1 text-xs text-muted-foreground">Tersedia untuk Proyek</p>
                   <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-                    <Badge variant="secondary" className="text-[10px]">Freelancer</Badge>
-                    <Badge variant="secondary" className="text-[10px]">Remote</Badge>
-                    <Badge variant="secondary" className="text-[10px]">Full-time</Badge>
-                  </div>
+                    </div>
                 </div>
               </Card>
             </SectionReveal>
@@ -164,10 +110,6 @@ export default async function AboutPage() {
             <SectionReveal delay={0.1}>
               <div className="space-y-5">
                 <div>
-                  <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                    <Star className="mr-1.5 size-3.5 text-primary" />
-                    Profil Singkat
-                  </Badge>
                   <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                     Halo, saya <span className="text-gradient">{ownerName.split(" ")[0]}</span>
                   </h2>
@@ -213,14 +155,10 @@ export default async function AboutPage() {
       </section>
 
       {/* ===== Vision & Mission ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionReveal>
             <div className="mb-10 text-center">
-              <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                <Compass className="mr-1.5 size-3.5 text-primary" />
-                Arah &amp; Tujuan
-              </Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Visi &amp; Misi</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
                 Fondasi yang membimbing setiap langkah dan keputusan profesional saya.
@@ -230,10 +168,10 @@ export default async function AboutPage() {
 
           <div className="grid gap-6 md:grid-cols-2">
             <SectionReveal delay={0.05}>
-              <Card className="glass relative h-full overflow-hidden p-6 sm:p-8 lift">
+              <Card className="glass relative h-full overflow-hidden p-4 sm:p-5 lift">
                 <div className="mesh-bg opacity-50" aria-hidden />
                 <div className="relative z-10">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-chart-2 text-white shadow-lg">
+                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-primary text-white shadow-lg">
                     <Target className="size-7" />
                   </div>
                   <h3 className="text-xl font-bold sm:text-2xl">Visi</h3>
@@ -242,10 +180,10 @@ export default async function AboutPage() {
               </Card>
             </SectionReveal>
             <SectionReveal delay={0.1}>
-              <Card className="glass relative h-full overflow-hidden p-6 sm:p-8 lift">
+              <Card className="glass relative h-full overflow-hidden p-4 sm:p-5 lift">
                 <div className="mesh-bg opacity-50" aria-hidden />
                 <div className="relative z-10">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-chart-2 to-chart-3 text-white shadow-lg">
+                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-chart-2 text-white shadow-lg">
                     <Compass className="size-7" />
                   </div>
                   <h3 className="text-xl font-bold sm:text-2xl">Misi</h3>
@@ -258,7 +196,7 @@ export default async function AboutPage() {
       </section>
 
       {/* ===== Values / Hobbies / Languages ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-6xl space-y-8">
           {/* Values */}
           {values.length > 0 && (
@@ -295,7 +233,6 @@ export default async function AboutPage() {
                 <Card className="glass h-full p-6 sm:p-8">
                   <div className="mb-5 flex items-center gap-3">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-chart-3/15 text-chart-3">
-                      <Sparkles className="size-5" />
                     </div>
                     <div>
                       <h3 className="text-lg font-bold sm:text-xl">Hobi</h3>
@@ -304,7 +241,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="flex flex-wrap gap-2.5">
                     {hobbies.map((h) => {
-                      const Icon = hobbyIcons[h] ?? Sparkles;
+                      const Icon = hobbyIcons[h] ?? Briefcase;
                       return (
                         <span
                           key={h}
@@ -343,9 +280,7 @@ export default async function AboutPage() {
                         >
                           <span className="text-sm font-medium">{name}</span>
                           {level && (
-                            <Badge variant="secondary" className="text-[10px] uppercase tracking-wide">
-                              {level}
-                            </Badge>
+                            <span className="text-xs text-muted-foreground">{level}</span>
                           )}
                         </div>
                       );
@@ -360,14 +295,10 @@ export default async function AboutPage() {
 
       {/* ===== Career Timeline ===== */}
       {experiencesDesc.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-4xl">
             <SectionReveal>
               <div className="mb-10 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <Briefcase className="mr-1.5 size-3.5 text-primary" />
-                  Perjalanan Profesional
-                </Badge>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Karier</h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
                   Pengalaman kerja saya dalam urutan kronologis terbalik.
@@ -378,7 +309,7 @@ export default async function AboutPage() {
             <div className="relative">
               {/* vertical line */}
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent sm:left-1/2"
+                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30 sm:left-1/2"
                 aria-hidden
               />
 
@@ -405,22 +336,7 @@ export default async function AboutPage() {
                             i % 2 !== 0 ? "sm:justify-end" : ""
                           }`}
                         >
-                          <Badge variant="secondary" className="text-[10px] uppercase tracking-wider">
-                            <Calendar className="mr-1 size-3" />
-                            {formatDate(exp.startDate, { month: "short", year: "numeric" })} —{" "}
-                            {exp.current
-                              ? "Sekarang"
-                              : exp.endDate
-                                ? formatDate(exp.endDate, { month: "short", year: "numeric" })
-                                : "—"}
-                          </Badge>
-                          {exp.current && (
-                            <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
-                              Aktif
-                            </Badge>
-                          )}
-                        </div>
+</div>
                         <h3 className="mt-3 text-lg font-bold leading-tight">{exp.position}</h3>
                         <div
                           className={`mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground ${
@@ -450,9 +366,7 @@ export default async function AboutPage() {
                               .map((t) => t.trim())
                               .filter(Boolean)
                               .map((tech) => (
-                                <Badge key={tech} variant="outline" className="text-[10px]">
-                                  {tech}
-                                </Badge>
+                                <span key={tech} className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium">{tech}</span>
                               ))}
                           </div>
                         )}
@@ -468,14 +382,10 @@ export default async function AboutPage() {
 
       {/* ===== Education Timeline ===== */}
       {educationsDesc.length > 0 && (
-        <section className="section-pad py-12 sm:py-16">
+        <section className="section-pad py-8 sm:py-10">
           <div className="mx-auto max-w-4xl">
             <SectionReveal>
               <div className="mb-10 text-center">
-                <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                  <GraduationCap className="mr-1.5 size-3.5 text-primary" />
-                  Pendidikan
-                </Badge>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Riwayat Pendidikan</h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
                   Latar belakang akademis dan pencapaian saya.
@@ -485,7 +395,7 @@ export default async function AboutPage() {
 
             <div className="relative">
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-chart-3 via-chart-3/40 to-transparent"
+                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30"
                 aria-hidden
               />
 
@@ -499,22 +409,7 @@ export default async function AboutPage() {
 
                       <Card className="glass lift p-5 sm:p-6">
                         <div className="flex flex-wrap items-center gap-2">
-                          <Badge variant="secondary" className="text-[10px] uppercase tracking-wider">
-                            <Calendar className="mr-1 size-3" />
-                            {formatDate(edu.startDate, { month: "short", year: "numeric" })} —{" "}
-                            {edu.current
-                              ? "Sekarang"
-                              : edu.endDate
-                                ? formatDate(edu.endDate, { month: "short", year: "numeric" })
-                                : "—"}
-                          </Badge>
-                          {edu.grade && (
-                            <Badge className="bg-primary/15 text-primary">
-                              <Award className="mr-1 size-3" />
-                              {edu.grade}
-                            </Badge>
-                          )}
-                        </div>
+</div>
                         <h3 className="mt-3 text-lg font-bold leading-tight">{edu.institution}</h3>
                         <p className="mt-1 text-sm font-medium text-foreground/80">
                           {edu.degree}
@@ -533,7 +428,6 @@ export default async function AboutPage() {
                         )}
                         {edu.organization && (
                           <div className="mt-3 flex items-start gap-2 text-xs text-muted-foreground">
-                            <Sparkles className="mt-0.5 size-3.5 shrink-0 text-chart-3" />
                             <span>{edu.organization}</span>
                           </div>
                         )}
@@ -548,17 +442,13 @@ export default async function AboutPage() {
       )}
 
       {/* ===== Personal Info Card ===== */}
-      <section className="section-pad py-12 sm:py-16">
+      <section className="section-pad py-8 sm:py-10">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
             <Card className="glass-strong relative overflow-hidden p-6 sm:p-10">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <div className="mb-8 text-center">
-                  <Badge variant="outline" className="mb-3 text-xs uppercase tracking-wider">
-                    <Mail className="mr-1.5 size-3.5 text-primary" />
-                    Informasi Pribadi
-                  </Badge>
                   <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Mari Terhubung</h2>
                   <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
                     Tertarik bekerja sama atau sekadar berdiskusi? Hubungi saya melalui kontak di bawah.
@@ -610,7 +500,6 @@ export default async function AboutPage() {
                   </Button>
                   <Button asChild variant="outline" size="lg" className="glass">
                     <Link href="/services">
-                      <Sparkles className="size-4" />
                       Lihat Layanan
                     </Link>
                   </Button>
@@ -625,7 +514,7 @@ export default async function AboutPage() {
       <section className="section-pad pb-16 sm:pb-24">
         <div className="mx-auto max-w-5xl">
           <SectionReveal>
-            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-chart-2/10 to-chart-3/10 p-8 text-center sm:p-12">
+            <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-50" aria-hidden />
               <div className="relative z-10">
                 <Quote className="mx-auto mb-4 size-8 text-primary/60" />

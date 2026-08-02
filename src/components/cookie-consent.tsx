@@ -33,7 +33,7 @@ export function CookieConsent() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          className="fixed bottom-4 inset-x-4 z-50 mx-auto max-w-3xl"
+          className="fixed bottom-20 lg:bottom-4 inset-x-4 z-50 mx-auto max-w-3xl"
         >
           <div className="glass-strong rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="size-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">

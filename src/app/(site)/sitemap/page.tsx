@@ -1,9 +1,7 @@
 import Link from "next/link";
-import {
-  Home,
+import { Home,
   User,
   Briefcase,
-  Sparkles,
   Wrench,
   Mail,
   Image as ImageIcon,
@@ -20,9 +18,8 @@ import {
   Scale,
   Lock,
   ArrowRight,
-  type LucideIcon,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+  Code2,
+  type LucideIcon } from "lucide-react";
 import { SectionReveal } from "@/components/motion-primitives";
 import { cn } from "@/lib/utils";
 
@@ -57,7 +54,7 @@ const GROUPS: LinkGroup[] = [
       { label: "Tentang Saya", href: "/about", icon: User, description: "Profil & biografi" },
       { label: "Layanan", href: "/services", icon: Wrench, description: "Daftar layanan profesional" },
       { label: "Portofolio", href: "/portfolio", icon: Briefcase, description: "Proyek & karya terpilih" },
-      { label: "Keahlian", href: "/skills", icon: Sparkles, description: "Tech stack & skill set" },
+      { label: "Keahlian", href: "/skills", icon: Code2, description: "Tech stack & skill set" },
       { label: "Kontak", href: "/contact", icon: Mail, description: "Hubungi saya" },
     ],
   },
@@ -109,47 +106,9 @@ export default function SitemapPage() {
 
   return (
     <div className="relative">
-      {/* ===== Hero ===== */}
-      <section className="relative overflow-hidden animated-gradient border-b border-border">
-        <div className="mesh-bg" aria-hidden />
-        <div className="section-pad relative z-10 py-16 sm:py-20 lg:py-24">
-          <div className="mx-auto max-w-4xl text-center">
-            <SectionReveal>
-              <Badge
-                variant="outline"
-                className="mb-5 glass px-4 py-1.5 text-xs uppercase tracking-wider"
-              >
-                <MapIcon className="mr-1.5 size-3.5" />
-                Navigasi
-              </Badge>
-            </SectionReveal>
-            <SectionReveal delay={0.05}>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Peta <span className="text-gradient">Situs</span>
-              </h1>
-            </SectionReveal>
-            <SectionReveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                Temukan semua halaman utama, layanan, dan konten situs dalam satu
-                tampilan terstruktur. {totalLinks} halaman dalam {GROUPS.length}{" "}
-                kategori.
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={0.15}>
-              <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs text-muted-foreground">
-                <MapIcon className="size-3.5 text-primary" />
-                XML sitemap tersedia di{" "}
-                <Link href="/sitemap.xml" className="font-medium text-foreground underline-offset-2 hover:underline">
-                  /sitemap.xml
-                </Link>
-              </div>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
 
       {/* ===== Link groups ===== */}
-      <section className="section-pad py-12 sm:py-16 lg:py-20">
+      <section className="section-pad py-8 sm:py-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {GROUPS.map((group, gi) => (
@@ -159,7 +118,7 @@ export default function SitemapPage() {
                   <div className="mb-4 flex items-center gap-3">
                     <div
                       className={cn(
-                        "flex size-10 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-md",
+                        "flex size-10 items-center justify-center rounded-xl bg-primary text-white shadow-md",
                         group.accent,
                       )}
                       aria-hidden
@@ -208,7 +167,7 @@ export default function SitemapPage() {
             <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-2xl glass p-6 sm:flex-row sm:p-8">
               <div className="flex items-center gap-4">
                 <div
-                  className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md"
+                  className="flex size-12 items-center justify-center rounded-xl bg-amber-500 text-white shadow-md"
                   aria-hidden
                 >
                   <MapIcon className="size-6" />

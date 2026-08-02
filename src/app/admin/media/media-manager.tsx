@@ -374,7 +374,7 @@ export function MediaManager({ data }: { data: MediaRow[] }) {
             </div>
             <div className="h-2 rounded-full bg-muted overflow-hidden mb-2">
               <div
-                className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all"
+                className="h-full bg-amber-500 transition-all"
                 style={{ width: `${sizePercent}%` }}
               />
             </div>
