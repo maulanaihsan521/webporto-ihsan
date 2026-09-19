@@ -16,6 +16,7 @@ import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site-config";
 import { getBaseUrl } from "@/lib/server-site-config";
+import { isValidSocialUrl } from "@/lib/social-utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -92,13 +93,17 @@ export default async function ContactPage() {
     ? phone.replace(/^(\+?62|0)/, "+62 ")
     : whatsapp.replace(/^https?:\/\/wa\.me\//, "+");
 
+  // FIX (Task 15): filter pakai isValidSocialUrl — sebelumnya hanya cek truthy,
+  // placeholder DB seperti "https://facebook.com/" (tanpa username) dan
+  // "https://youtube.com/@" (tanpa handle) bocor ke tombol sosial + JSON-LD
+  // sameAs. Footer & homepage hero sudah memakai helper yang sama.
   const socials = [
     { name: "GitHub", url: github, icon: Github, color: "hover:text-foreground" },
     { name: "LinkedIn", url: linkedin, icon: Linkedin, color: "hover:text-teal-500" },
     { name: "Instagram", url: instagram, icon: Instagram, color: "hover:text-rose-500" },
     { name: "Facebook", url: facebook, icon: Facebook, color: "hover:text-violet-500" },
     { name: "YouTube", url: youtube, icon: Youtube, color: "hover:text-rose-600" },
-  ].filter((s) => s.url);
+  ].filter((s) => isValidSocialUrl(s.url));
 
   // JSON-LD ContactPage — structured data untuk rich result Google
   // (selaras dengan Service di services, ProfilePage di experience).

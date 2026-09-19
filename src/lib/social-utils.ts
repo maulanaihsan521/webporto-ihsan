@@ -42,3 +42,19 @@ export function isValidSocialUrl(url: string | null | undefined): boolean {
     return false; // Bukan URL valid
   }
 }
+
+/**
+ * Filter kumpulan URL sosial (Record label → URL) → hanya URL valid.
+ *
+ * FIX (Task 15, review): sebelumnya hanya about page yang punya filter lokal
+ * (duplikat logika ini) dan contact page TIDAK memfilter sama sekali —
+ * placeholder seperti "https://facebook.com/" dan "https://youtube.com/@"
+ * dari DB settings bocor ke tombol sosial + JSON-LD sameAs halaman kontak.
+ * Sekarang satu implementasi shared dipakai semua halaman.
+ *
+ * @param socials - Record berisi URL sosial (nilai kosong/invalid dihapus)
+ * @returns array URL yang valid (urutan dipertahankan)
+ */
+export function filterValidSocials(socials: Record<string, string | null | undefined>): string[] {
+  return Object.values(socials).filter((url): url is string => isValidSocialUrl(url));
+}

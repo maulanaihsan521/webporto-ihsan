@@ -26,6 +26,7 @@ import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL, SITE_CONFIG } from "@/lib/site-config";
 import { siteOriginFromHeaders } from "@/lib/server-site-config";
+import { filterValidSocials } from "@/lib/social-utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -93,19 +94,8 @@ function buildAboutUrl(currentHeaders: Headers): string {
   return `${siteOriginFromHeaders(currentHeaders)}/about`;
 }
 
-// Filter URL sosial media yang valid (punya path/profile, bukan placeholder kosong)
-function filterValidSocials(socials: Record<string, string>): string[] {
-  return Object.values(socials).filter((url) => {
-    if (!url) return false;
-    try {
-      const u = new URL(url);
-      const path = u.pathname.replace(/\/+$/, "");
-      return path.length > 1 && !path.endsWith("@");
-    } catch {
-      return false;
-    }
-  });
-}
+// (Task 15) Filter URL sosial → shared helper di @/lib/social-utils
+// (logika lama yang duplikat dengan isValidSocialUrl sudah dihapus).
 
 export default async function AboutPage() {
   const [settings, experiences, educations] = await Promise.all([
