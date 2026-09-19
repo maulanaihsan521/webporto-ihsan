@@ -1,0 +1,36 @@
+[
+  {
+    "id": "cmrabl5k30038sdar2lfnew6g",
+    "institution": "Telkom University Purwokerto",
+    "logo": null,
+    "degree": "Berjalan",
+    "field": "S1 Sistem Informasi",
+    "grade": "3.78",
+    "startDate": "2023-09-01T00:00:00.000Z",
+    "endDate": null,
+    "current": true,
+    "description": null,
+    "achievements": null,
+    "organization": "Marketing Crew,KSPM",
+    "order": 0,
+    "createdAt": "2026-07-07T07:20:57.700Z",
+    "updatedAt": "2026-07-07T18:40:53.234Z"
+  },
+  {
+    "id": "cmrabl5k40039sdarzpi1b29a",
+    "institution": "SMKN 1 Lemahabang",
+    "logo": null,
+    "degree": "SMK",
+    "field": "Multiedia",
+    "grade": "88.5",
+    "startDate": "2020-06-01T00:00:00.000Z",
+    "endDate": "2023-03-01T00:00:00.000Z",
+    "current": false,
+    "description": null,
+    "achievements": null,
+    "organization": "Exmukensa(Multimedia Skensala)",
+    "order": 1,
+    "createdAt": "2026-07-07T07:20:57.701Z",
+    "updatedAt": "2026-07-07T18:42:12.016Z"
+  }
+]

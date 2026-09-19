@@ -1,0 +1,840 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Light Mode — Warm Luxury Palette */
+  --background: #F8F6F2;          /* Warm Ivory */
+  --foreground: #1F1F1F;          /* Charcoal Black */
+  --card: #FFFFFF;                /* Pearl White */
+  --card-foreground: #1F1F1F;     /* Charcoal Black */
+  --popover: #FFFFFF;             /* Pearl White */
+  --popover-foreground: #1F1F1F;  /* Charcoal Black */
+  --primary: #D4A64A;             /* Champagne Gold */
+  --primary-foreground: #1F1F1F;  /* Charcoal Black (text on gold) */
+  --secondary: #F3EFE8;           /* Soft Linen */
+  --secondary-foreground: #1F1F1F;/* Charcoal Black */
+  --muted: #F3EFE8;               /* Soft Linen */
+  --muted-foreground: #8A857D;    /* Warm Gray */
+  --accent: #B68A3D;              /* Soft Bronze */
+  --accent-foreground: #F8F6F2;   /* Warm Ivory */
+  --destructive: #DC2626;
+  --border: #E8E0D4;              /* Light Sand */
+  --input: #E8E0D4;               /* Light Sand */
+  --ring: #D4A64A;                /* Champagne Gold */
+  --chart-1: #D4A64A;             /* Champagne Gold */
+  --chart-2: #B68A3D;             /* Soft Bronze */
+  --chart-3: #C6922E;             /* Rich Gold */
+  --chart-4: #8A857D;             /* Warm Gray */
+  --chart-5: #666666;             /* Slate Gray */
+  --sidebar: #F8F6F2;             /* Warm Ivory */
+  --sidebar-foreground: #1F1F1F;  /* Charcoal Black */
+  --sidebar-primary: #D4A64A;     /* Champagne Gold */
+  --sidebar-primary-foreground: #1F1F1F;
+  --sidebar-accent: #F3EFE8;      /* Soft Linen */
+  --sidebar-accent-foreground: #1F1F1F;
+  --sidebar-border: #E8E0D4;      /* Light Sand */
+  --sidebar-ring: #D4A64A;        /* Champagne Gold */
+}
+
+.dark {
+  /* Dark Mode — Deep navy-black bg + elevated navy cards (referensi user)
+     Gradasi permukaan (makin "tinggi" makin terang, langkah ±5-7, hue navy konsisten):
+       bg #0C1218 → sidebar #111821 → card #171F29 → popover #1C2531 → secondary/muted #202A36
+     Teks cool-white #E6EAF0 (senada hue navy, tetap tidak menyilaukan).
+     Gold dark #DCAF5E — kombinasi klasik gold-on-navy, premium dan hidup. */
+  --background: #0C1218;          /* Deep Navy Black (dari referensi user) */
+  --foreground: #E6EAF0;          /* Cool White — senada hue navy, tidak menyilaukan */
+  --card: #171F29;                /* Elevated navy surface — +11 dari bg, terangkat jelas */
+  --card-foreground: #E6EAF0;     /* Cool White */
+  --popover: #1C2531;             /* Floating surface — di atas card */
+  --popover-foreground: #E6EAF0;  /* Cool White */
+  --primary: #DCAF5E;             /* Champagne Gold (dark) — gold-on-navy klasik */
+  --primary-foreground: #0C1218;  /* Navy (teks di atas gold — lembut, bukan pure black) */
+  --secondary: #202A36;           /* Elevated muted navy surface */
+  --secondary-foreground: #E6EAF0;/* Cool White */
+  --muted: #202A36;               /* Elevated muted navy surface */
+  --muted-foreground: #96A1AD;    /* Cool Blue-Gray — kontras AA, senada dgn navy */
+  --accent: #C2963F;              /* Soft Bronze (dark) — lebih terbaca */
+  --accent-foreground: #E6EAF0;   /* Cool White */
+  --destructive: #DC2626;
+  --border: rgba(255, 255, 255, 0.14);  /* Border — cukup terlihat utk pemisahan kartu */
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #DCAF5E;                /* Champagne Gold (dark) */
+  --chart-1: #DCAF5E;             /* Champagne Gold (dark) */
+  --chart-2: #C2963F;             /* Soft Bronze (dark) */
+  --chart-3: #C6922E;             /* Rich Gold */
+  --chart-4: #94A3B3;             /* Cool Blue-Gray */
+  --chart-5: #64748B;             /* Slate */
+  --sidebar: #111821;             /* Sedikit di atas bg, di bawah card */
+  --sidebar-foreground: #E6EAF0;  /* Cool White */
+  --sidebar-primary: #DCAF5E;     /* Champagne Gold (dark) */
+  --sidebar-primary-foreground: #0C1218;
+  --sidebar-accent: #202A36;      /* Elevated muted navy surface */
+  --sidebar-accent-foreground: #E6EAF0;
+  --sidebar-border: rgba(255, 255, 255, 0.10);
+  --sidebar-ring: #DCAF5E;        /* Champagne Gold (dark) */
+}
+
+/* ===== Dark Mode Ambience (premium polish) =====
+   1. Glow navy lembut di atas viewport — meniru kedalaman referensi user
+      (top area sedikit lebih terang ~#151E27, lalu memudar ke bawah).
+   2. Glow emas SANGAT halus (opacity 5%) — kehangatan "navy premium" tanpa silau.
+   3. Transisi warna body halus saat toggle tema (buttery smooth). fixed agar stabil saat scroll. */
+.dark body {
+  background-image:
+    radial-gradient(
+      ellipse 90% 50% at 50% -10%,
+      rgba(44, 74, 112, 0.28),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 90% 55% at 50% -12%,
+      rgba(220, 175, 94, 0.05),
+      transparent 70%
+    );
+  background-attachment: fixed;
+}
+
+body {
+  transition: background-color 0.35s ease, color 0.35s ease;
+  /* Ambience light — mesh warm sangat halus di seluruh viewport (fixed):
+     blob gold/bronze + counterpoint cool-gray tipis di bawah.
+     Memberi kedalaman + "bahan" yang ditangkap blur kartu glass (frosted)
+     — pola ala Stripe/Linear light. Peak tint tetap rendah agar karakter
+     Warm Ivory dominan dan tetap nyaman. */
+  background-image:
+    radial-gradient(
+      ellipse 90% 55% at 50% -12%,
+      rgba(212, 166, 74, 0.22),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 100% 18%,
+      rgba(198, 146, 46, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 38% at 0% 45%,
+      rgba(182, 138, 61, 0.11),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 60% 45% at 50% 88%,
+      rgba(148, 177, 216, 0.1),
+      transparent 66%
+    );
+  background-attachment: fixed;
+}
+
+/* 3. Elevasi kartu (premium polish): Card asli border-0 + shadow tipis.
+      Light mode — paket "porcelain warm":
+      a. Edge 1px Light Sand transparan (definisi bentuk, tidak keras)
+      b. Inset top highlight 1px putih — cahaya dari atas (lit-from-above)
+      c. Shadow berlapis dgn tint hangat rgba(76,64,40) — senada palet ivory/gold
+      Hover: border menghangat ke arah gold + shadow sedikit dalam. */
+[data-slot="card"] {
+  border: 1px solid rgba(232, 224, 212, 0.6);
+  box-shadow:
+    0 1px 2px rgba(76, 64, 40, 0.04),
+    0 6px 20px rgba(76, 64, 40, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+[data-slot="card"]:hover {
+  border-color: rgba(212, 166, 74, 0.35);
+  box-shadow:
+    0 2px 4px rgba(76, 64, 40, 0.05),
+    0 12px 28px rgba(76, 64, 40, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* 3b. Dark mode — paket "lit-from-above" navy (tetap, tidak diubah):
+      a. Edge 1px luminous blue-gray (definisi bentuk kartu, tidak menyilaukan)
+      b. Inset top highlight 1px — cahaya dari atas ala kartu fisik premium
+      c. Shadow navy berlapis (contact + ambient) — kartu terasa terangkat */
+.dark [data-slot="card"] {
+  border: 1px solid rgba(148, 177, 216, 0.13);
+  box-shadow:
+    0 1px 2px rgba(4, 10, 18, 0.22),
+    0 6px 20px rgba(4, 10, 18, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark [data-slot="card"]:hover {
+  border-color: rgba(148, 177, 216, 0.22);
+  box-shadow:
+    0 2px 4px rgba(4, 10, 18, 0.25),
+    0 12px 32px rgba(4, 10, 18, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 25%, transparent);
+    color: var(--foreground);
+  }
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--foreground) 20%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 50%, transparent);
+  background-clip: padding-box;
+}
+
+/* ===== Solid border (for CTA cards) ===== */
+.animated-border {
+  position: relative;
+  background: var(--card);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-xl);
+}
+
+/* ===== Theme transition ===== */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease !important;
+}
+
+/* ===== Glassmorphism ===== */
+/* Light mode — frosted glass asli: gradasi putih diagonal (variasi translucensi
+   = kesan lembar kaca) + blur + saturate. Blob mesh/ambience di belakangnya
+   terlihat samar menembus kaca. Edge putih luminous + inset highlight. */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.62),
+    rgba(255, 255, 255, 0.3) 46%,
+    rgba(255, 255, 255, 0.55)
+  );
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 1px 2px rgba(76, 64, 40, 0.05),
+    0 8px 24px rgba(76, 64, 40, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass:hover {
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 2px 4px rgba(76, 64, 40, 0.06),
+    0 14px 32px rgba(76, 64, 40, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 2px 6px rgba(76, 64, 40, 0.06),
+    0 12px 32px rgba(76, 64, 40, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Dark mode: glass jadi translucent navy (glassmorphism asli) — filter bar, banner,
+   elemen mengambang. Semi-transparan di atas bg navy + blur = depth premium.
+   ⚠️ border WAJIB dioverride: base .glass light membawa edge putih 0.75 —
+   tanpa override ini, navbar/kartu glass di dark tampak "bingkai putih tebal". */
+.dark .glass {
+  background: rgba(23, 31, 41, 0.72);
+  border: 1px solid rgba(148, 177, 216, 0.13);
+  box-shadow:
+    0 4px 16px rgba(4, 10, 18, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark .glass:hover {
+  border-color: rgba(148, 177, 216, 0.22);
+  box-shadow:
+    0 10px 28px rgba(4, 10, 18, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.dark .glass-strong {
+  background: rgba(23, 31, 41, 0.88);
+  border: 1px solid rgba(148, 177, 216, 0.16);
+  box-shadow:
+    0 8px 24px rgba(4, 10, 18, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ===== Solid text (no gradient) ===== */
+.text-gradient {
+  color: var(--primary);
+}
+.text-gradient-warm {
+  color: var(--accent);
+}
+
+/* ===== Solid background (no gradient) ===== */
+.animated-gradient {
+  background: var(--background);
+}
+
+/* ===== Mesh background (di dalam kartu) ===== */
+/* Light mode: aktif — blob warna hangat dgn blur berat di dalam kartu.
+   Memberi "bahan" di balik kartu glass (efek frosted terlihat) + depth.
+   Dark mode: nonaktif — tampilan navy premium sudah disetujui apa adanya. */
+.mesh-bg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 45% 60% at 20% 20%,
+      rgba(212, 166, 74, 0.34),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 55% at 80% 30%,
+      rgba(198, 146, 46, 0.24),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 55% 85%,
+      rgba(148, 177, 216, 0.26),
+      transparent 72%
+    );
+  filter: blur(40px);
+}
+.dark .mesh-bg {
+  display: none;
+}
+
+/* ===== Typing cursor ===== */
+.typing-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: var(--primary);
+  font-weight: 300;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===== Card hover lift ===== */
+.lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+
+/* ===== Shimmer skeleton ===== */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: var(--muted);
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--foreground) 8%, transparent), transparent);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ===== Marquee ===== */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 2rem;
+}
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ===== Fade in on view ===== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Prose for blog ===== */
+.prose-content {
+  line-height: 1.8;
+  color: var(--foreground);
+}
+.prose-content h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 6rem;
+}
+.prose-content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+.prose-content p {
+  margin-bottom: 1.1rem;
+}
+.prose-content ul, .prose-content ol {
+  margin: 1rem 0 1.2rem 1.5rem;
+}
+.prose-content ul { list-style: disc; }
+.prose-content ol { list-style: decimal; }
+.prose-content li { margin-bottom: 0.4rem; }
+.prose-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-content blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--muted-foreground);
+  margin: 1.4rem 0;
+}
+.prose-content code {
+  background: var(--muted);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+}
+.prose-content pre {
+  background: var(--muted);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.2rem 0;
+}
+.prose-content pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose-content img {
+  border-radius: 0.75rem;
+  margin: 1.4rem 0;
+  max-width: 100%;
+}
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+}
+/* Wrapper tabel (dihasilkan wrapResponsiveTables di titik render):
+   tabel lebar jadi scroll horizontal sendiri di layar kecil,
+   tanpa memaksa scroll seluruh halaman */
+.prose-content .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.2rem 0;
+}
+.prose-content .table-wrap table {
+  margin: 0;
+}
+.prose-content th, .prose-content td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+}
+.prose-content th {
+  background: var(--muted);
+  font-weight: 600;
+}
+
+/* ===== Alignment support (tombol rata kiri/tengah/kanan/justify dari editor) ===== */
+/* Atribut align="" (legacy, dihasilkan execCommand di beberapa browser) */
+.prose-content [align="left"] { text-align: left; }
+.prose-content [align="center"] { text-align: center; }
+.prose-content [align="right"] { text-align: right; }
+.prose-content [align="justify"] { text-align: justify; }
+/* Teks rata kiri-kanan: hindari "river of white" dengan hyphenation */
+.prose-content [align="justify"],
+.prose-content [style*="text-align: justify"],
+.prose-content [style*="text-align:justify"] {
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+/* ===== Penempatan gambar (fitur dari editor: kiri/tengah/kanan/penuh + ukuran) ===== */
+.prose-content figure { margin: 1.4rem 0; }
+.prose-content figure img { margin: 0; }
+.prose-content figcaption {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+/* Penempatan */
+.prose-content .img-left { float: left; margin: 0.5rem 1.5rem 1rem 0; }
+.prose-content .img-right { float: right; margin: 0.5rem 0 1rem 1.5rem; }
+.prose-content .img-center { margin-left: auto; margin-right: auto; text-align: center; }
+.prose-content .img-full { width: 100%; }
+/* Ukuran */
+.prose-content .img-sm { max-width: 33%; }
+.prose-content .img-md { max-width: 50%; }
+.prose-content .img-lg { max-width: 75%; }
+/* Clearfix: agar gambar float tidak keluar dari container konten */
+.prose-content::after { content: ""; display: table; clear: both; }
+/* Highlight gambar yang sedang dipilih di editor */
+.prose-content img.img-editing { outline: 2px solid var(--primary); outline-offset: 2px; }
+/* Mobile: gambar float/kecil terlalu sempit → jadikan tampilan penuh agar terbaca nyaman */
+@media (max-width: 640px) {
+  .prose-content .img-left,
+  .prose-content .img-right { float: none; margin-left: auto; margin-right: auto; }
+  .prose-content .img-sm,
+  .prose-content .img-md,
+  .prose-content .img-lg { max-width: 100%; }
+}
+
+/* ===== Hide scrollbar utility ===== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== Custom thin scrollbar utility ===== */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--foreground) 15%, transparent);
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 50%, transparent);
+}
+
+/* ===== Section reveal animation classes used with framer motion ===== */
+.section-pad {
+  @apply px-4 sm:px-6 lg:px-8;
+  padding-left: max(1rem, calc((100vw - 80rem) / 2 + 1rem));
+  padding-right: max(1rem, calc((100vw - 80rem) / 2 + 1rem));
+}
+
+/* ===== Focus ring for keyboard nav ===== */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ===== Hero Card — theme-aware (light in light mode, dark card in dark mode) ===== */
+/* In light mode: card follows global theme (white bg, dark text) + shadow hangat
+   berlapis (menggantikan shadow hitam pekat yang terasa berat/dingin). */
+.hero-card {
+  /* Default values (light mode) — inherit from global theme */
+  --hero-card-bg: var(--card);
+  --hero-card-fg: var(--foreground);
+  --hero-card-muted: var(--muted-foreground);
+  --hero-card-border: var(--border);
+  --hero-card-secondary: var(--secondary);
+  --hero-card-secondary-fg: var(--secondary-foreground);
+
+  background: var(--hero-card-bg);
+  color: var(--hero-card-fg);
+  border: 1px solid var(--hero-card-border);
+  border-radius: 1.75rem;
+  box-shadow:
+    0 2px 4px rgba(76, 64, 40, 0.04),
+    0 25px 50px -12px rgba(76, 64, 40, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dark mode: override — selaras dengan sistem card global navy (#171F29, elevated dari bg #0C1218).
+   Inset top highlight 1px memberi kesan "lit from above" ala kartu premium. */
+.dark .hero-card {
+  --hero-card-bg: #171F29;
+  --hero-card-fg: #E6EAF0;
+  --hero-card-muted: #A2ACB8;
+  --hero-card-border: #303C4A;
+  --hero-card-secondary: #202A36;
+  --hero-card-secondary-fg: #E6EAF0;
+  box-shadow:
+    0 25px 50px -12px rgba(4, 10, 18, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Photo diagonal cut — sharp hard edge between text column (left) and photo (right).
+   Desktop hero only (mobile uses horizontal split with hard edge). */
+.hero-photo-blend {
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* Headline — white text, gold accent for the name */
+.hero-headline {
+  color: var(--hero-card-fg);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.hero-headline-accent {
+  color: var(--primary);
+}
+
+/* Status badge — dark translucent pill */
+.hero-status-badge {
+  background: var(--hero-card-secondary);
+  color: var(--hero-card-secondary-fg);
+  border: 1px solid var(--hero-card-border);
+}
+
+/* Social icon buttons */
+.hero-social-btn {
+  background: var(--hero-card-secondary);
+  border: 1px solid var(--hero-card-border);
+  color: var(--hero-card-muted);
+  transition: all 0.2s ease;
+}
+
+.hero-social-btn:hover {
+  background: rgba(212, 160, 23, 0.12);
+  border-color: rgba(212, 160, 23, 0.4);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Floating experience badge — solid backdrop with shadow for clarity */
+.hero-exp-badge {
+  background: var(--hero-card-secondary);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--hero-card-border);
+  color: var(--hero-card-fg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.15),
+    0 10px 15px -3px rgba(0, 0, 0, 0.2),
+    0 20px 25px -5px rgba(0, 0, 0, 0.25),
+    0 0 0 1px var(--hero-card-border);
+}
+
+/* Dark mode: stronger shadow for visible depth on dark photo */
+.dark .hero-exp-badge {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 10px 15px -3px rgba(0, 0, 0, 0.45),
+    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--hero-card-border);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Stats bar — same color as card, with subtle top border */
+.hero-stats-bar {
+  background: var(--hero-card-bg);
+  border-top: 1px solid var(--hero-card-border);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.hero-stat-divider {
+  border-right: 1px solid var(--hero-card-border);
+}
+
+.hero-stat-icon-bubble {
+  background: rgba(212, 160, 23, 0.12);
+  color: var(--primary);
+}
+
+.hero-stat-value {
+  color: var(--hero-card-fg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-stat-label {
+  color: var(--hero-card-muted);
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+
+/* Button variants inside hero — visible on dark bg */
+.hero-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--hero-card-fg);
+}
+
+.hero-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.hero-btn-ghost {
+  background: transparent;
+  color: var(--hero-card-muted);
+}
+
+.hero-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--hero-card-fg);
+}
+
+/* ===== Service Card — horizontal ala referensi user =====
+   Layout: teks kiri (icon + judul + deskripsi + checklist + CTA),
+   foto tema kanan (~40%). Mobile: foto di atas (16:9), teks di bawah.
+   Light: porcelain warm — border sand + shadow berlapis hangat + lit-from-above
+   (senada paket [data-slot=card] light). Dark: navy + luminous edge. */
+.service-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-radius: 1.25rem;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid rgba(232, 224, 212, 0.6);
+  overflow: hidden;
+  min-height: 17rem;
+  box-shadow:
+    0 1px 2px rgba(76, 64, 40, 0.05),
+    0 10px 30px -12px rgba(76, 64, 40, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 166, 74, 0.35);
+  box-shadow:
+    0 2px 4px rgba(76, 64, 40, 0.06),
+    0 18px 40px -12px rgba(76, 64, 40, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.service-card-body {
+  flex: 1 1 60%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.service-card-media {
+  flex: 0 0 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon squircle — tint lebih pekat + edge halus (ala referensi) */
+.service-card-icon {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 6px rgba(4, 10, 18, 0.25);
+}
+.dark .service-card-icon {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Dark mode: paket "lit-from-above" konsisten dgn [data-slot="card"] */
+.dark .service-card {
+  border: 1px solid rgba(148, 177, 216, 0.13);
+  box-shadow:
+    0 1px 2px rgba(4, 10, 18, 0.22),
+    0 6px 20px rgba(4, 10, 18, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark .service-card:hover {
+  border-color: rgba(148, 177, 216, 0.22);
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(4, 10, 18, 0.25),
+    0 12px 32px rgba(4, 10, 18, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Kartu CTA — panel script emas lebih dominan */
+.service-card--cta .service-card-media {
+  flex-basis: 46%;
+}
+
+/* Mobile: stack — foto di atas (16:9), teks di bawah */
+@media (max-width: 639px) {
+  .service-card {
+    flex-direction: column-reverse;
+    min-height: 0;
+  }
+  .service-card-media,
+  .service-card--cta .service-card-media {
+    flex: none;
+    aspect-ratio: 16 / 9;
+  }
+  .service-card-body {
+    padding: 1.25rem;
+  }
+}

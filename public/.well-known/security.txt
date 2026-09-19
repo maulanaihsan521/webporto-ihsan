@@ -1,0 +1,14 @@
+# Security Vulnerability Disclosure Policy
+# RFC 9116 compliant — https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:maulanaihsanrohim@gmail.com
+Expires: 2027-08-04T00:00:00.000Z
+Preferred-Languages: id, en
+Canonical: https://portofoliomaulanaihsan.my.id/.well-known/security.txt
+Policy: https://portofoliomaulanaihsan.my.id/privacy-policy
+
+# Penting:
+# - Jika Anda menemukan kerentanan, kirim laporan ke email di atas
+# - Berikan waktu minimal 90 hari sebelum publikasi (responsible disclosure)
+# - Jangan mengeksploitasi kerentanan untuk akses data pribadi
+# - Laporan yang valid akan diapresiasi dan di-credit (jika diizinkan)

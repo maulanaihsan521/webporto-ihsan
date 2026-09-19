@@ -1,0 +1,497 @@
+// Portfolio CMS Enterprise - Prisma Schema
+// Owner: Maulana Ihsan Rohim
+//
+// ITERATION 2026-08-26:
+// - Tambahan @@index untuk kolom yang sering di-query (filter/sort/join)
+//   sehingga PostgreSQL pakai Index Scan daripada Seq Scan.
+// - onDelete: SetNull untuk FK ke Category dan User (cegah FK violation
+//   saat parent dihapus), onDelete: Cascade untuk self-reference Comment
+//   (auto-purge reply orphan saat parent comment dihapus).
+// - @@unique([date, path]) di VisitorCount untuk cegah duplicate per day/path.
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String?
+  password     String
+  image        String?
+  role         String        @default("ADMIN") // ADMIN | EDITOR | VIEWER
+  bio          String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  posts        Post[]        @relation("AuthorPosts")
+  comments     Comment[]
+  activityLogs ActivityLog[]
+  messages     Message[]     @relation("MessageReplier")
+
+  @@index([email])
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  slug         String        @unique
+  type         String        @default("BLOG") // BLOG | PORTFOLIO | CERTIFICATE | GALLERY
+  description  String?
+  color        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  posts        Post[]
+  portfolios   Portfolio[]
+  certificates Certificate[]
+  galleries    Gallery[]
+
+  @@index([type, createdAt(sort: Desc)])
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  posts     Post[]
+}
+
+model Post {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  excerpt         String?
+  content         String
+  coverImage      String?
+  published       Boolean   @default(false)
+  featured        Boolean   @default(false)
+  viewCount       Int       @default(0)
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  canonical       String?
+  ogImage         String?
+  documentUrl     String?   // Link dokumen asli (Google Drive, PDF, dll) — tombol "Lihat Dokumen" di blog
+  readingTime     Int       @default(0)
+  authorId        String
+  author          User      @relation("AuthorPosts", fields: [authorId], references: [id], onDelete: Cascade)
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  tags            Tag[]
+  comments        Comment[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  publishedAt     DateTime?
+
+  // Indexes
+  @@index([published, publishedAt(sort: Desc)])
+  @@index([featured, createdAt(sort: Desc)])
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  name      String
+  email     String
+  content   String
+  parentId  String?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentReplies")
+  approved  Boolean   @default(false)
+  postId    String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Indexes
+  @@index([postId, approved, createdAt(sort: Desc)])
+  @@index([parentId])
+  @@index([approved, createdAt(sort: Desc)])
+  @@index([email])
+}
+
+model Portfolio {
+  id              String           @id @default(cuid())
+  title           String
+  slug            String           @unique
+  excerpt         String?
+  description     String
+  thumbnail       String?
+  banner          String?
+  videoUrl        String?
+  role            String?
+  client          String?
+  status          String           @default("PUBLISHED") // DRAFT | PUBLISHED
+  startDate       DateTime?
+  endDate         DateTime?
+  projectDate     DateTime?
+  technologies    String?
+  githubUrl       String?
+  demoUrl         String?
+  figmaUrl        String?
+  youtubeUrl      String?
+  downloadUrl     String?
+  featured        Boolean          @default(false)
+  viewCount       Int              @default(0)
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  images          PortfolioImage[]
+  categoryId      String?
+  category        Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Indexes
+  @@index([status, featured, createdAt(sort: Desc)])
+  @@index([categoryId])
+  @@index([featured, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
+}
+
+model PortfolioImage {
+  id          String    @id @default(cuid())
+  url         String
+  caption     String?
+  order       Int       @default(0)
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+
+  @@index([portfolioId, order])
+}
+
+model Gallery {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String?
+  url         String
+  type        String    @default("IMAGE") // IMAGE | VIDEO
+  thumbnail   String?
+  album       String?
+  featured    Boolean   @default(false)
+  order       Int       @default(0)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Indexes
+  @@index([featured, order])
+  @@index([categoryId])
+  @@index([order])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Certificate {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  description   String?
+  issuer        String
+  issueDate     DateTime
+  expiryDate    DateTime?
+  credentialId  String?
+  credentialUrl String?
+  fileUrl       String?
+  imageUrl      String?
+  featured      Boolean   @default(false)
+  categoryId    String?
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Indexes
+  @@index([issueDate(sort: Desc)])
+  @@index([featured])
+  @@index([categoryId])
+  @@index([issuer])
+}
+
+model Experience {
+  id           String    @id @default(cuid())
+  company      String
+  logo         String?
+  position     String
+  location     String?
+  type         String    @default("FULL_TIME") // FULL_TIME | PART_TIME | CONTRACT | INTERNSHIP | FREELANCE
+  startDate    DateTime
+  endDate      DateTime?
+  current      Boolean   @default(false)
+  description  String?
+  technologies String?
+  order        Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Index
+  @@index([order, startDate(sort: Desc)])
+}
+
+model Education {
+  id           String    @id @default(cuid())
+  institution  String
+  logo         String?
+  degree       String
+  field        String?
+  grade        String? // IPK / GPA
+  startDate    DateTime
+  endDate      DateTime?
+  current      Boolean   @default(false)
+  description  String?
+  achievements String?
+  organization String?
+  order        Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Index
+  @@index([order, startDate(sort: Desc)])
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  category    String
+  percentage  Int      @default(0)
+  level       String   @default("INTERMEDIATE") // BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
+  icon        String?
+  description String?
+  color       String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Indexes
+  @@index([featured, order])
+  @@index([category, order])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  icon        String?
+  color       String?
+  features    String?
+  /// Foto tema kartu layanan (URL Supabase storage / path lokal).
+  /// Null/empty = fallback ke foto default per slug (public/images/services).
+  image       String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Index
+  @@index([order])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  position  String?
+  company   String?
+  avatar    String?
+  rating    Int      @default(5)
+  content   String
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Index
+  @@index([featured, order])
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  category  String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Index
+  @@index([published, order])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  starred   Boolean  @default(false)
+  replied   Boolean  @default(false)
+  reply     String?
+  replierId String?
+  replier   User?    @relation("MessageReplier", fields: [replierId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexes
+  @@index([read, createdAt(sort: Desc)])
+  @@index([starred, createdAt(sort: Desc)])
+  @@index([email])
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Index
+  @@index([active, createdAt(sort: Desc)])
+}
+
+model MarketArticle {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  excerpt         String?
+  content         String
+  type            String    @default("ANALYSIS") // ANALYSIS | TECHNICAL | FUNDAMENTAL | EDUCATION | RISK | JOURNAL
+  instrument      String?
+  coverImage      String?
+  published       Boolean   @default(false)
+  featured        Boolean   @default(false)
+  viewCount       Int       @default(0)
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  publishedAt     DateTime?
+
+  // Indexes
+  @@index([published, publishedAt(sort: Desc)])
+  @@index([featured, publishedAt(sort: Desc)])
+  @@index([type, publishedAt(sort: Desc)])
+  @@index([instrument])
+}
+
+model Watchlist {
+  id          String   @id @default(cuid())
+  symbol      String
+  name        String
+  type        String   @default("STOCK") // STOCK | CRYPTO | FOREX | INDEX | COMMODITY
+  notes       String?
+  targetPrice String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([type, createdAt(sort: Desc)])
+  @@index([symbol])
+}
+
+model PortfolioHolding {
+  id           String   @id @default(cuid())
+  symbol       String
+  name         String
+  type         String   @default("STOCK") // STOCK | CRYPTO
+  quantity     Float    @default(0)
+  buyPrice     Float    @default(0)
+  currentPrice Float    @default(0)
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([type, createdAt(sort: Desc)])
+  @@index([symbol])
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  type      String // IMAGE | VIDEO | AUDIO | DOCUMENT | ARCHIVE
+  mimeType  String?
+  size      Int      @default(0)
+  folder    String   @default("/")
+  width     Int?
+  height    Int?
+  alt       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexes
+  @@index([folder, createdAt(sort: Desc)])
+  @@index([type, createdAt(sort: Desc)])
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("TEXT") // TEXT | JSON | IMAGE | COLOR
+  group     String   @default("GENERAL")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([group])
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String?
+  detail    String?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  // Indexes (terutama untuk query audit log terbaru per user)
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([entity, entityId])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  country   String?
+  city      String?
+  device    String?
+  browser   String?
+  sessionId String?
+  createdAt DateTime @default(now())
+
+  // Indexes (sessionId untuk unique visitor, createdAt untuk cleanup rentention)
+  @@index([sessionId])
+  @@index([createdAt])
+  @@index([path, createdAt(sort: Desc)])
+}
+
+model VisitorCount {
+  id     String   @id @default(cuid())
+  date   DateTime @default(now())
+  count  Int      @default(0)
+  unique Int      @default(0)
+  path   String   @default("/")
+
+  // Index + unique constraint untuk cegah duplicate per day/path
+  @@unique([date, path])
+  @@index([date(sort: Desc), path])
+}

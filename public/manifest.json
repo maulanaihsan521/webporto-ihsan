@@ -1,0 +1,33 @@
+{
+  "name": "Maulana Ihsan Rohim",
+  "short_name": "Maulana Ihsan",
+  "description": "Portfolio profesional Maulana Ihsan Rohim — Digital Marketing, Social Media, Photo & Video, Financial Market Analyst",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo-mi.png",
+      "sizes": "768x768",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "finance"],
+  "lang": "id",
+  "dir": "ltr"
+}
