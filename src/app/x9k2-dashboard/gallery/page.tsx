@@ -10,8 +10,11 @@ export default async function AdminGalleryPage() {
       include: { category: true },
       orderBy: [{ order: "asc" }, { createdAt: "desc" }],
     }),
+    // SESUAIKAN (2026-09-20): opsi kategori = type GALLERY ∪ kategori yang
+    // sedang dipakai item gallery mana pun — dropdown edit selalu menampung
+    // nilai kategori lama.
     db.category.findMany({
-      where: { type: "GALLERY" },
+      where: { OR: [{ type: "GALLERY" }, { galleries: { some: {} } }] },
       orderBy: { name: "asc" },
     }),
   ]);

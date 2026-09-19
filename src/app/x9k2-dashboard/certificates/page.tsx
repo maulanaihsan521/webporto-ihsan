@@ -10,8 +10,11 @@ export default async function AdminCertificatesPage() {
       include: { category: true },
       orderBy: { issueDate: "desc" },
     }),
+    // SESUAIKAN (2026-09-20): opsi kategori = type CERTIFICATE ∪ kategori
+    // yang sedang dipakai certificate mana pun — dropdown edit selalu
+    // menampung nilai kategori lama.
     db.category.findMany({
-      where: { type: "CERTIFICATE" },
+      where: { OR: [{ type: "CERTIFICATE" }, { certificates: { some: {} } }] },
       orderBy: { name: "asc" },
     }),
   ]);

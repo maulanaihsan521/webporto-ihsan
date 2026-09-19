@@ -14,8 +14,11 @@ export default async function AdminBlogPage() {
       },
       orderBy: { createdAt: "desc" },
     }),
+    // SESUAIKAN (2026-09-20): opsi kategori = type BLOG ∪ kategori yang
+    // sedang dipakai post mana pun — dropdown edit selalu menampung nilai
+    // kategori lama apa pun type-nya.
     db.category.findMany({
-      where: { type: "BLOG" },
+      where: { OR: [{ type: "BLOG" }, { posts: { some: {} } }] },
       orderBy: { name: "asc" },
     }),
     db.tag.findMany({ orderBy: { name: "asc" } }),

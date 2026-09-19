@@ -48,7 +48,11 @@ export default async function CertificatesPage() {
       // PERF (Task 12): batasi jumlah baris utk list publik
       take: 200,
     }),
-    db.category.findMany({ where: { type: "CERTIFICATE" } }),
+    // SESUAIKAN FILTER (2026-09-20): pill kategori = kategori yang benar-benar
+    // dipakai certificate. Saat ini belum ada certificate berkategori →
+    // pills row otomatis tersembunyi (guard categories.length > 0 di
+    // cert-filter) — tidak ada 6 pill hantu yang klik-nya kosong.
+    db.category.findMany({ where: { certificates: { some: {} } } }),
   ]);
 
   const typedCertificates: CertificateItem[] = certificates.map((c) => ({

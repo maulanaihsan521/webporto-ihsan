@@ -48,7 +48,10 @@ export default async function GalleryPage() {
       // PERF (Task 12): batasi jumlah baris utk galeri publik
       take: 300,
     }),
-    db.category.findMany({ where: { type: "GALLERY" } }),
+    // SESUAIKAN FILTER (2026-09-20): pill kategori = kategori yang benar-benar
+    // dipakai item gallery — bukan semua type=GALLERY. Menghapus pill hantu
+    // (Design, Travel = 0 item) dan selalu sinkron dengan data.
+    db.category.findMany({ where: { galleries: { some: {} } } }),
   ]);
 
   const typedGalleries: GalleryItem[] = galleries.map((g) => ({

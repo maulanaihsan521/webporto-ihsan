@@ -64,8 +64,12 @@ export default async function BlogPage() {
         category: true, tags: true,
       },
     }),
+    // SESUAIKAN FILTER (2026-09-20): pill kategori = kategori yang dipakai
+    // post published — bukan semua type=BLOG. Menghapus pill hantu
+    // (Digital Marketing, Social Media, Videography = 0 post published)
+    // dan selalu sinkron dengan data.
     db.category.findMany({
-      where: { type: "BLOG" },
+      where: { posts: { some: { published: true } } },
       orderBy: { name: "asc" },
     }),
     db.tag.findMany({

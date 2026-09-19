@@ -1,9 +1,21 @@
-export const dynamic = "force-dynamic";
+// ISR (2026-09-20): feed di-serve dari cache (milidetik), regenerasi tiap
+// 1 jam — sebelumnya force-dynamic: query DB + getSettings di SETIAP request
+// (±6s per fetch di pooler Supabase). Konsisten dengan migrasi sitemap.ts
+// (fix Google Search Console "Couldn't fetch").
+export const revalidate = 3600;
 
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
-import { getBaseUrl } from "@/lib/server-site-config";
+import { SITE_URL } from "@/lib/site-config";
 import { truncate, stripHtml } from "@/lib/utils";
+
+/** Base URL deterministik — TANPA headers() agar route tetap cacheable (ISR).
+ *  Produksi selalu domain utama; dev localhost. Konsisten dengan sitemap.ts. */
+function getFeedBaseUrl(): string {
+  return process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : SITE_URL;
+}
 
 type FeedItem = {
   title: string;
@@ -30,27 +42,46 @@ function cdata(s: string): string {
 }
 
 export async function GET() {
-  const settings = await getSettings();
-  // Dynamic base URL dari incoming request headers (auto-detect domain)
-  const baseUrl = await getBaseUrl();
-  // 2026-09-19: artikel market kini = post blog (kategori Financial Market,
-  // hasil migrasi) — otomatis masuk feed lewat query `posts` (link /blog,
-  // kategori "Financial Market") dan TETAP ada walau toggle market off.
-  const posts = await db.post.findMany({
-    where: { published: true },
-    orderBy: { publishedAt: "desc" },
-    // PERF (Task 12): feed cukup 20 item terbaru (standar RSS)
-    take: 20,
-    select: {
-      title: true,
-      slug: true,
-      excerpt: true,
-      content: true,
-      publishedAt: true,
-      author: { select: { name: true } },
-      category: { select: { name: true } },
-    },
-  });
+  const baseUrl = getFeedBaseUrl();
+  // Resilien saat build/regenerasi: DB unreachable → feed tetap valid
+  // (channel tanpa item), build Vercel tidak gagal.
+  let settings: Awaited<ReturnType<typeof getSettings>> = {} as Awaited<
+    ReturnType<typeof getSettings>
+  >;
+  let posts: {
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    content: string;
+    publishedAt: Date | null;
+    author: { name: string } | null;
+    category: { name: string } | null;
+  }[] = [];
+  try {
+    [settings, posts] = await Promise.all([
+      getSettings(),
+      // 2026-09-19: artikel market kini = post blog (kategori Financial Market,
+      // hasil migrasi) — otomatis masuk feed lewat query `posts` (link /blog,
+      // kategori "Financial Market") dan TETAP ada walau toggle market off.
+      db.post.findMany({
+        where: { published: true },
+        orderBy: { publishedAt: "desc" },
+        // PERF (Task 12): feed cukup 20 item terbaru (standar RSS)
+        take: 20,
+        select: {
+          title: true,
+          slug: true,
+          excerpt: true,
+          content: true,
+          publishedAt: true,
+          author: { select: { name: true } },
+          category: { select: { name: true } },
+        },
+      }),
+    ]);
+  } catch (e) {
+    console.error("[rss] DB unreachable, serving channel-only feed:", e);
+  }
 
   const items: FeedItem[] = posts
     .map((p) => ({
