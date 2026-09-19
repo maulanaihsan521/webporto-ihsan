@@ -1,23 +1,35 @@
 import { db } from "@/lib/db";
-import { getSettings } from "@/lib/settings";
+import { getSettings, isMarketEnabled } from "@/lib/settings";
 
 export async function getHomeData() {
-  const [settings, featuredPortfolios, latestPosts, latestCerts, latestGalleries, services, testimonials, skills, featuredMarketArticles] = await Promise.all([
-    getSettings(),
+  // Settings dulu — keputusan filter post terbaru bergantung toggle market
+  // (market OFF → artikel financial-market TETAP tampil di "Artikel Terbaru",
+  // permintaan user 2026-09-20: "yang telkom tampilkan juga di home").
+  const settings = await getSettings();
+  const marketEnabled = isMarketEnabled(settings);
+
+  const [featuredPortfolios, latestPosts, latestCerts, latestGalleries, services, testimonials, skills, featuredMarketArticles] = await Promise.all([
     db.portfolio.findMany({
       where: { status: "PUBLISHED", featured: true },
       take: 4,
       orderBy: { createdAt: "desc" },
       include: { category: true },
     }),
-    // Post blog terbaru — KATEGORI financial-market DIKECUALIKAN agar tidak
-    // dobel dengan featuredMarketArticles (artikel market featured) di bawah;
-    // saat market off, artikel market tetap ada di /blog (hanya tidak
-    // ditonjolkan di homepage).
+    // Post blog terbaru (3).
+    // - Market ON: kategori financial-market DIKECUALIKAN agar tidak dobel
+    //   dengan featuredMarketArticles (artikel market featured) di bawah.
+    // - Market OFF (kondisi sekarang): SEMUA kategori ikut — artikel market
+    //   (mis. Analisa Saham TLKM) tetap tampil di homepage sebagai kartu
+    //   blog biasa; featuredMarketArticles memang tidak dirender saat market
+    //   off, jadi tidak mungkin dobel. Artinya tetap hidup di /blog.
     db.post.findMany({
       where: {
         published: true,
-        OR: [{ category: null }, { category: { slug: { not: "financial-market" } } }],
+        ...(marketEnabled
+          ? {
+              OR: [{ category: null }, { category: { slug: { not: "financial-market" } } }],
+            }
+          : {}),
       },
       take: 3,
       orderBy: { publishedAt: "desc" },
