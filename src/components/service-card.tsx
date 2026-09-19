@@ -34,6 +34,8 @@ export interface ServiceCardProps {
   image?: string | null;
   /** Link tujuan kartu (default: /contact?layanan=) */
   href?: string;
+  /** Priority load untuk kartu pertama (LCP) — preconnect + fetchPriority tinggi */
+  priority?: boolean;
 }
 
 export function ServiceCard({
@@ -45,6 +47,7 @@ export function ServiceCard({
   features,
   image,
   href,
+  priority = false,
 }: ServiceCardProps) {
   const Icon = getServiceIcon(icon);
   const theme = getServiceColor(color);
@@ -109,6 +112,7 @@ export function ServiceCard({
             alt=""
             sizes="(max-width: 639px) 100vw, 40vw"
             className="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            priority={priority}
           />
         ) : (
           /* Fallback: panel gradasi tema + ikon besar */

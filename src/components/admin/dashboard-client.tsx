@@ -93,7 +93,7 @@ export function AdminDashboardClient({
       </motion.div>
 
       {/* Visitor stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={Eye} label="Visitors Today" value={visitorStats.today} change={visitorStats.change} color="text-teal-500" />
         <StatCard icon={Eye} label="This Week" value={visitorStats.week} color="text-violet-500" />
         <StatCard icon={Eye} label="Total Visitors" value={visitorStats.total} color="text-amber-500" />
@@ -101,7 +101,7 @@ export function AdminDashboardClient({
       </div>
 
       {/* Charts row */}
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2 rounded-2xl p-5 glass">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -180,7 +180,7 @@ export function AdminDashboardClient({
       </div>
 
       {/* Recent messages + activity */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card className="rounded-2xl p-5 glass">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold">Recent Messages</h3>

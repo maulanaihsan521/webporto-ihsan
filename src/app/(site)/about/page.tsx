@@ -191,7 +191,7 @@ export default async function AboutPage() {
       {/* ===== Profile + Bio ===== */}
       <section className="section-pad py-8 sm:py-12">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
             {/* Profile Card */}
             <SectionReveal>
               <Card className="glass-strong relative overflow-hidden p-4 text-center lift">
@@ -238,7 +238,7 @@ export default async function AboutPage() {
                 <p className="text-base leading-relaxed text-muted-foreground">{description}</p>
 
                 {/* Quick info */}
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <div className="glass flex items-center gap-3 rounded-xl p-3">
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <MapPin className="size-4" />
@@ -287,7 +287,7 @@ export default async function AboutPage() {
             </div>
           </SectionReveal>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <SectionReveal delay={0.05}>
               <Card className="glass relative h-full overflow-hidden p-4 sm:p-5 lift">
                 <div className="mesh-bg opacity-50" aria-hidden />
@@ -347,7 +347,7 @@ export default async function AboutPage() {
             </SectionReveal>
           )}
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {/* Hobbies */}
             {hobbies.length > 0 && (
               <SectionReveal delay={0.05}>
@@ -659,7 +659,7 @@ export default async function AboutPage() {
                   </p>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <a
                     href={`mailto:${settings.owner_email}`}
                     className="group glass flex flex-col items-center gap-3 rounded-2xl p-6 text-center lift"

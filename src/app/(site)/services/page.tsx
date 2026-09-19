@@ -177,6 +177,7 @@ export default async function ServicesPage() {
                     color={service.color}
                     features={service.features}
                     image={service.image}
+                    priority={i === 0}
                   />
                 </SectionReveal>
               ))}

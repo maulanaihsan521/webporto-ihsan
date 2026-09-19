@@ -83,7 +83,7 @@ export function NewsletterManager({ data }: { data: Subscriber[] }) {
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-3 mb-6">
+      <div className="grid-cols-1 grid gap-4 sm:grid-cols-3 mb-6">
         <Card className="rounded-2xl p-5 glass">
           <div className="size-10 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-600 mb-3">
             <MailCheck className="size-5" />

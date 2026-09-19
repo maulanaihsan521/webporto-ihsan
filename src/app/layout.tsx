@@ -7,6 +7,7 @@ import { ServiceWorkerRegister } from "@/components/sw-register";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { getBaseUrl } from "@/lib/server-site-config";
 import { getSettings } from "@/lib/settings";
+import { filterValidSocials } from "@/lib/social-utils";
 import { DEFAULT_OG_IMAGE_URL, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, absoluteOgImage, adminOgImageFor } from "@/lib/og-image";
 
 import { safeJsonLd } from "@/lib/utils";
@@ -200,7 +201,12 @@ function buildWebsiteSchema(profilePhotoUrl: string | null, metaDescription: str
   };
 }
 
-function buildPersonSchema(profilePhotoUrl: string | null, metaDescription: string, siteUrl: string) {
+function buildPersonSchema(
+  profilePhotoUrl: string | null,
+  metaDescription: string,
+  siteUrl: string,
+  socialUrls: string[],
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -218,6 +224,10 @@ function buildPersonSchema(profilePhotoUrl: string | null, metaDescription: stri
       "Video Editing",
       "Financial Market Analysis",
     ],
+    // FIX 2026-09-20: sameAs menghubungkan Person ke profil sosial valid —
+    // sinyal knowledge graph Google (profil yang tidak valid difilter,
+    // mis. placeholder "https://facebook.com/").
+    ...(socialUrls.length > 0 ? { sameAs: socialUrls } : {}),
   };
 }
 
@@ -235,7 +245,16 @@ export default async function RootLayout({
   const dynamicSiteUrl = await getBaseUrl();
 
   const websiteSchema = buildWebsiteSchema(profilePhotoUrl, metaDescription, dynamicSiteUrl);
-  const personSchema = buildPersonSchema(profilePhotoUrl, metaDescription, dynamicSiteUrl);
+  // sameAs: hanya URL sosial valid (github/linkedin/instagram/tiktok/wa aktif)
+  const socialUrls = filterValidSocials({
+    github: settings.social_github,
+    linkedin: settings.social_linkedin,
+    instagram: settings.social_instagram,
+    tiktok: settings.social_tiktok,
+    youtube: settings.social_youtube,
+    facebook: settings.social_facebook,
+  });
+  const personSchema = buildPersonSchema(profilePhotoUrl, metaDescription, dynamicSiteUrl, socialUrls);
 
   return (
     <html lang="id" suppressHydrationWarning>

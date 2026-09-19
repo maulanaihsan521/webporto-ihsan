@@ -493,7 +493,7 @@ export function GalleryManager({ data, categories }: GalleryManagerProps) {
               onDragEnd={handleDragEnd}
             >
               <SortableContext items={reorderItems.map((i) => i.id)} strategy={rectSortingStrategy}>
-                <div className="grid gap-2 sm:grid-cols-2">
+                <div className="grid-cols-1 grid gap-2 sm:grid-cols-2">
                   {reorderItems.map((item, idx) => (
                     <div key={item.id} className="flex items-center gap-2">
                       <span className="text-xs font-mono text-muted-foreground w-6 text-right shrink-0">{idx + 1}</span>

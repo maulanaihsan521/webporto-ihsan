@@ -175,7 +175,7 @@ export default async function SkillsPage() {
             </div>
           </SectionReveal>
           <SectionReveal delay={0.1}>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {categorySummary.map((cat, i) => (
                 <div key={cat.name} className="rounded-2xl glass p-4 group hover:border-primary/30 transition-colors">
                   <div className="flex items-center justify-between mb-2">
@@ -214,7 +214,7 @@ export default async function SkillsPage() {
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {levelLegend.map((item, i) => (
                   <div
                     key={item.level}
@@ -253,7 +253,7 @@ export default async function SkillsPage() {
             </div>
           </SectionReveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 icon: Megaphone,

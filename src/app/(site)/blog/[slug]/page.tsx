@@ -35,6 +35,7 @@ import { TableOfContents } from "@/components/table-of-contents";
 import { ShareButtons } from "@/components/share-buttons";
 import { PdfViewer } from "@/components/pdf-viewer";
 import { PdfLinkExtractor } from "@/components/pdf-link-extractor";
+import { OptimizedImage } from "@/components/optimized-image";
 import { formatDate,
   formatDateShort,
   stripHtml,
@@ -420,10 +421,12 @@ export default async function BlogDetailPage({ params }: Params) {
           <SectionReveal>
             <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border shadow-lg">
               <div className="relative aspect-[16/9]">
-                <img
+                <OptimizedImage
                   src={coverImage}
                   alt={post.title}
+                  sizes="(max-width: 896px) 100vw, 896px"
                   className="size-full object-cover"
+                  priority
                 />
               </div>
             </div>

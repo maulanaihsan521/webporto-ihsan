@@ -348,7 +348,7 @@ export function PortfolioExplorer({
           ) : (
             <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-6">
               {paged.map((p, idx) => (
-                <PortfolioCard key={p.id} portfolio={p} delay={idx * 0.05} />
+                <PortfolioCard key={p.id} portfolio={p} delay={idx * 0.05} priority={idx < 3} />
               ))}
             </div>
           )}
@@ -453,9 +453,11 @@ function CategoryPill({
 function PortfolioCard({
   portfolio,
   delay,
+  priority = false,
 }: {
   portfolio: PortfolioItem;
   delay: number;
+  priority?: boolean;
 }) {
   const p = portfolio;
   const gradient = gradientFor(p.category?.name ?? null);
@@ -479,6 +481,7 @@ function PortfolioCard({
                 alt={p.title}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                priority={priority}
               />
             ) : (
               <div

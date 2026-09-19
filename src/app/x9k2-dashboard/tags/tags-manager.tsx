@@ -92,7 +92,7 @@ export function TagsManager({ data }: { data: TagRow[] }) {
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-3 mb-6">
+      <div className="grid-cols-1 grid gap-4 sm:grid-cols-3 mb-6">
         <Card className="rounded-2xl p-5 glass">
           <div className="size-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary mb-3">
             <Tag className="size-5" />
