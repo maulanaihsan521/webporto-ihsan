@@ -10,8 +10,14 @@ export default async function AdminPortfolioPage() {
       include: { category: true, _count: { select: { images: true } } },
       orderBy: { createdAt: "desc" },
     }),
+    // SESUAIKAN FILTER (2026-09-20): opsi kategori = type PORTFOLIO ∪ kategori
+    // yang sedang dipakai portofolio mana pun. Kategori "Photography" (type
+    // BLOG, dipakai proyek lama "Fotografer & Editor") kini tetap muncul di
+    // dropdown edit — sebelumnya nilainya tidak cocok dengan opsi mana pun.
     db.category.findMany({
-      where: { type: "PORTFOLIO" },
+      where: {
+        OR: [{ type: "PORTFOLIO" }, { portfolios: { some: {} } }],
+      },
       orderBy: { name: "asc" },
     }),
   ]);

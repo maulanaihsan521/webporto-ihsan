@@ -59,8 +59,17 @@ export default async function PortfolioPage() {
       // PERF (Task 12): batasi jumlah baris utk list publik
       take: 100,
     }),
+    // SESUAIKAN FILTER (2026-09-20): kategori pill diturunkan dari kategori
+    // yang BENAR-BENAR dipakai portofolio published — bukan semua kategori
+    // type=PORTFOLIO. Masalah lama: (a) pill hantu "Branding" & "UI/UX
+    // Design" muncul padahal 0 proyek → klik = kosong; (b) kategori
+    // "Photography" (type BLOG, dipakai proyek "Fotografer & Editor" dari
+    // seed lama) tidak pernah muncul sebagai filter. Dengan relasi
+    // `portfolios: { some: { status: "PUBLISHED" } }` filter selalu sinkron
+    // dengan data: kategori terpakai pasti tampil, kategori kosong pasti
+    // tersembunyi — apa pun type kategorinya.
     db.category.findMany({
-      where: { type: "PORTFOLIO" },
+      where: { portfolios: { some: { status: "PUBLISHED" } } },
       orderBy: { name: "asc" },
     }),
   ]);
