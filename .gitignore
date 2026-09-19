@@ -74,3 +74,18 @@ worklog.md
 # Skill internal sandbox
 /skills/
 tool-results/
+
+# ===== Artefak diagnostik sesi (Task 15) =====
+# Snapshot HTML/XML/JSON hasil verifikasi live & pencarian — bukan kode sumber.
+# Mencegah auto-checkpoint lokal ikut mem-commit file-file ini ke history.
+scripts/*.html
+scripts/*.xml
+scripts/live-*
+scripts/search-*
+scripts/fresh-*
+scripts/old-*
+scripts/new-*
+scripts/check-siteurl.mjs
+scripts/count-posts.mjs
+scripts/test-*.mjs
+scripts/task15-*.mjs
