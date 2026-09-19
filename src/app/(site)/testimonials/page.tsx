@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { ArrowRight,
   Star,
   Quote,
@@ -7,7 +6,7 @@ import { ArrowRight,
   TrendingUp,
   MessageSquare } from "lucide-react";
 import { db } from "@/lib/db";
-import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal, Counter } from "@/components/motion-primitives";
@@ -113,11 +112,8 @@ export default async function TestimonialsPage() {
   // JSON-LD CollectionPage + ItemList — structured data untuk daftar
   // testimoni (tanpa markup Review self-serving yang tidak eligible
   // rich result).
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const testimonialsUrl = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}/testimonials`
-    : `${SITE_URL}/testimonials`;
+  // (Task 14) URL JSON-LD selalu domain produksi; dev lokal tetap host dev.
+  const testimonialsUrl = `${await getBaseUrl()}/testimonials`;
   const testimonialsJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

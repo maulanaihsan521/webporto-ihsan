@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { ArrowRight, Award, ShieldCheck } from "lucide-react";
 import { db } from "@/lib/db";
-import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -85,11 +84,8 @@ export default async function CertificatesPage() {
   // JSON-LD CollectionPage + ItemList — structured data untuk daftar
   // sertifikat (selaras dengan detail yang sudah punya
   // EducationalOccupationalCredential).
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const certsUrl = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}/certificates`
-    : `${SITE_URL}/certificates`;
+  // (Task 14) URL JSON-LD selalu domain produksi; dev lokal tetap host dev.
+  const certsUrl = `${await getBaseUrl()}/certificates`;
   const certsJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

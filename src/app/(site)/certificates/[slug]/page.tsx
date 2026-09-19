@@ -19,6 +19,7 @@ import { ArrowRight,
   FileText } from "lucide-react";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/site-config";
+import { siteOriginFromHeaders } from "@/lib/server-site-config";
 import { ogImageFor, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from "@/lib/og-image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -37,16 +38,10 @@ const getCertificate = cache(async (slug: string) =>
   }),
 );
 
-// Build canonical/share URL from headers safely (server component).
-// Fallback ke SITE_URL (production domain) supaya tidak pernah bocor localhost.
+// URL kanonik/share — SELALU domain produksi (Task 14); host request hanya
+// dipakai saat dev lokal. Anti host-spoofing: host apa pun tak masuk URL publik.
 function buildUrl(headers: Headers, slug: string): string {
-  const host = headers.get("x-forwarded-host") || headers.get("host");
-  if (host) {
-    const proto = headers.get("x-forwarded-proto") || "https";
-    return `${proto}://${host}/certificates/${slug}`;
-  }
-  // Fallback: SITE_URL dari env (akan resolve ke https://portofoliomaulanaihsan.my.id)
-  return `${SITE_URL}/certificates/${slug}`;
+  return `${siteOriginFromHeaders(headers)}/certificates/${slug}`;
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {

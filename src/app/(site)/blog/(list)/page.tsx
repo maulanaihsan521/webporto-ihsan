@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { ArrowRight, Newspaper } from "lucide-react";
 import { db } from "@/lib/db";
-import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { ogImageFor, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from "@/lib/og-image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -51,14 +50,11 @@ export default async function BlogPage() {
   const [posts, categories, tags] = await Promise.all([
     db.post.findMany({
       where: { published: true },
-      include: {
-        author: { select: { name: true, image: true } },
-        category: true,
-        tags: true,
-      },
+      // PERF (Task 12): batasi jumlah + select kolom yang dipakai list saja.
+      // FIX (Task 14): `include` + `select` bersamaan = PrismaClientValidationError
+      // → halaman /blog kosong diam-diam (status 200 via streaming SSR).
+      // Relasi (author/category/tags) sudah didefinisikan di `select`.
       orderBy: { publishedAt: "desc" },
-      // PERF (Task 12): batasi jumlah + JANGAN fetch kolom content utk list —
-      // sebelumnya seluruh corpus HTML (~45rb char/post) dikirim ke client.
       take: 50,
       select: {
         id: true, title: true, slug: true, excerpt: true, content: true,
@@ -123,11 +119,8 @@ export default async function BlogPage() {
 
   // JSON-LD Blog + ItemList BlogPosting — structured data untuk daftar
   // artikel (selaras dengan detail yang sudah punya BlogPosting).
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const blogUrl = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}/blog`
-    : `${SITE_URL}/blog`;
+  // (Task 14) URL JSON-LD selalu domain produksi; dev lokal tetap host dev.
+  const blogUrl = `${await getBaseUrl()}/blog`;
   const blogJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",

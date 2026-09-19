@@ -15,11 +15,10 @@ import { TrendingUp,
   BarChart3,
   AlertTriangle,
   ArrowUpRight } from "lucide-react";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
-import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -241,11 +240,8 @@ export default async function FinancialMarketPage() {
   // artikel market. Item URL menunjuk /blog/[slug] (lokasi final artikel
   // setelah migrasi — /financial-market/[slug] kini hanya redirect 308,
   // structured data harus memakai URL kanonik, bukan URL redirect).
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const origin = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}`
-    : SITE_URL;
+  // (Task 14) origin selalu domain produksi; dev lokal tetap host dev.
+  const origin = await getBaseUrl();
   const marketUrl = `${origin}/financial-market`;
   const marketJsonLd = {
     "@context": "https://schema.org",

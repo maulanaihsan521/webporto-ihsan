@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { Mail,
   Phone,
   MapPin,
@@ -16,6 +15,7 @@ import { Mail,
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -74,17 +74,8 @@ export default async function ContactPage() {
   const youtube = settings.social_youtube || "";
   const mapEmbed = settings.map_embed || "";
 
-  // Build URL halaman dari headers safely (server component).
-  // Fallback ke SITE_URL (production domain) supaya tidak pernah bocor localhost.
-  const reqHeaders = await headers();
-  const contactUrl = (() => {
-    const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-    if (host) {
-      const proto = reqHeaders.get("x-forwarded-proto") || "https";
-      return `${proto}://${host}/contact`;
-    }
-    return `${SITE_URL}/contact`;
-  })();
+  // (Task 14) URL halaman selalu domain produksi; dev lokal tetap host dev.
+  const contactUrl = `${await getBaseUrl()}/contact`;
   // Extract the src URL from the iframe HTML, or use the value as-is if it's already a URL
   const mapSrc = (() => {
     const raw = mapEmbed.trim();

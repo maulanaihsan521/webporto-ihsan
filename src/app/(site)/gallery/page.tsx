@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { ArrowRight, Image as ImageIcon, Camera } from "lucide-react";
 import { db } from "@/lib/db";
-import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -81,11 +80,8 @@ export default async function GalleryPage() {
 
   // JSON-LD CollectionPage + ItemList ImageObject — structured data
   // untuk galeri media visual.
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const galleryUrl = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}/gallery`
-    : `${SITE_URL}/gallery`;
+  // (Task 14) URL JSON-LD selalu domain produksi; dev lokal tetap host dev.
+  const galleryUrl = `${await getBaseUrl()}/gallery`;
   const galleryJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

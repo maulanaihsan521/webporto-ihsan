@@ -25,6 +25,7 @@ import { ArrowRight,
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL, SITE_CONFIG } from "@/lib/site-config";
+import { siteOriginFromHeaders } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -86,15 +87,10 @@ const typeStyles: Record<string, string> = {
   FREELANCE: "bg-chart-4/15 text-chart-4",
 };
 
-// Build URL halaman dari headers safely (server component).
-// Fallback ke SITE_URL (production domain) supaya tidak pernah bocor localhost.
+// URL halaman — SELALU domain produksi (Task 14); host request hanya dipakai
+// saat dev lokal. Anti host-spoofing: host apa pun tak masuk URL publik.
 function buildAboutUrl(currentHeaders: Headers): string {
-  const host = currentHeaders.get("x-forwarded-host") || currentHeaders.get("host");
-  if (host) {
-    const proto = currentHeaders.get("x-forwarded-proto") || "https";
-    return `${proto}://${host}/about`;
-  }
-  return `${SITE_URL}/about`;
+  return `${siteOriginFromHeaders(currentHeaders)}/about`;
 }
 
 // Filter URL sosial media yang valid (punya path/profile, bukan placeholder kosong)

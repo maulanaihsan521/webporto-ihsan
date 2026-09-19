@@ -13,6 +13,7 @@ import { ArrowRight,
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site-config";
+import { siteOriginFromHeaders } from "@/lib/server-site-config";
 import type { Experience } from "@prisma/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -80,15 +81,10 @@ function calcYears(items: Experience[]): number {
   return Math.max(0, Math.round(totalMonths / 12));
 }
 
-// Build URL halaman dari headers safely (server component).
-// Fallback ke SITE_URL (production domain) supaya tidak pernah bocor localhost.
+// URL halaman — SELALU domain produksi (Task 14); host request hanya dipakai
+// saat dev lokal. Anti host-spoofing: host apa pun tak masuk URL publik.
 function buildExperienceUrl(currentHeaders: Headers): string {
-  const host = currentHeaders.get("x-forwarded-host") || currentHeaders.get("host");
-  if (host) {
-    const proto = currentHeaders.get("x-forwarded-proto") || "https";
-    return `${proto}://${host}/experience`;
-  }
-  return `${SITE_URL}/experience`;
+  return `${siteOriginFromHeaders(currentHeaders)}/experience`;
 }
 
 export default async function ExperiencePage() {

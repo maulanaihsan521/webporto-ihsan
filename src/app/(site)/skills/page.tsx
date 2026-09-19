@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { headers } from "next/headers";
 import { ArrowRight,
   Award,
   Zap,
@@ -8,6 +7,7 @@ import { ArrowRight,
   Megaphone } from "lucide-react";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/site-config";
+import { getBaseUrl } from "@/lib/server-site-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
@@ -113,11 +113,8 @@ export default async function SkillsPage() {
 
   // JSON-LD ProfilePage + Person knowsAbout — structured data untuk
   // daftar keahlian (kategori + nama skill).
-  const reqHeaders = await headers();
-  const host = reqHeaders.get("x-forwarded-host") || reqHeaders.get("host");
-  const skillsUrl = host
-    ? `${reqHeaders.get("x-forwarded-proto") || "https"}://${host}/skills`
-    : `${SITE_URL}/skills`;
+  // (Task 14) URL JSON-LD selalu domain produksi; dev lokal tetap host dev.
+  const skillsUrl = `${await getBaseUrl()}/skills`;
   const skillsJsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
