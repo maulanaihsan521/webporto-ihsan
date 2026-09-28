@@ -439,15 +439,15 @@ export default async function AboutPage() {
             </SectionReveal>
 
             <div className="relative">
-              {/* vertical line - centered on desktop, left on mobile */}
+              {/* vertical line — satu kolom di kiri, konsisten dengan timeline
+                  Riwayat Pendidikan (garis menembus pusat dot size-8 di left-0) */}
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30 sm:left-1/2 sm:-translate-x-1/2"
+                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30"
                 aria-hidden
               />
 
               <ol className="space-y-8">
                 {experiences.map((exp, i) => {
-                  const isLeft = i % 2 === 0;
                   const dateRange = `${formatDateShort(exp.startDate)} — ${
                     exp.current
                       ? "Sekarang"
@@ -461,36 +461,19 @@ export default async function AboutPage() {
                     .filter(Boolean);
 
                   return (
-                    <li
-                      key={exp.id}
-                      className={cn(
-                        "relative pl-12 sm:w-1/2 sm:pl-0",
-                        isLeft ? "sm:ml-auto sm:pl-12" : "sm:pr-12 sm:text-right",
-                      )}
-                    >
+                    <li key={exp.id} className="relative pl-12">
                       {/* dot — di luar SectionReveal agar positioning absolute
                           tetap relatif ke <li> (transform pada wrapper reveal
-                          menciptakan containing block baru) */}
-                      <span
-                        className={cn(
-                          "absolute top-1 flex size-8 items-center justify-center rounded-full border-4 border-background bg-primary text-primary-foreground shadow-md",
-                          isLeft
-                            ? "left-0 sm:-left-4"
-                            : "left-0 sm:left-auto sm:-right-4",
-                        )}
-                      >
+                          menciptakan containing block baru). Top disetel agar pusat
+                          dot sejajar dengan baris tanggal (p-5 → top-3, sm:p-6 → top-4) */}
+                      <span className="absolute top-3 left-0 flex size-8 items-center justify-center rounded-full border-4 border-background bg-primary text-primary-foreground shadow-md sm:top-4">
                         <Building2 className="size-3.5" />
                       </span>
 
-                      <SectionReveal delay={i * 0.05} className="h-full">
-                        <Card className="glass lift h-full p-5 sm:p-6">
+                      <SectionReveal delay={i * 0.05}>
+                        <Card className="glass lift p-5 sm:p-6">
                           {/* Date + type + status */}
-                          <div
-                            className={cn(
-                              "flex flex-wrap items-center gap-2",
-                              !isLeft && "sm:justify-end",
-                            )}
-                          >
+                          <div className="flex flex-wrap items-center gap-2">
                             <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                               <Calendar className="size-3.5" />
                               {dateRange}
@@ -515,12 +498,7 @@ export default async function AboutPage() {
                           </div>
 
                           <h3 className="mt-3 text-lg font-bold leading-tight">{exp.position}</h3>
-                          <div
-                            className={cn(
-                              "mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground",
-                              !isLeft && "sm:justify-end",
-                            )}
-                          >
+                          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
                             <span className="font-medium text-foreground/80">{exp.company}</span>
                             {exp.location && (
                               <span className="inline-flex items-center gap-1">
@@ -533,7 +511,7 @@ export default async function AboutPage() {
                             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{exp.description}</p>
                           )}
                           {techs.length > 0 && (
-                            <div className={cn("mt-4 flex flex-wrap gap-1.5", !isLeft && "sm:justify-end")}>
+                            <div className="mt-4 flex flex-wrap gap-1.5">
                               {techs.map((tech) => (
                                 <span key={tech} className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium">{tech}</span>
                               ))}
@@ -576,7 +554,7 @@ export default async function AboutPage() {
                 aria-hidden
               />
 
-              <ol className="space-y-6">
+              <ol className="space-y-8">
                 {educations.map((edu, i) => {
                   const dateRange = `${formatDateShort(edu.startDate)} — ${
                     edu.current
@@ -588,8 +566,9 @@ export default async function AboutPage() {
 
                   return (
                     <li key={edu.id} className="relative pl-12">
-                      {/* dot — di luar SectionReveal (lihat catatan pada timeline Karier) */}
-                      <span className="absolute top-1.5 left-0 flex size-8 items-center justify-center rounded-full border-4 border-background bg-chart-3 text-white shadow-md">
+                      {/* dot — top-3/sm:top-4: pusat dot sejajar baris tanggal
+                          (p-5 → top-3, sm:p-6 → sm:top-4); sama dengan timeline Karier */}
+                      <span className="absolute top-3 left-0 flex size-8 items-center justify-center rounded-full border-4 border-background bg-chart-3 text-white shadow-md sm:top-4">
                         <GraduationCap className="size-4" />
                       </span>
 

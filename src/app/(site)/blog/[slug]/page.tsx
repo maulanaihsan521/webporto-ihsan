@@ -48,6 +48,13 @@ import { CommentsSection,
   type CommentReplyItem } from "./comments-section";
 import { sanitizeHtml, wrapResponsiveTables } from "@/lib/sanitize-html";
 
+// DRAFT SELALU TERSEMBUNYI DARI PUBLIK (update Task 17, request user
+// 2026-09-28: "yang di draft jangan ditampilkan ke publik"):
+// Halaman detail blog TIDAK PERNAH merender draft — di dev, preview sandbox,
+// mapupun produksi. URL draft selalu 404 + noindex. Review draft dilakukan
+// lewat dashboard admin (Blog Posts → Edit → tombol Preview), lalu publish
+// dari sana saat sudah siap.
+
 type Params = { params: Promise<{ slug: string }> };
 
 // Satu fetch di-cache per request — dipakai bersama oleh generateMetadata
@@ -395,10 +402,10 @@ export default async function BlogDetailPage({ params }: Params) {
                   />
                   <span className="font-medium text-foreground/80">{authorName}</span>
                 </span>
-                {post.publishedAt && (
+                {(post.publishedAt || post.createdAt) && (
                   <span className="inline-flex items-center gap-1">
                     <Calendar className="size-3.5" />
-                    {formatDate(post.publishedAt)}
+                    {formatDate(post.publishedAt ?? post.createdAt)}
                   </span>
                 )}
                 <span className="inline-flex items-center gap-1">

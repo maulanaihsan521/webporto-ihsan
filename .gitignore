@@ -93,3 +93,22 @@ scripts/task15-*.mjs
 # intermediate PDF pipeline laporan ISO
 scripts/iso-cover.pdf
 scripts/iso-report-body.pdf
+
+# Blog article generation scripts (internal tooling — bukan bagian runtime app)
+scripts/blog-article-*.js
+scripts/insert-blog-draft.js
+scripts/upload-blog-cover.js
+scripts/blog-context-query.js
+scripts/preview-article.js
+scripts/verify-pdf-secrets.py
+scripts/upload-pdf.sh
+
+# ===== Artefak sesi lanjutan (Task 16-17) =====
+# Diagnostik draft artikel & reorder service — internal, jangan ter-commit
+scripts/check-existing-draft.js
+scripts/inspect-db-for-article.js
+scripts/qa-article-content.js
+scripts/list-services.js
+scripts/reorder-services.js
+# Salinan lokal laporan audit (file besar, disajikan via temp.sh; bukan aset repo)
+public/laporan-audit-iso-portofoliomaulanaihsan.pdf

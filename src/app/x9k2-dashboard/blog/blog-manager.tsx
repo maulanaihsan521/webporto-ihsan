@@ -349,11 +349,19 @@ export function BlogManager({ data, categories, tags }: BlogManagerProps) {
       >
         <Eye className="size-3.5" />
       </Button>
-      <Button asChild variant="ghost" size="icon" className="size-8" title="View">
-        <a href={`/blog/${row.slug}`} target="_blank" rel="noopener noreferrer">
+      {/* View hanya untuk post published — draft tidak tayang di /blog/{slug}
+          (selalu 404); review draft lewat Edit → Preview. */}
+      {row.published ? (
+        <Button asChild variant="ghost" size="icon" className="size-8" title="Lihat artikel tayang">
+          <a href={`/blog/${row.slug}`} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="size-3.5" />
+          </a>
+        </Button>
+      ) : (
+        <Button variant="ghost" size="icon" className="size-8 opacity-40" disabled title="Draft tidak tayang publik — buka Edit lalu Preview">
           <ExternalLink className="size-3.5" />
-        </a>
-      </Button>
+        </Button>
+      )}
       <DeleteConfirm
         title={`Hapus "${row.title}"?`}
         description="Post dan semua komentarnya akan dihapus permanen."

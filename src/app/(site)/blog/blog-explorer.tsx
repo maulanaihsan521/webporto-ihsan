@@ -63,6 +63,9 @@ export type BlogPostItem = {
   coverImage: string | null;
   documentUrl: string | null;
   featured: boolean;
+  // Field defensif (Task 17): server list kini HANYA mengirim post published,
+  // sehingga nilai ini selalu true dan badge "Draf" tidak pernah muncul.
+  published?: boolean;
   viewCount: number;
   readingTime: number;
   publishedAt: Date | string | null;
@@ -121,10 +124,13 @@ export function BlogExplorer({
   const [sort, setSort] = useState<SortKey>("newest");
   const [page, setPage] = useState(1);
 
-  // Featured post (first featured=true), excluded from the grid
+  // Featured post (first featured=true), excluded from the grid.
+  // DEV-ONLY DRAFT PREVIEW: draft tidak boleh jadi hero supaya preview dev
+  // menampilkan hero yang SAMA dengan produksi (di produksi draft tidak
+  // pernah masuk daftar).
   const featuredPost = useMemo(() => {
     return (
-      posts.find((p) => p.featured) ?? null
+      posts.find((p) => p.featured && p.published !== false) ?? null
     );
   }, [posts]);
 
@@ -1005,12 +1011,14 @@ function PostCard({ post, delay }: { post: BlogPostItem; delay: number }) {
               className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
               aria-hidden
             />
-            {post.featured && (
-              <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-amber-500/95 px-2.5 py-1 text-[10px] font-semibold text-white shadow-md backdrop-blur">
-                <Star className="size-3 fill-current" />
-                Unggulan
-              </div>
-            )}
+            <div className="absolute left-3 top-3 flex items-center gap-1.5">
+              {post.featured && (
+                <div className="flex items-center gap-1 rounded-full bg-amber-500/95 px-2.5 py-1 text-[10px] font-semibold text-white shadow-md backdrop-blur">
+                  <Star className="size-3 fill-current" />
+                  Unggulan
+                </div>
+              )}
+            </div>
             <div className="absolute right-3 top-3 flex flex-col items-end gap-1.5">
               {post.category && (
                 <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-md">

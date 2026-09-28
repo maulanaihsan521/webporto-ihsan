@@ -42,6 +42,13 @@ export const metadata = {
   },
 };
 
+// DRAFT SELALU TERSEMBUNYI DARI PUBLIK (update Task 17, request user
+// 2026-09-28: "yang di draft jangan ditampilkan ke publik"):
+// Daftar blog HANYA memuat post published — di dev, preview sandbox, mapupun
+// produksi. Draft tidak pernah masuk kartu list, payload RSC, ataupun
+// JSON-LD structured data. Review draft lewat dashboard admin
+// (Blog Posts → Edit → Preview).
+
 export default async function BlogPage() {
   // 2026-09-19: artikel market kini = post blog (kategori "Financial Market",
   // hasil migrasi) — tidak ada lagi merge MarketArticle & tidak digated toggle
@@ -49,6 +56,8 @@ export default async function BlogPage() {
   // di blog (permintaan user: "market di-off, artikel tetap ada").
   const [posts, categories, tags] = await Promise.all([
     db.post.findMany({
+      // Hanya post published — draft tidak pernah ikut ke list/RSC/JSON-LD
+      // di environment mana pun (lihat catatan Task 17 di atas).
       where: { published: true },
       // PERF (Task 12): batasi jumlah + select kolom yang dipakai list saja.
       // FIX (Task 14): `include` + `select` bersamaan = PrismaClientValidationError
@@ -59,6 +68,7 @@ export default async function BlogPage() {
       select: {
         id: true, title: true, slug: true, excerpt: true, content: true,
         coverImage: true, documentUrl: true, featured: true, viewCount: true,
+        published: true,
         readingTime: true, publishedAt: true, createdAt: true,
         author: { select: { name: true, image: true } },
         category: true, tags: true,
@@ -97,6 +107,7 @@ export default async function BlogPage() {
     coverImage: p.coverImage || null,
     documentUrl: p.documentUrl || null,
     featured: p.featured,
+    published: p.published,
     viewCount: p.viewCount,
     readingTime: p.readingTime,
     publishedAt: p.publishedAt ?? p.createdAt,
