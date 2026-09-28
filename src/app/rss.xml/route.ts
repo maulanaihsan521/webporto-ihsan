@@ -54,7 +54,7 @@ export async function GET() {
     excerpt: string | null;
     content: string;
     publishedAt: Date | null;
-    author: { name: string } | null;
+    author: { name: string | null } | null;
     category: { name: string } | null;
   }[] = [];
   try {

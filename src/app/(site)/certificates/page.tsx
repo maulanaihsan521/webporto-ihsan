@@ -14,12 +14,12 @@ import { CertFilter,
 export const metadata = {
   title: { absolute: "Maulana Ihsan Rohim | Certificates & Credentials" },
   description:
-    "Koleksi sertifikasi profesional dari Google, Meta, Adobe, HubSpot, Bloomberg, dan lainnya. Semua kredensial terverifikasi.",
+    "Koleksi sertifikasi & kompetensi profesional: uji kompetensi keahlian multimedia, praktik kerja lapangan industri, magang digital marketing, hingga sertifikasi SAP. Kredensial dapat diverifikasi.",
   alternates: { canonical: "/certificates" },
   openGraph: {
     title: "Maulana Ihsan Rohim | Certificates & Credentials",
     description:
-      "Koleksi sertifikasi profesional dari Google, Meta, Adobe, HubSpot, Bloomberg, dan lainnya. Semua kredensial terverifikasi.",
+      "Koleksi sertifikasi & kompetensi profesional: uji kompetensi keahlian multimedia, praktik kerja lapangan industri, magang digital marketing, hingga sertifikasi SAP. Kredensial dapat diverifikasi.",
     type: "website",
     url: "/certificates",
     siteName: "Maulana Ihsan Rohim",
@@ -36,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Maulana Ihsan Rohim | Certificates & Credentials",
     description:
-      "Koleksi sertifikasi profesional dari Google, Meta, Adobe, HubSpot, Bloomberg, dan lainnya.",
+      "Koleksi sertifikasi & kompetensi profesional — semua kredensial dapat diverifikasi.",
   },
 };
 
@@ -162,9 +162,11 @@ export default async function CertificatesPage() {
                   profesional bersertifikat?
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-                  Dengan kredensial dari Google, Meta, Adobe, dan Bloomberg, saya siap
-                  membantu proyek digital marketing, produksi konten, hingga analisis
-                  pasar finansial Anda.
+                  Dengan sertifikasi kompetensi multimedia, pengalaman industri
+                  di bidang produksi konten dan digital marketing, serta
+                  sertifikasi proses bisnis dari SAP, saya siap membantu proyek
+                  digital marketing, produksi konten, hingga analisis proses
+                  bisnis Anda.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   <Button asChild size="lg">
