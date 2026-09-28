@@ -645,14 +645,9 @@ body {
   line-height: 1.05;
 }
 
-/* Gold nama — LIGHT diperdemi kontras (WCAG): #D4A64A di kartu putih hanya
-   2.1:1 (gagal); Soft Bronze gelap #A67C2E ≈ 3.8:1 — lolos AA utk teks besar
-   (nama hero = besar & bold), nuansa gold tetap terjaga.
-   DARK tetap var(--primary) (#DCAF5E di kartu slate — kontras baik). */
+/* Gold accent nama hero — memakai --primary: light = Champagne Gold #D4A64A,
+   dark = #DCAF5E (sesuai permintaan user, kembali seperti semula). */
 .hero-headline-accent {
-  color: #A67C2E;
-}
-.dark .hero-headline-accent {
   color: var(--primary);
 }
 
