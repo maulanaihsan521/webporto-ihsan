@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { CookieConsent } from "@/components/cookie-consent";
 import { VisitorTracker } from "@/components/visitor-tracker";
+import { SiteAmbience } from "@/components/site-ambience";
 import { getSettings, isMarketEnabled } from "@/lib/settings";
 
 // Render halaman publik saat diakses (bukan saat build).
@@ -15,6 +16,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const marketEnabled = isMarketEnabled(settings);
   return (
     <div className="relative min-h-screen flex flex-col">
+      {/* Dekorasi latar light & dark — wave/blob/dot-grid di belakang konten (z -10) */}
+      <SiteAmbience />
       <SiteHeader marketEnabled={marketEnabled} />
       {/* A11Y (Task 12): skip link — user keyboard langsung lompat ke konten
           tanpa harus men-tab seluruh navbar (situs header fixed). */}

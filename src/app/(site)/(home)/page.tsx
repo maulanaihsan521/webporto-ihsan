@@ -99,7 +99,7 @@ export default async function HomePage() {
       {/* Section wrapper keeps the page's default light background.
           Inner hero card uses .hero-card class which is theme-aware:
           - Light mode: card follows global theme (white bg, dark text)
-          - Dark mode: card uses navy #171F29 (selaras --card global, di atas bg #0C1218) */}
+          - Dark mode: card uses slate #1E293B (selaras --card global, di atas bg #0F172A) */}
       <section className="relative overflow-hidden pt-6 pb-12 sm:pt-12 sm:pb-20">
 
         {/* === MOBILE HERO: Horizontal split card + integrated stats bar === */}

@@ -80,59 +80,59 @@
 }
 
 .dark {
-  /* Dark Mode — Deep navy-black bg + elevated navy cards (referensi user)
-     Gradasi permukaan (makin "tinggi" makin terang, langkah ±5-7, hue navy konsisten):
-       bg #0C1218 → sidebar #111821 → card #171F29 → popover #1C2531 → secondary/muted #202A36
-     Teks cool-white #E6EAF0 (senada hue navy, tetap tidak menyilaukan).
-     Gold dark #DCAF5E — kombinasi klasik gold-on-navy, premium dan hidup. */
-  --background: #0C1218;          /* Deep Navy Black (dari referensi user) */
-  --foreground: #E6EAF0;          /* Cool White — senada hue navy, tidak menyilaukan */
-  --card: #171F29;                /* Elevated navy surface — +11 dari bg, terangkat jelas */
-  --card-foreground: #E6EAF0;     /* Cool White */
-  --popover: #1C2531;             /* Floating surface — di atas card */
-  --popover-foreground: #E6EAF0;  /* Cool White */
-  --primary: #DCAF5E;             /* Champagne Gold (dark) — gold-on-navy klasik */
-  --primary-foreground: #0C1218;  /* Navy (teks di atas gold — lembut, bukan pure black) */
-  --secondary: #202A36;           /* Elevated muted navy surface */
-  --secondary-foreground: #E6EAF0;/* Cool White */
-  --muted: #202A36;               /* Elevated muted navy surface */
-  --muted-foreground: #96A1AD;    /* Cool Blue-Gray — kontras AA, senada dgn navy */
-  --accent: #C2963F;              /* Soft Bronze (dark) — lebih terbaca */
-  --accent-foreground: #E6EAF0;   /* Cool White */
+  /* Dark Mode — Slate navy (referensi user: bg #0f172a, card #1e293b)
+     Gradasi permukaan ala Tailwind Slate (makin "tinggi" makin terang):
+       bg #0F172A → sidebar #131C2E → card #1E293B → popover #243244 → secondary/muted #283548
+     Teks #F8FAFC (slate-50) + muted #94A3B8 (slate-400) — persis referensi.
+     Aksen emas kembali ke Champagne Gold #DCAF5E seperti awal (permintaan user). */
+  --background: #0F172A;          /* Slate-900 — bg referensi user */
+  --foreground: #F8FAFC;         /* Slate-50 — heading referensi */
+  --card: #1E293B;                /* Slate-800 — card referensi user */
+  --card-foreground: #F8FAFC;     /* Slate-50 */
+  --popover: #243244;             /* Floating surface — di atas card */
+  --popover-foreground: #F8FAFC;  /* Slate-50 */
+  --primary: #DCAF5E;             /* Champagne Gold (dark) — seperti awal */
+  --primary-foreground: #0F172A; /* Slate-900 (teks di atas gold, ala referensi) */
+  --secondary: #283548;           /* Elevated muted slate surface */
+  --secondary-foreground: #F8FAFC;/* Slate-50 */
+  --muted: #283548;               /* Elevated muted slate surface */
+  --muted-foreground: #94A3B8;    /* Slate-400 — body text referensi, kontras AA */
+  --accent: #C2963F;              /* Soft Bronze (dark) — seperti awal */
+  --accent-foreground: #F8FAFC;   /* Slate-50 */
   --destructive: #DC2626;
-  --border: rgba(255, 255, 255, 0.14);  /* Border — cukup terlihat utk pemisahan kartu */
-  --input: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.08);  /* Border referensi — putih sangat halus */
+  --input: rgba(255, 255, 255, 0.10);
   --ring: #DCAF5E;                /* Champagne Gold (dark) */
   --chart-1: #DCAF5E;             /* Champagne Gold (dark) */
   --chart-2: #C2963F;             /* Soft Bronze (dark) */
   --chart-3: #C6922E;             /* Rich Gold */
-  --chart-4: #94A3B3;             /* Cool Blue-Gray */
-  --chart-5: #64748B;             /* Slate */
-  --sidebar: #111821;             /* Sedikit di atas bg, di bawah card */
-  --sidebar-foreground: #E6EAF0;  /* Cool White */
+  --chart-4: #94A3B8;             /* Slate-400 */
+  --chart-5: #64748B;             /* Slate-500 */
+  --sidebar: #131C2E;             /* Sedikit di atas bg, di bawah card */
+  --sidebar-foreground: #F8FAFC;  /* Slate-50 */
   --sidebar-primary: #DCAF5E;     /* Champagne Gold (dark) */
-  --sidebar-primary-foreground: #0C1218;
-  --sidebar-accent: #202A36;      /* Elevated muted navy surface */
-  --sidebar-accent-foreground: #E6EAF0;
-  --sidebar-border: rgba(255, 255, 255, 0.10);
+  --sidebar-primary-foreground: #0F172A;
+  --sidebar-accent: #283548;      /* Elevated muted slate surface */
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #DCAF5E;        /* Champagne Gold (dark) */
 }
 
-/* ===== Dark Mode Ambience (premium polish) =====
-   1. Glow navy lembut di atas viewport — meniru kedalaman referensi user
-      (top area sedikit lebih terang ~#151E27, lalu memudar ke bawah).
-   2. Glow emas SANGAT halus (opacity 5%) — kehangatan "navy premium" tanpa silau.
-   3. Transisi warna body halus saat toggle tema (buttery smooth). fixed agar stabil saat scroll. */
+/* ===== Dark Mode Ambience (premium polish — referensi user) =====
+   1. Glow biru-slate lembut di atas viewport — meniru "ambient lighting" referensi.
+   2. Glow emas SANGAT halus (opacity 5%) — kehangatan ala referensi hero.
+   3. Gelombang/blob dekoratif ada di komponen <DarkAmbience /> (layer -z-10).
+   fixed agar stabil saat scroll. */
 .dark body {
   background-image:
     radial-gradient(
       ellipse 90% 50% at 50% -10%,
-      rgba(44, 74, 112, 0.28),
+      rgba(59, 91, 148, 0.22),
       transparent 72%
     ),
     radial-gradient(
       ellipse 90% 55% at 50% -12%,
-      rgba(220, 175, 94, 0.05),
+      rgba(251, 191, 36, 0.05),
       transparent 70%
     );
   background-attachment: fixed;
@@ -190,22 +190,22 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
-/* 3b. Dark mode — paket "lit-from-above" navy (tetap, tidak diubah):
-      a. Edge 1px luminous blue-gray (definisi bentuk kartu, tidak menyilaukan)
+/* 3b. Dark mode — paket "lit-from-above" slate (ala referensi user):
+      a. Edge 1px putih transparan sangat halus (referensi: rgba(255,255,255,0.08))
       b. Inset top highlight 1px — cahaya dari atas ala kartu fisik premium
-      c. Shadow navy berlapis (contact + ambient) — kartu terasa terangkat */
+      c. Shadow hitam berlapis (referensi: 0 25px 50px -12px rgba(0,0,0,0.5)) */
 .dark [data-slot="card"] {
-  border: 1px solid rgba(148, 177, 216, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    0 1px 2px rgba(4, 10, 18, 0.22),
-    0 6px 20px rgba(4, 10, 18, 0.32),
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 6px 20px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 .dark [data-slot="card"]:hover {
-  border-color: rgba(148, 177, 216, 0.22);
+  border-color: rgba(255, 255, 255, 0.16);
   box-shadow:
-    0 2px 4px rgba(4, 10, 18, 0.25),
-    0 12px 32px rgba(4, 10, 18, 0.42),
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
@@ -298,23 +298,23 @@ body {
    ⚠️ border WAJIB dioverride: base .glass light membawa edge putih 0.75 —
    tanpa override ini, navbar/kartu glass di dark tampak "bingkai putih tebal". */
 .dark .glass {
-  background: rgba(23, 31, 41, 0.72);
-  border: 1px solid rgba(148, 177, 216, 0.13);
+  background: rgba(30, 41, 59, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    0 4px 16px rgba(4, 10, 18, 0.35),
+    0 4px 16px rgba(0, 0, 0, 0.40),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 .dark .glass:hover {
-  border-color: rgba(148, 177, 216, 0.22);
+  border-color: rgba(255, 255, 255, 0.16);
   box-shadow:
-    0 10px 28px rgba(4, 10, 18, 0.45),
+    0 10px 28px rgba(0, 0, 0, 0.50),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 .dark .glass-strong {
-  background: rgba(23, 31, 41, 0.88);
-  border: 1px solid rgba(148, 177, 216, 0.16);
+  background: rgba(30, 41, 59, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   box-shadow:
-    0 8px 24px rgba(4, 10, 18, 0.40),
+    0 8px 24px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -617,18 +617,18 @@ body {
   position: relative;
 }
 
-/* Dark mode: override — selaras dengan sistem card global navy (#171F29, elevated dari bg #0C1218).
+/* Dark mode: override — selaras dengan sistem card global slate (#1E293B, di atas bg #0F172A).
    Inset top highlight 1px memberi kesan "lit from above" ala kartu premium. */
 .dark .hero-card {
-  --hero-card-bg: #171F29;
-  --hero-card-fg: #E6EAF0;
-  --hero-card-muted: #A2ACB8;
-  --hero-card-border: #303C4A;
-  --hero-card-secondary: #202A36;
-  --hero-card-secondary-fg: #E6EAF0;
+  --hero-card-bg: #1E293B;
+  --hero-card-fg: #F8FAFC;
+  --hero-card-muted: #94A3B8;
+  --hero-card-border: rgba(255, 255, 255, 0.10);
+  --hero-card-secondary: #283548;
+  --hero-card-secondary-fg: #F8FAFC;
   box-shadow:
-    0 25px 50px -12px rgba(4, 10, 18, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Photo diagonal cut — sharp hard edge between text column (left) and photo (right).
@@ -803,18 +803,18 @@ body {
 
 /* Dark mode: paket "lit-from-above" konsisten dgn [data-slot="card"] */
 .dark .service-card {
-  border: 1px solid rgba(148, 177, 216, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
-    0 1px 2px rgba(4, 10, 18, 0.22),
-    0 6px 20px rgba(4, 10, 18, 0.32),
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 6px 20px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 .dark .service-card:hover {
-  border-color: rgba(148, 177, 216, 0.22);
+  border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-3px);
   box-shadow:
-    0 2px 4px rgba(4, 10, 18, 0.25),
-    0 12px 32px rgba(4, 10, 18, 0.42),
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
@@ -838,3 +838,135 @@ body {
     padding: 1.25rem;
   }
 }
+
+/* ===== Site Ambience — wave shape / abstract wave (light & dark, STATIS) =====
+   Layer dekoratif fixed di belakang konten (komponen <SiteAmbience />, z -10).
+   Warna via CSS variables — LIGHT: soft gold/biru di atas Warm Ivory;
+   DARK: indigo/slate + dot putih. TANPA animasi (permintaan user:
+   gelombang tidak bergerak agar website ringan). */
+
+.amb-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Palet ambience — LIGHT (default, di atas Warm Ivory #F8F6F2):
+   wave gold lembut + counterpoint biru periwinkle, dot warm-gray halus. */
+:root {
+  --amb-dot: rgba(76, 64, 40, 0.13);
+  --amb-blob-a: radial-gradient(
+    circle at 55% 45%,
+    rgba(148, 177, 216, 0.20),
+    rgba(148, 177, 216, 0.10) 45%,
+    transparent 70%
+  );
+  --amb-blob-b: radial-gradient(
+    circle at 45% 55%,
+    rgba(212, 166, 74, 0.15),
+    transparent 65%
+  );
+  --amb-wave-top: rgba(148, 177, 216, 0.13);
+  --amb-wave-1: rgba(212, 166, 74, 0.14);
+  --amb-wave-2: rgba(148, 177, 216, 0.16);
+}
+
+/* Palet ambience — DARK (di atas Slate-900 #0F172A, ala referensi user):
+   wave indigo/biru-slate + garis emas, dot putih halus. */
+.dark {
+  --amb-dot: rgba(255, 255, 255, 0.14);
+  --amb-blob-a: radial-gradient(
+    circle at 55% 45%,
+    rgba(79, 70, 229, 0.17),
+    rgba(49, 46, 129, 0.11) 45%,
+    transparent 70%
+  );
+  --amb-blob-b: radial-gradient(
+    circle at 45% 55%,
+    rgba(220, 175, 94, 0.06),
+    transparent 65%
+  );
+  --amb-wave-top: rgba(148, 163, 184, 0.05);
+  --amb-wave-1: rgba(99, 102, 241, 0.09);
+  --amb-wave-2: rgba(59, 91, 148, 0.08);
+}
+
+/* Dot grid — kanan atas, memudar ke arah tengah */
+.amb-dot-grid {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(52vw, 720px);
+  height: min(42vh, 400px);
+  background-image: radial-gradient(var(--amb-dot) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 95% 90% at 80% 8%,
+    black 18%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 95% 90% at 80% 8%,
+    black 18%,
+    transparent 75%
+  );
+}
+
+/* Blob organik — radial-gradient murni (tanpa filter blur = murah performa) */
+.amb-blob {
+  position: absolute;
+  border-radius: 9999px;
+}
+.amb-blob-a {
+  left: -14vw;
+  bottom: -20vh;
+  width: 58vw;
+  height: 58vw;
+  max-width: 840px;
+  max-height: 840px;
+  background: var(--amb-blob-a);
+}
+.amb-blob-b {
+  right: -12vw;
+  top: -14vh;
+  width: 44vw;
+  height: 44vw;
+  max-width: 640px;
+  max-height: 640px;
+  background: var(--amb-blob-b);
+}
+
+/* Gelombang SVG — 200% lebar + path periodik (2 periode per viewBox)
+   supaya animasi translateX(-50%) looping mulus tanpa lompatan. */
+.amb-wave {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 200%;
+}
+.amb-wave-top {
+  top: 0;
+  height: 150px;
+}
+.amb-wave-b1 {
+  bottom: -6px;
+  height: 220px;
+}
+.amb-wave-b2 {
+  bottom: -10px;
+  height: 190px;
+}
+.amb-wave-top path {
+  fill: var(--amb-wave-top);
+}
+.amb-wave-b1 path {
+  fill: var(--amb-wave-1);
+}
+.amb-wave-b2 path {
+  fill: var(--amb-wave-2);
+}
+
+/* Gelombang STATIS (permintaan user) — tanpa animasi agar ringan;
+   layer 200% lebar hanya untuk pola periodik, kanan terpotong overflow:hidden. */
