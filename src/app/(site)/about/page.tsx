@@ -228,8 +228,11 @@ export default async function AboutPage() {
             </SectionReveal>
 
             {/* Bio */}
-            <SectionReveal delay={0.1}>
-              <div className="space-y-5">
+            <SectionReveal delay={0.1} className="h-full">
+              {/* Flex kolom penuh + mt-auto pada info kontak → baris kartu kontak
+                  rata dengan dasar Kartu Profil (menghapus ruang kosong besar
+                  di bawah bio saat kartu profil lebih tinggi). */}
+              <div className="flex h-full flex-col gap-5">
                 <div>
                   <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
                     Halo, saya <span className="text-gradient">{ownerName.split(" ")[0]}</span>
@@ -238,7 +241,7 @@ export default async function AboutPage() {
                 <p className="text-base leading-relaxed text-muted-foreground">{description}</p>
 
                 {/* Quick info */}
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="mt-auto grid grid-cols-1 gap-3 pt-2 sm:grid-cols-3">
                   <div className="glass flex items-center gap-3 rounded-xl p-3">
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <MapPin className="size-4" />

@@ -89,3 +89,7 @@ scripts/check-siteurl.mjs
 scripts/count-posts.mjs
 scripts/test-*.mjs
 scripts/task15-*.mjs
+
+# intermediate PDF pipeline laporan ISO
+scripts/iso-cover.pdf
+scripts/iso-report-body.pdf
