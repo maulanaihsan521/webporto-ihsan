@@ -30,6 +30,10 @@ import { DataTable, type Column } from "@/components/admin/data-table";
 import { AdminPageHeader } from "@/components/admin/page-header";
 import { MediaPicker } from "@/components/admin/media-picker";
 import { DeleteConfirm } from "@/components/admin/delete-confirm";
+import {
+  PortfolioGalleryEditor,
+  type GalleryImage,
+} from "@/components/admin/portfolio-gallery-editor";
 import { cn, slugify, formatDate, formatNumber } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -119,10 +123,12 @@ export function PortfolioManager({ data, categories }: PortfolioManagerProps) {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [slugTouched, setSlugTouched] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
 
   const openCreate = () => {
     setForm(EMPTY_FORM);
     setSlugTouched(false);
+    setGallery([]);
     setOpen(true);
   };
 
@@ -165,6 +171,16 @@ export function PortfolioManager({ data, categories }: PortfolioManagerProps) {
         ogImage: d.ogImage || "",
         categoryId: d.categoryId || "",
       });
+      setGallery(
+        Array.isArray(d.images)
+          ? d.images.map((im: any) => ({
+              id: im.id,
+              url: im.url,
+              caption: im.caption ?? null,
+              order: im.order ?? 0,
+            }))
+          : []
+      );
       setSlugTouched(true);
       setOpen(true);
     } catch (e: any) {
@@ -652,6 +668,16 @@ export function PortfolioManager({ data, categories }: PortfolioManagerProps) {
               />
             </div>
           </div>
+
+          {form.id ? (
+            <div className="mt-4 border-t pt-4">
+              <PortfolioGalleryEditor
+                key={form.id}
+                portfolioId={form.id}
+                initialImages={gallery}
+              />
+            </div>
+          ) : null}
 
           <DialogFooter className="pt-3 border-t">
             <Button variant="outline" onClick={() => setOpen(false)} disabled={loading}>
