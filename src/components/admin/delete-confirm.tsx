@@ -44,6 +44,10 @@ export function DeleteConfirm({
     try {
       await onConfirm();
       setOpen(false);
+    } catch {
+      // onConfirm gagal — dialog dibiarkan terbuka agar user bisa mencoba lagi.
+      // Notifikasi error sudah ditampilkan pemanggil (toast); tanpa catch di sini
+      // rejection akan menjadi "Uncaught (in promise)" di console browser.
     } finally {
       setLoading(false);
     }
