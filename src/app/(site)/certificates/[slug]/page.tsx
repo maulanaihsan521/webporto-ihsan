@@ -655,7 +655,14 @@ export default async function CertificateDetailPage({ params }: Params) {
             <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <Award className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-expert.webp"
+                  alt="Maskot wisuda — keahlian terverifikasi"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Butuh keahlian <span className="text-gradient">terverifikasi?</span>
                 </h2>

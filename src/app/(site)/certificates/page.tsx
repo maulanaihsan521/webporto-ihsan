@@ -156,7 +156,14 @@ export default async function CertificatesPage() {
             <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <Award className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-expert.webp"
+                  alt="Maskot wisuda — kolaborasi dengan profesional bersertifikat"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Ingin <span className="text-gradient">berkolaborasi</span> dengan
                   profesional bersertifikat?

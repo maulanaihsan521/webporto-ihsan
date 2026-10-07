@@ -5,9 +5,6 @@ import { ArrowRight,
   Mail,
   Phone,
   MapPin,
-  Target,
-  Compass,
-  Heart,
   Briefcase,
   GraduationCap,
   Languages as LanguagesIcon,
@@ -15,7 +12,6 @@ import { ArrowRight,
   Building2,
   Calendar,
   CheckCircle2,
-  Quote,
   Camera,
   Video,
   TrendingUp,
@@ -30,7 +26,9 @@ import { filterValidSocials } from "@/lib/social-utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal } from "@/components/motion-primitives";
+import { CompanyLogoPair } from "@/components/company-logo-pair";
 import { cn, formatDateShort, getInitials, safeJsonLd } from "@/lib/utils";
+import { getParentLogo } from "@/lib/company-logos";
 import { DEFAULT_OG_IMAGE_URL } from "@/lib/og-image";
 
 export const metadata: Metadata = {
@@ -295,9 +293,14 @@ export default async function AboutPage() {
               <Card className="glass relative h-full overflow-hidden p-4 sm:p-5 lift">
                 <div className="mesh-bg opacity-50" aria-hidden />
                 <div className="relative z-10">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-primary text-white shadow-lg">
-                    <Target className="size-7" />
-                  </div>
+                  <img
+                    src="/images/about/mascot-visi.webp"
+                    alt="Maskot berkacamata teropong — melihat jauh ke depan, simbol visi"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    className="mb-5 size-16 object-contain drop-shadow-lg"
+                  />
                   <h3 className="text-xl font-bold sm:text-2xl">Visi</h3>
                   <p className="mt-3 leading-relaxed text-muted-foreground">{vision}</p>
                 </div>
@@ -307,9 +310,14 @@ export default async function AboutPage() {
               <Card className="glass relative h-full overflow-hidden p-4 sm:p-5 lift">
                 <div className="mesh-bg opacity-50" aria-hidden />
                 <div className="relative z-10">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-chart-2 text-white shadow-lg">
-                    <Compass className="size-7" />
-                  </div>
+                  <img
+                    src="/images/about/mascot-misi.webp"
+                    alt="Maskot menunjuk target dengan panah — fokus pada tujuan, simbol misi"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    className="mb-5 size-16 object-contain drop-shadow-lg"
+                  />
                   <h3 className="text-xl font-bold sm:text-2xl">Misi</h3>
                   <p className="mt-3 leading-relaxed text-muted-foreground">{mission}</p>
                 </div>
@@ -327,9 +335,14 @@ export default async function AboutPage() {
             <SectionReveal>
               <Card className="glass p-6 sm:p-8">
                 <div className="mb-5 flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Heart className="size-5" />
-                  </div>
+                  <img
+                    src="/images/about/mascot-nilai.webp"
+                    alt="Maskot memegang bintang emas sambil jempol ke atas — simbol nilai-nilai"
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                    className="size-12 object-contain drop-shadow-md"
+                  />
                   <div>
                     <h3 className="text-base font-bold sm:text-xl">Nilai-Nilai</h3>
                     <p className="text-xs text-muted-foreground">Prinsip yang saya pegang dalam setiap proyek.</p>
@@ -356,9 +369,14 @@ export default async function AboutPage() {
               <SectionReveal delay={0.05}>
                 <Card className="glass h-full p-6 sm:p-8">
                   <div className="mb-5 flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                      <Heart className="size-5" />
-                    </div>
+                    <img
+                      src="/images/about/mascot-hobi.webp"
+                      alt="Maskot memegang kamera dan gamepad — simbol hobi"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      className="size-12 object-contain drop-shadow-md"
+                    />
                     <div>
                       <h3 className="text-base font-bold sm:text-xl">Hobi</h3>
                       <p className="text-xs text-muted-foreground">Aktivitas yang menginspirasi saya.</p>
@@ -440,14 +458,15 @@ export default async function AboutPage() {
 
             <div className="relative">
               {/* vertical line — satu kolom di kiri, konsisten dengan timeline
-                  Riwayat Pendidikan (garis menembus pusat dot size-8 di left-0) */}
+                  Riwayat Pendidikan (garis menembus pusat dot size-10 di left-0) */}
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30"
+                className="absolute left-5 top-2 bottom-2 w-px bg-primary/30"
                 aria-hidden
               />
 
               <ol className="space-y-8">
                 {experiences.map((exp, i) => {
+                  const parent = getParentLogo(exp.company);
                   const dateRange = `${formatDateShort(exp.startDate)} — ${
                     exp.current
                       ? "Sekarang"
@@ -461,14 +480,41 @@ export default async function AboutPage() {
                     .filter(Boolean);
 
                   return (
-                    <li key={exp.id} className="relative pl-12">
+                    <li key={exp.id} className="relative pl-14">
                       {/* dot — di luar SectionReveal agar positioning absolute
                           tetap relatif ke <li> (transform pada wrapper reveal
                           menciptakan containing block baru). Top disetel agar pusat
-                          dot sejajar dengan baris tanggal (p-5 → top-3, sm:p-6 → top-4) */}
-                      <span className="absolute top-3 left-0 flex size-8 items-center justify-center rounded-full border-4 border-background bg-primary text-primary-foreground shadow-md sm:top-4">
-                        <Building2 className="size-3.5" />
-                      </span>
+                          dot sejajar dengan baris tanggal (p-5 → top-3, sm:p-6 → top-4).
+                          Unit bagian dari organisasi induk → pasangan logo
+                          bertumpuk (induk di belakang, unit di depan, overlap
+                          ±15%) center di garis. */}
+                      {exp.logo && parent ? (
+                        <span className="absolute top-[14px] left-0 flex translate-x-[-13.5px] items-center sm:top-[18px]">
+                          <CompanyLogoPair
+                            logo={exp.logo}
+                            company={exp.company}
+                            parent={parent}
+                            size={28}
+                          />
+                        </span>
+                      ) : (
+                        <span className="absolute top-3 left-0 flex size-10 items-center justify-center rounded-full border-4 border-background shadow-md sm:top-4">
+                          {exp.logo ? (
+                            <img
+                              src={exp.logo}
+                              alt={`Logo ${exp.company}`}
+                              width={32}
+                              height={32}
+                              loading="lazy"
+                              className="size-full rounded-full bg-white object-contain p-0.5"
+                            />
+                          ) : (
+                            <span className="flex size-full items-center justify-center rounded-full bg-primary text-primary-foreground">
+                              <Building2 className="size-3.5" />
+                            </span>
+                          )}
+                        </span>
+                      )}
 
                       <SectionReveal delay={i * 0.05}>
                         <Card className="glass lift p-5 sm:p-6">
@@ -499,7 +545,32 @@ export default async function AboutPage() {
 
                           <h3 className="mt-3 text-lg font-bold leading-tight">{exp.position}</h3>
                           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-                            <span className="font-medium text-foreground/80">{exp.company}</span>
+                            <span className="inline-flex items-center gap-1 font-medium text-foreground/80">
+                              {exp.logo ? (
+                                parent ? (
+                                  <CompanyLogoPair
+                                    logo={exp.logo}
+                                    company={exp.company}
+                                    parent={parent}
+                                    size={16}
+                                    variant="inline"
+                                    className="shrink-0"
+                                  />
+                                ) : (
+                                  <img
+                                    src={exp.logo}
+                                    alt=""
+                                    width={16}
+                                    height={16}
+                                    loading="lazy"
+                                    className="size-4 shrink-0 rounded-[4px] bg-white object-contain"
+                                  />
+                                )
+                              ) : (
+                                <Building2 className="size-3.5" />
+                              )}
+                              {exp.company}
+                            </span>
                             {exp.location && (
                               <span className="inline-flex items-center gap-1">
                                 <MapPin className="size-3" />
@@ -549,8 +620,10 @@ export default async function AboutPage() {
             </SectionReveal>
 
             <div className="relative">
+              {/* vertical line — left-5: menembus pusat dot size-10 (logo
+                  institusi), selaras dengan timeline Karier */}
               <div
-                className="absolute left-4 top-2 bottom-2 w-px bg-primary/30"
+                className="absolute left-5 top-2 bottom-2 w-px bg-primary/30"
                 aria-hidden
               />
 
@@ -565,11 +638,26 @@ export default async function AboutPage() {
                   }`;
 
                   return (
-                    <li key={edu.id} className="relative pl-12">
+                    <li key={edu.id} className="relative pl-14">
                       {/* dot — top-3/sm:top-4: pusat dot sejajar baris tanggal
-                          (p-5 → top-3, sm:p-6 → sm:top-4); sama dengan timeline Karier */}
-                      <span className="absolute top-3 left-0 flex size-8 items-center justify-center rounded-full border-4 border-background bg-chart-3 text-white shadow-md sm:top-4">
-                        <GraduationCap className="size-4" />
+                          (p-5 → top-3, sm:p-6 → sm:top-4); sama dengan timeline
+                          Karier. Logo institusi dalam lingkaran putih; fallback
+                          ikon GraduationCap bila logo null. */}
+                      <span className="absolute top-3 left-0 flex size-10 items-center justify-center rounded-full border-4 border-background shadow-md sm:top-4">
+                        {edu.logo ? (
+                          <img
+                            src={edu.logo}
+                            alt={`Logo ${edu.institution}`}
+                            width={32}
+                            height={32}
+                            loading="lazy"
+                            className="size-full rounded-full bg-white object-contain p-0.5"
+                          />
+                        ) : (
+                          <span className="flex size-full items-center justify-center rounded-full bg-chart-3 text-white">
+                            <GraduationCap className="size-5" />
+                          </span>
+                        )}
                       </span>
 
                       <SectionReveal delay={i * 0.05}>
@@ -591,7 +679,23 @@ export default async function AboutPage() {
                             )}
                           </div>
 
-                          <h3 className="mt-3 text-lg font-bold leading-tight">{edu.institution}</h3>
+                          {/* Institution — mini logo di samping nama (selaras
+                              baris perusahaan di timeline Karier) */}
+                          <h3 className="mt-3 flex items-center gap-2 text-lg font-bold leading-tight">
+                            {edu.logo ? (
+                              <img
+                                src={edu.logo}
+                                alt=""
+                                width={20}
+                                height={20}
+                                loading="lazy"
+                                className="size-5 shrink-0 rounded-[4px] bg-white object-contain"
+                              />
+                            ) : (
+                              <GraduationCap className="size-4 shrink-0 text-chart-3" />
+                            )}
+                            {edu.institution}
+                          </h3>
                           <p className="mt-1 text-sm font-medium text-foreground/80">
                             {edu.degree}
                             {edu.field ? ` — ${edu.field}` : ""}
@@ -631,7 +735,14 @@ export default async function AboutPage() {
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
                 <div className="mb-8 text-center">
-                  <Quote className="mx-auto mb-4 size-8 text-primary/60" />
+                  <img
+                    src="/images/mascots/mascot-execute.webp"
+                    alt="Maskot mengeksekusi proyek — siap menghasilkan dampak nyata"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                  />
                   <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                     Siap menghasilkan <span className="text-gradient">dampak nyata</span> bersama?
                   </h2>

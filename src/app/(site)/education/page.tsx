@@ -186,8 +186,21 @@ export default async function EducationPage() {
                       {/* dot — di luar SectionReveal (transform pada wrapper
                           reveal menciptakan containing block yang menggeser
                           absolute positioning) */}
-                      <span className="absolute top-1.5 left-0 flex size-10 items-center justify-center rounded-full border-4 border-background bg-chart-3 text-white shadow-lg">
-                        <GraduationCap className="size-5" />
+                      <span className="absolute top-1.5 left-0 flex size-10 items-center justify-center rounded-full border-4 border-background shadow-lg">
+                        {edu.logo ? (
+                          <img
+                            src={edu.logo}
+                            alt={`Logo ${edu.institution}`}
+                            width={32}
+                            height={32}
+                            loading="lazy"
+                            className="size-full rounded-full bg-white object-contain p-0.5"
+                          />
+                        ) : (
+                          <span className="flex size-full items-center justify-center rounded-full bg-chart-3 text-white">
+                            <GraduationCap className="size-5" />
+                          </span>
+                        )}
                       </span>
 
                       <SectionReveal delay={i * 0.05} className="h-full">
@@ -205,8 +218,21 @@ export default async function EducationPage() {
                             </div>
                           )}
 
-                          {/* Institution */}
-                          <h2 className="text-lg font-bold leading-tight">
+                          {/* Institution — mini logo di samping nama (selaras
+                              baris perusahaan di /experience) */}
+                          <h2 className="flex items-center gap-2 text-lg font-bold leading-tight">
+                            {edu.logo ? (
+                              <img
+                                src={edu.logo}
+                                alt=""
+                                width={20}
+                                height={20}
+                                loading="lazy"
+                                className="size-5 shrink-0 rounded-[4px] bg-white object-contain"
+                              />
+                            ) : (
+                              <GraduationCap className="size-4 shrink-0 text-chart-3" />
+                            )}
                             {edu.institution}
                           </h2>
                           {/* Degree + field */}
@@ -267,7 +293,14 @@ export default async function EducationPage() {
             <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <GraduationCap className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-berpengalaman.webp"
+                  alt="Maskot wisuda — mari belajar bersama"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Ingin belajar <span className="text-gradient">bersama?</span>
                 </h2>

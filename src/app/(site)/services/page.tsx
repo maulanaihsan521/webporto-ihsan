@@ -1,15 +1,6 @@
 import Link from "next/link";
 import { headers } from "next/headers";
-import { ArrowRight,
-  Search,
-  ClipboardList,
-  Rocket,
-  TrendingUp,
-  ShieldCheck,
-  Star,
-  Zap,
-  Award,
-  Briefcase } from "lucide-react";
+import { ArrowRight, Star, Briefcase } from "lucide-react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { SITE_URL } from "@/lib/site-config";
@@ -54,28 +45,28 @@ export const metadata = {
 
 const processSteps = [
   {
-    icon: Search,
+    mascot: "mascot-discover",
     title: "Discover",
     subtitle: "Temukan",
     description:
       "Memahami kebutuhan, target audience, dan tujuan bisnis Anda melalui riset mendalam.",
   },
   {
-    icon: ClipboardList,
+    mascot: "mascot-plan",
     title: "Plan",
     subtitle: "Rencanakan",
     description:
       "Menyusun strategi, timeline, dan deliverables yang jelas dan terukur untuk setiap tahapan.",
   },
   {
-    icon: Rocket,
+    mascot: "mascot-execute",
     title: "Execute",
     subtitle: "Eksekusi",
     description:
       "Mengimplementasikan strategi dengan kreativitas, teknologi terkini, dan standar kualitas tinggi.",
   },
   {
-    icon: TrendingUp,
+    mascot: "mascot-deliver",
     title: "Deliver",
     subtitle: "Kirim",
     description:
@@ -216,9 +207,14 @@ export default async function ServicesPage() {
                   <div className="relative flex flex-col items-center text-center">
                     {/* numbered circle */}
                     <div className="relative z-10 mb-5">
-                      <div className="flex size-24 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-primary/20">
-                        <step.icon className="size-9" />
-                      </div>
+                      <img
+                        src={`/images/mascots/${step.mascot}.webp`}
+                        alt={`Maskot langkah ${i + 1}: ${step.title} — ${step.subtitle}`}
+                        width={96}
+                        height={96}
+                        loading="lazy"
+                        className="size-24 object-contain drop-shadow-xl"
+                      />
                       <span className="absolute -right-1 -top-1 flex size-8 items-center justify-center rounded-full bg-background text-sm font-bold text-primary ring-2 ring-primary/30">
                         {i + 1}
                       </span>
@@ -255,22 +251,22 @@ export default async function ServicesPage() {
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {[
                     {
-                      icon: Award,
+                      mascot: "mascot-berpengalaman",
                       title: "Berpengalaman",
                       desc: "5+ tahun menangani berbagai klien dari beragam industri.",
                     },
                     {
-                      icon: Zap,
+                      mascot: "mascot-cepat",
                       title: "Cepat & Tepat",
                       desc: "Pengerjaan efisien dengan deadline yang selalu terpenuhi.",
                     },
                     {
-                      icon: TrendingUp,
+                      mascot: "mascot-terukur",
                       title: "Hasil Terukur",
                       desc: "Setiap kampanye dilengkapi laporan dan analisis performa.",
                     },
                     {
-                      icon: ShieldCheck,
+                      mascot: "mascot-profesional",
                       title: "Profesional",
                       desc: "Komunikasi transparan dan kualitas yang konsisten.",
                     },
@@ -280,9 +276,14 @@ export default async function ServicesPage() {
                       className="glass rounded-2xl p-5 text-center lift"
                       style={{ animationDelay: `${i * 60}ms` }}
                     >
-                      <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <f.icon className="size-6" />
-                      </div>
+                      <img
+                        src={`/images/mascots/${f.mascot}.webp`}
+                        alt={`Maskot — ${f.title}: ${f.desc}`}
+                        width={56}
+                        height={56}
+                        loading="lazy"
+                        className="mx-auto mb-3 size-14 object-contain drop-shadow-md"
+                      />
                       <h3 className="text-base font-semibold">{f.title}</h3>
                       <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{f.desc}</p>
                     </div>

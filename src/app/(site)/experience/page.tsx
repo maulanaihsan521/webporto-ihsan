@@ -18,7 +18,9 @@ import type { Experience } from "@prisma/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionReveal, Counter } from "@/components/motion-primitives";
+import { CompanyLogoPair } from "@/components/company-logo-pair";
 import { cn, formatDateShort, getInitials, safeJsonLd } from "@/lib/utils";
+import { getParentLogo } from "@/lib/company-logos";
 import { DEFAULT_OG_IMAGE_URL } from "@/lib/og-image";
 
 export const metadata: Metadata = {
@@ -211,6 +213,7 @@ export default async function ExperiencePage() {
                     .split(",")
                     .map((t) => t.trim())
                     .filter(Boolean);
+                  const parent = getParentLogo(exp.company);
                   const isLeft = i % 2 === 0;
                   const dateRange = `${formatDateShort(exp.startDate)} — ${
                     exp.current
@@ -228,18 +231,59 @@ export default async function ExperiencePage() {
                         isLeft ? "sm:ml-auto sm:pl-12" : "sm:pr-12 sm:text-right",
                       )}
                     >
-                      {/* dot with initials — di luar SectionReveal agar
+                      {/* dot with company logo / initials — di luar SectionReveal agar
                           positioning absolute tetap relatif ke <li> (transform
-                          pada wrapper reveal menciptakan containing block baru) */}
+                          pada wrapper reveal menciptakan containing block baru).
+                          Unit yg bagian dari organisasi induk → pasangan logo
+                          bertumpuk (induk di belakang, unit di depan, overlap
+                          ±15%) di desktop; mobile cukup logo unit agar ringkas. */}
                       <span
                         className={cn(
-                          "absolute top-1 flex size-10 items-center justify-center rounded-full border-4 border-background bg-primary text-xs font-bold text-primary-foreground shadow-lg sm:top-2",
-                          isLeft
-                            ? "left-0 sm:-left-5"
-                            : "left-0 sm:left-auto sm:-right-5",
+                          "absolute top-1 flex items-center sm:top-2",
+                          parent
+                            ? isLeft
+                              ? "left-0 sm:-left-[45px]"
+                              : "left-0 sm:left-auto sm:-right-[45px]"
+                            : isLeft
+                              ? "left-0 sm:-left-6"
+                              : "left-0 sm:left-auto sm:-right-6",
                         )}
                       >
-                        {getInitials(exp.company)}
+                        {exp.logo ? (
+                          parent ? (
+                            <>
+                              {/* Mobile: logo unit saja — ringkas; kapsul penuh di desktop */}
+                              <img
+                                src={exp.logo}
+                                alt={`Logo ${exp.company}`}
+                                width={48}
+                                height={48}
+                                loading="lazy"
+                                className="size-12 rounded-full border-4 border-background bg-white object-contain p-0.5 shadow-lg sm:hidden"
+                              />
+                              <CompanyLogoPair
+                                logo={exp.logo}
+                                company={exp.company}
+                                parent={parent}
+                                size={40}
+                                className="hidden sm:inline-flex"
+                              />
+                            </>
+                          ) : (
+                            <img
+                              src={exp.logo}
+                              alt={`Logo ${exp.company}`}
+                              width={48}
+                              height={48}
+                              loading="lazy"
+                              className="size-12 rounded-full border-4 border-background bg-white object-contain p-0.5 shadow-lg"
+                            />
+                          )
+                        ) : (
+                          <span className="flex size-12 items-center justify-center rounded-full border-4 border-background bg-primary text-xs font-bold text-primary-foreground shadow-lg">
+                            {getInitials(exp.company)}
+                          </span>
+                        )}
                       </span>
 
                       <SectionReveal delay={i * 0.05} className="h-full">
@@ -288,7 +332,29 @@ export default async function ExperiencePage() {
                             )}
                           >
                             <span className="inline-flex items-center gap-1 font-medium text-foreground/80">
-                              <Building2 className="size-3.5" />
+                              {exp.logo ? (
+                                parent ? (
+                                  <CompanyLogoPair
+                                    logo={exp.logo}
+                                    company={exp.company}
+                                    parent={parent}
+                                    size={16}
+                                    variant="inline"
+                                    className="shrink-0"
+                                  />
+                                ) : (
+                                  <img
+                                    src={exp.logo}
+                                    alt=""
+                                    width={16}
+                                    height={16}
+                                    loading="lazy"
+                                    className="size-4 shrink-0 rounded-[4px] bg-white object-contain"
+                                  />
+                                )
+                              ) : (
+                                <Building2 className="size-3.5" />
+                              )}
                               {exp.company}
                             </span>
                             {exp.location && (
@@ -346,7 +412,14 @@ export default async function ExperiencePage() {
             <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <Briefcase className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-advanced.webp"
+                  alt="Maskot profesional — siap mengembangkan karier berikutnya"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Siap mengembangkan <span className="text-gradient">karier Anda</span>{" "}
                   berikutnya?

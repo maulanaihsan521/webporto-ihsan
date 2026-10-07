@@ -1,10 +1,5 @@
 import Link from "next/link";
-import { ArrowRight,
-  Award,
-  Zap,
-  TrendingUp,
-  ShieldCheck,
-  Megaphone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/site-config";
 import { getBaseUrl } from "@/lib/server-site-config";
@@ -50,33 +45,25 @@ const levelLegend = [
   {
     level: "Beginner",
     description: "Pemula — dasar & sedang berkembang",
-    color: "bg-amber-500",
     text: "text-amber-600 dark:text-amber-400",
-    bg: "bg-amber-500/15",
     range: "0–40%",
   },
   {
     level: "Intermediate",
     description: "Menengah — mampu dengan bimbingan",
-    color: "bg-cyan-500",
     text: "text-cyan-600 dark:text-cyan-400",
-    bg: "bg-cyan-500/15",
     range: "41–70%",
   },
   {
     level: "Advanced",
     description: "Mahir — mandiri & percaya diri",
-    color: "bg-violet-500",
     text: "text-violet-600 dark:text-violet-400",
-    bg: "bg-violet-500/15",
     range: "71–89%",
   },
   {
     level: "Expert",
     description: "Ahli — pemimpin & inovator",
-    color: "bg-emerald-500",
     text: "text-emerald-600 dark:text-emerald-400",
-    bg: "bg-emerald-500/15",
     range: "90–100%",
   },
 ];
@@ -221,11 +208,14 @@ export default async function SkillsPage() {
                     className="glass rounded-2xl p-5 text-center"
                     style={{ animationDelay: `${i * 60}ms` }}
                   >
-                    <div
-                      className={`mx-auto mb-3 flex size-12 items-center justify-center rounded-full ${item.bg}`}
-                    >
-                      <span className={`size-4 rounded-full ${item.color}`} />
-                    </div>
+                  <img
+                    src={`/images/mascots/mascot-${item.level.toLowerCase()}.webp`}
+                    alt={`Maskot level ${item.level} — ${item.description}`}
+                    width={56}
+                    height={56}
+                    loading="lazy"
+                    className="mx-auto mb-3 size-14 object-contain drop-shadow-md"
+                  />
                     <h3 className={`text-base font-bold ${item.text}`}>{item.level}</h3>
                     <p className="mt-1 text-xs font-medium tabular-nums text-muted-foreground">
                       {item.range}
@@ -256,22 +246,22 @@ export default async function SkillsPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: Megaphone,
+                mascot: "mascot-digital-marketing",
                 title: "Digital Marketing",
                 desc: "SEO, Meta & Google Ads, content marketing, dan social media management.",
               },
               {
-                icon: TrendingUp,
+                mascot: "mascot-creative-production",
                 title: "Creative Production",
                 desc: "Photography, videography, video editing, dan motion graphics profesional.",
               },
               {
-                icon: Zap,
+                mascot: "mascot-web-development",
                 title: "Web Development",
                 desc: "Modern stack: React, Next.js, TypeScript, Tailwind, dan Prisma.",
               },
               {
-                icon: ShieldCheck,
+                mascot: "mascot-financial-market",
                 title: "Financial Market",
                 desc: "Technical & fundamental analysis, risk management, dan investment strategy.",
               },
@@ -279,9 +269,14 @@ export default async function SkillsPage() {
               <SectionReveal key={domain.title} delay={i * 0.05}>
                 <Card className="glass group relative h-full overflow-hidden p-4 lift">
                   <div className="relative z-10">
-                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
-                      <domain.icon className="size-6" />
-                    </div>
+                    <img
+                      src={`/images/mascots/${domain.mascot}.webp`}
+                      alt={`Maskot ${domain.title} — ${domain.desc}`}
+                      width={56}
+                      height={56}
+                      loading="lazy"
+                      className="mb-4 size-14 object-contain drop-shadow-md"
+                    />
                     <h3 className="text-base font-bold">{domain.title}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{domain.desc}</p>
                   </div>
@@ -298,7 +293,14 @@ export default async function SkillsPage() {
           <SectionReveal>
             <div className="relative overflow-hidden rounded-3xl border-0 bg-card p-8 text-center sm:p-12 shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
               <div className="relative z-10">
-                <Award className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-deliver.webp"
+                  alt="Maskot peraih juara — siap membantu kebutuhan keahlian Anda"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Butuh <span className="text-gradient">keahlian</span> tertentu?
                 </h2>

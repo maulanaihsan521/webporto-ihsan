@@ -17,7 +17,6 @@ import { Search,
   Hash,
   TrendingUp,
   User,
-  BookOpen,
   FileText,
   Tag as TagIcon } from "lucide-react";
 import { Select,
@@ -680,7 +679,14 @@ export function BlogExplorer({
 
           {/* CTA card */}
           <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-primary/10 p-5">
-            <BookOpen className="mb-2 size-6 text-primary" />
+            <img
+              src="/images/mascots/mascot-plan.webp"
+              alt="Maskot menyusun strategi konten"
+              width={56}
+              height={56}
+              loading="lazy"
+              className="mb-2 size-14 object-contain drop-shadow-md"
+            />
             <p className="text-sm font-semibold">Butuh konten yang lebih dalam?</p>
             <p className="mt-1 text-xs text-muted-foreground">
               Hubungi saya untuk konsultasi strategi konten &amp; digital marketing.

@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, Image as ImageIcon, FileText, Mail } from "lucide-react";
+import { Home, User, Briefcase, Image as ImageIcon, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// About menggantikan Contact (permintaan user) & diposisikan tepat di
+// sebelah Home — Contact tetap tersedia di header desktop & menu lengkap.
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
+  { label: "About", href: "/about", icon: User },
   { label: "Portfolio", href: "/portfolio", icon: Briefcase },
   { label: "Gallery", href: "/gallery", icon: ImageIcon },
   { label: "Blog", href: "/blog", icon: FileText },
-  { label: "Contact", href: "/contact", icon: Mail },
 ];
 
 export function MobileBottomNav() {

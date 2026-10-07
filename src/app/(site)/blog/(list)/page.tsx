@@ -202,7 +202,14 @@ export default async function BlogPage() {
             <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/10 p-8 text-center sm:p-12">
               <div className="mesh-bg opacity-60" aria-hidden />
               <div className="relative z-10">
-                <Newspaper className="mx-auto mb-4 size-8 text-primary" />
+                <img
+                  src="/images/mascots/mascot-plan.webp"
+                  alt="Maskot menyusun strategi konten — mari diskusikan ide konten Anda"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="mx-auto mb-4 size-16 object-contain drop-shadow-lg"
+                />
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                   Ingin konten yang <span className="text-gradient">lebih dalam?</span>
                 </h2>
