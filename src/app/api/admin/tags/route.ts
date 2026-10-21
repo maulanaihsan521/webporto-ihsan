@@ -22,7 +22,11 @@ export async function POST(req: NextRequest) {
   const { name } = await req.json();
   if (!name) return NextResponse.json({ error: "Name required" }, { status: 400 });
   const slug = slugify(name);
-  const existing = await db.tag.findUnique({ where: { slug } });
+  // FIX 2026-10-22: cek juga by NAME — slugify bisa menghasilkan slug berbeda
+  // dari tag yang sudah ada (mis. "INDEX:COMPOSITE" → "indexcomposite" vs
+  // "index-composite" di DB) sehingga cek by-slug saja lolos, lalu create
+  // meledak dengan P2002 (unique name) → 500. Sekarang ditangani rapi → 400.
+  const existing = await db.tag.findFirst({ where: { OR: [{ slug }, { name }] } });
   if (existing) return NextResponse.json({ error: "Tag sudah ada" }, { status: 400 });
   const tag = await db.tag.create({ data: { name, slug } });
   await db.activityLog.create({ data: { action: "CREATE", entity: "Tag", entityId: tag.id, userId: session.id, detail: name } });
